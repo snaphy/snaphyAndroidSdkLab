@@ -5,10 +5,11 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
-import com.androidsdk.snaphy.snaphyandroidsdk.adapter.Adapter;
 
+
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 import com.strongloop.android.remoting.JsonUtil;
-//import com.strongloop.android.remoting.adapters.Adapter;
+import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
 
@@ -573,7 +574,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Comments> commentsList = new ArrayList<Comments>();
+                                    DataList<Comments> commentsList = new DataList<Comments>();
                                     CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
 
                                     for (Map<String, Object> obj : result) {

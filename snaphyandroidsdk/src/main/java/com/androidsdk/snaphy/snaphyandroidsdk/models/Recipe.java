@@ -6,9 +6,16 @@ import org.json.JSONArray;
 
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
@@ -1157,7 +1164,20 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void exists__cuisines( String fk,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void exists__cuisines( String fk,  RestAdapter restAdapter, final ObjectCallback<JSONObject> objectCallback) {
+                                        objectCallback.onBefore();
+                                        final Adapter.JsonObjectCallback  callback = new Adapter.JsonObjectCallback() {
+                                            @Override
+                                            public void onSuccess(JSONObject response) {
+                                                objectCallback.onSuccess(response);
+                                            }
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                objectCallback.onError(t);
+                                            }
+                                        };
+
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
