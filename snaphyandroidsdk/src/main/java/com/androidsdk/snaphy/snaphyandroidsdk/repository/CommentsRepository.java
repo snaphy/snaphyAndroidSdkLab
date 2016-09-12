@@ -2,12 +2,13 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 
-import com.google.common.collect.ImmutableMap;
-import com.strongloop.android.loopback.callbacks.ListCallback;
-import com.strongloop.android.loopback.callbacks.ObjectCallback;
-import com.strongloop.android.loopback.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.Adapter;
+
 import com.strongloop.android.remoting.JsonUtil;
-import com.strongloop.android.remoting.adapters.Adapter;
+//import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
 
@@ -32,20 +33,9 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Comments;
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
-            
-        
-    
 
 
-
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
 
 
 public class CommentsRepository extends ModelRepository<Comments> {
@@ -258,7 +248,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method get__customer definition
             public void get__customer(  String commentsId,  Boolean refresh, final ObjectCallback<Customer> callback){
-
+                callback.onBefore();
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -275,15 +265,17 @@ public class CommentsRepository extends ModelRepository<Comments> {
                     
                     
                     invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
+
                         @Override
                         public void onError(Throwable t) {
+
                             callback.onError(t);
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
-                            
+
                                 if(response != null){
                                     CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
@@ -293,7 +285,9 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                 }else{
                                     callback.onSuccess(null);
                                 }
-                            
+
+                                callback.onFinally();
+
                         }
                     });
                 
@@ -309,6 +303,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method get__recipe definition
             public void get__recipe(  String commentsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
+
+
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -550,7 +546,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Comments> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -841,8 +837,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                 
                     
                     invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
+
+
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -850,10 +846,12 @@ public class CommentsRepository extends ModelRepository<Comments> {
 
                         @Override
                         public void onSuccess(JSONObject response) {
-                            
+
                                 callback.onSuccess(response);
-                            
+
                         }
+
+
                     });
                 
 

@@ -1,12 +1,15 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.list;
 
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+
+
+import android.util.Log;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 
 /**
@@ -39,6 +42,23 @@ public class DataList<T> extends ArrayList<T> {
     public void add(int index, T element){
         super.add(index, element);
         publishOnChange();
+        addBackRefrences(element);
+    }
+
+
+    /**
+     * Add backrefrences to model of snaphy loopback type only.
+     * @param element
+     */
+    private void addBackRefrences(T element){
+        //Add references of SnaphyModel to the list..
+        try{
+            if(element instanceof Model){
+                ((Model) element).addListSubscriber((DataList<Model>)this);
+            }
+        }catch (Exception e){
+            Log.d("Snaphy", "Model is not the instance of SnaphyModel type");
+        }
     }
 
 
@@ -46,6 +66,7 @@ public class DataList<T> extends ArrayList<T> {
     public boolean add(T element){
         boolean returnValue = super.add(element);
         publishOnChange();
+        addBackRefrences(element);
         return returnValue;
     }
 

@@ -54,7 +54,7 @@ public class Employee extends com.strongloop.android.loopback.User {
         }
     }
 
-    private Employee that ;
+    private Employee that;
 
     public Employee (){
         that = this;

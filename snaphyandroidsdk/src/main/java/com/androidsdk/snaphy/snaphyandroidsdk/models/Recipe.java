@@ -1,12 +1,6 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
-
-
-import com.strongloop.android.loopback.Model;
-
-
-
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -92,7 +86,7 @@ public class Recipe extends Model {
 
 
     //For converting all model values to hashMap
-    private Map<String, Object> hashMap = new HashMap<>();
+    private transient Map<String, Object> hashMap = new HashMap<>();
 
     public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
@@ -103,14 +97,26 @@ public class Recipe extends Model {
         }
     }
 
-    private Recipe that ;
+    private Recipe that;
 
     public Recipe (){
         that = this;
     }
 
-    
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             
             
                 private String name;
@@ -451,7 +457,7 @@ public class Recipe extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Customer  customer ;
+                    private transient Customer  customer ;
 
                     public Customer getCustomer() {
                         return customer;
@@ -777,7 +783,7 @@ public class Recipe extends Model {
                 
                     //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..warning backward compatibility may leads to cyclic error..
                     //Define belongsTo relation method here..
-                    private List<Cuisines>  cuisines ;
+                    private transient List<Cuisines>  cuisines ;
 
                     public List<Cuisines> getCuisines() {
                         return cuisines;
