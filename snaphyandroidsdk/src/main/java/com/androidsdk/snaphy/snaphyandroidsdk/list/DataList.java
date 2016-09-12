@@ -3,63 +3,62 @@ package com.androidsdk.snaphy.snaphyandroidsdk.list;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+
 
 /**
  * Created by snaphy on 12/9/16.
  */
 public class DataList<T> extends ArrayList<T> {
 
-    //Implementing the interface for events..
-    public interface Listeners<T> {
-        //On Initialization of the COnstructors..
-        public void onInitialize(DataList<T> dataList);
-        // When any Change appears in the list..
-        public void onChange(DataList<T> dataList);
-        // On Clearing the list..
-        public void onClear();
-        //On removing of an element from datalist..
-        public void onRemove(T element);
-    }
 
-    public DataList(int capacity){
+    //Variable holding all the subscriber object respect to object..
+    HashMap<Object, Listeners> listenersMap = new HashMap();
+
+
+    public DataList(Object context, int capacity){
         super(capacity);
-        //TODO fire onInitialize event..
+        publishOnInitialize();
     }
 
-    public DataList(){
+    public DataList(Object context){
         super();
-        //TODO fire onInitialize event..
+        publishOnInitialize();
     }
 
-    public DataList(Collection<? extends T> collection){
+    public DataList(Object context, Collection<? extends T> collection){
         super(collection);
-        //TODO fire onInitialize event..
+        publishOnInitialize();
     }
 
 
-    @Override
+
     public void add(int index, T element){
         super.add(index, element);
-        //TODO fire onChange event
+        publishOnChange();
     }
 
-    @Override
+
+
     public boolean add(T element){
         boolean returnValue = super.add(element);
-        //TODO fire onChange event
+        publishOnChange();
         return returnValue;
     }
 
-    @Override
+
+
     public boolean addAll(Collection<? extends T> collection){
         boolean returnValue = super.addAll(collection);
-        //TODO fire onChange event..
+        publishOnChange();
         return returnValue;
     }
+
 
     public boolean addAll(int index, Collection<? extends T> collection){
         boolean returnValue = super.addAll(index, collection);
-        //TODO fires onChange event..
+        publishOnChange();
         return returnValue;
     }
 
@@ -69,10 +68,10 @@ public class DataList<T> extends ArrayList<T> {
      * @see #isEmpty
      * @see #size
      */
-    @Override public void clear() {
+    public void clear() {
         super.clear();
-        //TODO fire onChange event
-        //TODO fire onClear event.
+        publishOnChange();
+        publishOnClear();
     }
 
     /**
@@ -84,17 +83,17 @@ public class DataList<T> extends ArrayList<T> {
      * @throws IndexOutOfBoundsException
      *             when {@code location < 0 || location >= size()}
      */
-    @Override public T remove(int index) {
+    public T remove(int index) {
         T returnValue = super.remove(index);
-        //TODO fire the onChange event
-        //TODO fire the onRemove event
+        publishOnChange();
+        publishOnRemove(returnValue);
         return returnValue;
     }
 
-    @Override public boolean remove(Object object) {
+    public boolean remove(Object object) {
         boolean returnValue = super.remove(object);
-        //TODO fire the onChange event
-        //TODO fire the onRemove event
+        publishOnChange();
+        publishOnRemove((T)object);
         return returnValue;
 
     }
@@ -112,11 +111,131 @@ public class DataList<T> extends ArrayList<T> {
      * @throws IndexOutOfBoundsException
      *             when {@code location < 0 || location >= size()}
      */
-    @Override public T set(int index, T object){
+    public T set(int index, T object){
         T returnValue = super.set(index, object);
-        //TODO fire onChange event
+        publishOnChange();
         return returnValue;
     }
+
+
+    /*Adding the Listener interface*/
+
+
+
+
+    //Variable of all the holders..
+
+    //Implementing the interface for events..
+    public interface Listeners<T> {
+        //On Initialization of the Constructors..
+        public void onInitialize(DataList<T> dataList);
+        // When any Change appears in the list..
+        public void onChange(DataList<T> dataList);
+        // On Clearing the list..
+        public void onClear();
+        //On removing of an element from datalist..
+
+        /**
+         * onRemove event
+         * @param element Element which is removed.
+         * @param dataList Collection from which the element is removed.
+         */
+        public void onRemove(T element, DataList<T> dataList);
+    }
+
+
+    /**
+     * Assign the listener implementing events interface that will receive the events
+     * @param context Context to which this listener is binded.
+     * @param listener Listener object
+     */
+    public void subscribe(Object context, Listeners<T> listener) {
+        listenersMap.put(context, listener);
+        //Fire the Initialize event here..for first time.
+        listener.onInitialize(this);
+    }
+
+    /**
+     * Remove all the listener subscribed to the list
+     */
+    public void unsubscribe(){
+        listenersMap.clear();
+    }
+
+    /**
+     * Remove listeners of the current context only.
+     * */
+    public void unsubscribe(Object context){
+        listenersMap.clear();
+    }
+
+    /**
+     * Publish all the onChange event subscribed to datalist
+     */
+    private void publishOnChange(){
+        for(Object key : listenersMap.keySet()){
+            if(key == null){
+                return;
+            }
+            Listeners<T> listener = listenersMap.get(key);
+            //Now publish the onChange event..
+            if(listener != null){
+                listener.onChange(this);
+            }
+        }
+    }
+
+    /**
+     * Publish all the onInitialize event subscribed to datalist
+     */
+    private void publishOnInitialize(){
+        for(Object key : listenersMap.keySet()){
+            if(key == null){
+                return;
+            }
+            Listeners<T> listener = listenersMap.get(key);
+            //Now publish the onChange event..
+            if(listener != null){
+                listener.onInitialize(this);
+            }
+        }
+    }
+
+    /**
+     * Publish all the onClear event subscribed to datalist
+     */
+    private void publishOnClear(){
+        for(Object key : listenersMap.keySet()){
+            if(key == null){
+                return;
+            }
+            Listeners<T> listener = listenersMap.get(key);
+            //Now publish the onChange event..
+            if(listener != null){
+                listener.onClear();
+            }
+        }
+    }
+
+
+    /**
+     * Publish all the onRemove event subscribed to datalist
+     * @param element Remove element
+     */
+    private void publishOnRemove(T element){
+        for(Object key : listenersMap.keySet()){
+            if(key == null){
+                return;
+            }
+            Listeners<T> listener = listenersMap.get(key);
+            //Now publish the onChange event..
+            if(listener != null){
+                listener.onRemove(element, this);
+            }
+        }
+    }
+
+
 
 
 }
