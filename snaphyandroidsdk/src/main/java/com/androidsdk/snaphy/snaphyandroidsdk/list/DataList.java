@@ -1,6 +1,8 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.list;
 
 
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,20 +16,20 @@ public class DataList<T> extends ArrayList<T> {
 
 
     //Variable holding all the subscriber object respect to object..
-    HashMap<Object, Listeners> listenersMap = new HashMap();
+    HashMap<Object, Listen> listenersMap = new HashMap();
 
 
-    public DataList(Object context, int capacity){
+    public DataList(int capacity){
         super(capacity);
         publishOnInitialize();
     }
 
-    public DataList(Object context){
+    public DataList(){
         super();
         publishOnInitialize();
     }
 
-    public DataList(Object context, Collection<? extends T> collection){
+    public DataList(Collection<? extends T> collection){
         super(collection);
         publishOnInitialize();
     }
@@ -118,8 +120,6 @@ public class DataList<T> extends ArrayList<T> {
     }
 
 
-    /*Adding the Listener interface*/
-
 
 
 
@@ -128,7 +128,7 @@ public class DataList<T> extends ArrayList<T> {
     //Implementing the interface for events..
     public interface Listeners<T> {
         //On Initialization of the Constructors..
-        public void onInitialize(DataList<T> dataList);
+        public void onInit(DataList<T> dataList);
         // When any Change appears in the list..
         public void onChange(DataList<T> dataList);
         // On Clearing the list..
@@ -149,10 +149,10 @@ public class DataList<T> extends ArrayList<T> {
      * @param context Context to which this listener is binded.
      * @param listener Listener object
      */
-    public void subscribe(Object context, Listeners<T> listener) {
+    public void subscribe(Object context, Listen<T> listener) {
         listenersMap.put(context, listener);
         //Fire the Initialize event here..for first time.
-        listener.onInitialize(this);
+        listener.onInit(this);
     }
 
     /**
@@ -196,7 +196,7 @@ public class DataList<T> extends ArrayList<T> {
             Listeners<T> listener = listenersMap.get(key);
             //Now publish the onChange event..
             if(listener != null){
-                listener.onInitialize(this);
+                listener.onInit(this);
             }
         }
     }

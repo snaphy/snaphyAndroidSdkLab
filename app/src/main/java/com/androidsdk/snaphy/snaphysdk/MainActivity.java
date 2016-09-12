@@ -5,12 +5,35 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Listen;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*DataList<Customer> customerDataList = new DataList<Customer>();
+        customerDataList.subscribe(this, new Listen<Customer>() {
+            @Override
+            public void onInit(DataList<Customer> dataList) {
+                super.onInit(dataList);
+            }
+
+            @Override
+            public void onChange(DataList<Customer> dataList) {
+                super.onChange(dataList);
+            }
+
+            @Override
+            public void onClear() {
+                super.onClear();
+            }
+
+        });*/
     }
 
     @Override
