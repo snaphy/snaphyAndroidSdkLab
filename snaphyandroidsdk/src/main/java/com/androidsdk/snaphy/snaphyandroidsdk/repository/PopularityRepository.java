@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -18,7 +26,8 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.ModelRepository;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -208,6 +217,12 @@ public class PopularityRepository extends ModelRepository<Popularity> {
             //Method get__chefs definition
             public void get__chefs(  String popularityId,  Boolean refresh, final ObjectCallback<Chef> callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -228,6 +243,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -243,6 +260,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -258,6 +277,12 @@ public class PopularityRepository extends ModelRepository<Popularity> {
         
             //Method create definition
             public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -277,6 +302,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -292,6 +319,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -308,6 +337,12 @@ public class PopularityRepository extends ModelRepository<Popularity> {
         
             //Method upsert definition
             public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -327,6 +362,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -342,6 +379,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -356,7 +395,13 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -376,6 +421,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -383,6 +430,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -398,6 +447,12 @@ public class PopularityRepository extends ModelRepository<Popularity> {
         
             //Method findById definition
             public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -419,6 +474,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -434,6 +491,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -448,7 +507,13 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Popularity> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -467,6 +532,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -475,7 +542,7 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Popularity> popularityList = new ArrayList<Popularity>();
+                                    DataList<Popularity> popularityList = new DataList<Popularity>();
                                     PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -487,6 +554,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -500,6 +569,12 @@ public class PopularityRepository extends ModelRepository<Popularity> {
         
             //Method findOne definition
             public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -519,6 +594,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -534,6 +611,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -548,7 +627,13 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -570,6 +655,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -577,6 +664,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -591,7 +680,13 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -611,6 +706,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -618,6 +715,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -632,7 +731,13 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -652,6 +757,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -659,6 +766,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -674,6 +783,12 @@ public class PopularityRepository extends ModelRepository<Popularity> {
         
             //Method updateAttributes definition
             public void updateAttributes(  String popularityId,  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -695,6 +810,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -710,6 +827,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -726,7 +845,13 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -744,6 +869,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -751,6 +878,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -765,7 +894,13 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -783,6 +918,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -790,6 +927,8 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 

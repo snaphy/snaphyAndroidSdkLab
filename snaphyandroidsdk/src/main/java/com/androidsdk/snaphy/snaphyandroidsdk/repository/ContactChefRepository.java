@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -18,7 +26,8 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.ModelRepository;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -229,6 +238,12 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             //Method get__chef definition
             public void get__chef(  String contactChefId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -249,6 +264,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -264,6 +281,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -279,6 +298,12 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         
             //Method get__customer definition
             public void get__customer(  String contactChefId,  Boolean refresh, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -300,6 +325,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -315,6 +342,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -330,6 +359,12 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         
             //Method create definition
             public void create(  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -349,6 +384,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -364,6 +401,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -380,6 +419,12 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         
             //Method upsert definition
             public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -399,6 +444,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -414,6 +461,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -428,7 +477,13 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -448,6 +503,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -455,6 +512,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -470,6 +529,12 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         
             //Method findById definition
             public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<ContactChef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -491,6 +556,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -506,6 +573,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -520,7 +589,13 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<ContactChef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -539,6 +614,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -547,7 +624,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
+                                    DataList<ContactChef> contactChefList = new DataList<ContactChef>();
                                     ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -559,6 +636,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -572,6 +651,12 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         
             //Method findOne definition
             public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<ContactChef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -591,6 +676,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -606,6 +693,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -620,7 +709,13 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -642,6 +737,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -649,6 +746,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -663,7 +762,13 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -683,6 +788,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -690,6 +797,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -704,7 +813,13 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -724,6 +839,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -731,6 +848,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -746,6 +865,12 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         
             //Method updateAttributes definition
             public void updateAttributes(  String contactChefId,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -767,6 +892,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -782,6 +909,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -798,7 +927,13 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -816,6 +951,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -823,6 +960,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -837,7 +976,13 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -855,6 +1000,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -862,6 +1009,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 

@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -18,9 +26,14 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.UserRepository;
+//Replaced by Custom  Repo methods
+// import com.strongloop.android.loopback.UserRepository;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
+import android.content.SharedPreferences;
+import android.util.Log;
+import org.json.JSONException;
+import android.content.Context;
 
 
 
@@ -46,7 +59,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
 
 
 
-public class EmployeeRepository extends com.strongloop.android.loopback.UserRepository<Employee> {
+public class EmployeeRepository extends UserRepository<Employee> {
 
 
     public EmployeeRepository(){
@@ -57,6 +70,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
     		//Create public methods..
     		public Employee cachedCurrentUser;
+            private Object currentUserId;
+            private boolean isCurrentUserIdLoaded;
     		public Employee getCachedCurrentUser(){
     			return cachedCurrentUser;
     		}
@@ -65,9 +80,89 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     			cachedCurrentUser = user;
     		}
 
-    		public void setCurrentUserId(Object id){
+    		/* public void setCurrentUserId(Object id){
     			super.setCurrentUserId(id);
-    		}
+    		} */
+
+            public void findCurrentUser(final ObjectCallback<Employee> callback){
+                //Call the onBefore method..
+                callback.onBefore();
+
+                if(getCurrentUserId() == null){
+                    callback.onSuccess(null);
+                    return;
+                }
+
+                HashMap<String, Object> hashMap = new HashMap<>();
+
+                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Employee>() {
+                    @Override
+                    public void onSuccess(Employee user){
+                        cachedCurrentUser = user;
+                        callback.onSuccess(user);
+                        //Call the finally method..
+                        callback.onFinally();
+                    }
+
+                    @Override
+                    public void onError(Throwable t){
+                        callback.onError(t);
+                        //Call the finally method..
+                        callback.onFinally();
+                    }
+                });
+
+            }
+
+            public Object getCurrentUserId(){
+                loadCurrentUserIdIfNotLoaded();
+                return currentUserId;
+            }
+
+            public void setCurrentUserId(Object currentUserId){
+                this.currentUserId = currentUserId;
+                cachedCurrentUser = null;
+                saveCurrentUserId();
+            }
+
+            private void saveCurrentUserId(){
+                final SharedPreferences.Editor editor = getSharedPreferences().edit();
+                final String json = new JSONArray().put(getCurrentUserId()).toString();
+                editor.putString(PROPERTY_CURRENT_USER_ID, json);
+                editor.commit();
+            }
+
+
+            //Add loadCurrentUserIdIfNotLoaded method..
+            private void loadCurrentUserIdIfNotLoaded(){
+                if(isCurrentUserIdLoaded) return;
+
+                isCurrentUserIdLoaded = true;
+                String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
+                if(json == null){
+                    return;
+                }
+
+                if(json.equals("[null]")){
+                    return;
+                }
+
+                try{
+                    Object id = new JSONArray(json).get(0);
+                    setCurrentUserId(id);
+                }catch(JSONException e){
+                    String msg = "Cannot parse user id '" + json + "'";
+                    Log.e("Snaphy", msg, e);
+                }
+            }
+
+            private SharedPreferences getSharedPreferences() {
+                return getApplicationContext().getSharedPreferences(
+                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+            }
+
+
+
 
     
 
@@ -328,6 +423,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             //Method findById__accessTokens definition
             public void findById__accessTokens(  String employeeId,  String fk, final ObjectCallback<AccessToken> callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -348,6 +449,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -363,6 +466,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -379,6 +484,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroyById__accessTokens definition
             public void destroyById__accessTokens(  String employeeId,  String fk, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -392,12 +503,16 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -416,6 +531,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__accessTokens definition
             public void updateById__accessTokens(  String employeeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -439,6 +560,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -454,6 +577,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -469,6 +594,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__employeeDetails definition
             public void get__employeeDetails(  String employeeId,  Boolean refresh, final ObjectCallback<EmployeeDetails> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -490,6 +621,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -505,6 +638,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -520,6 +655,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__employeeDetails definition
             public void create__employeeDetails(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<EmployeeDetails> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -541,6 +682,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -556,6 +699,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -571,6 +716,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method update__employeeDetails definition
             public void update__employeeDetails(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<EmployeeDetails> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -592,6 +743,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -607,6 +760,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -623,6 +778,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroy__employeeDetails definition
             public void destroy__employeeDetails(  String employeeId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -634,12 +795,16 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroy__employeeDetails", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -657,7 +822,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__accessTokens definition
-            public void get__accessTokens(  String employeeId,  Map<String,  ? extends Object> filter, final ListCallback<AccessToken> callback){
+            public void get__accessTokens(  String employeeId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -678,6 +849,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -686,7 +859,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<AccessToken> accessTokenList = new ArrayList<AccessToken>();
+                                    DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -698,6 +871,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -711,6 +886,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__accessTokens definition
             public void create__accessTokens(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -732,6 +913,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -747,6 +930,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -763,6 +948,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             //Method delete__accessTokens definition
             public void delete__accessTokens(  String employeeId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -774,12 +965,16 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -797,7 +992,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__accessTokens definition
-            public void count__accessTokens(  String employeeId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__accessTokens(  String employeeId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -819,6 +1020,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -826,6 +1029,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -841,6 +1046,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create definition
             public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -860,6 +1071,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -875,6 +1088,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -891,6 +1106,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method upsert definition
             public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -910,6 +1131,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -925,6 +1148,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -939,7 +1164,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -959,6 +1190,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -966,6 +1199,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -981,6 +1216,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById definition
             public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1002,6 +1243,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1017,6 +1260,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1031,7 +1276,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Employee> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Employee> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1050,6 +1301,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1058,7 +1311,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Employee> employeeList = new ArrayList<Employee>();
+                                    DataList<Employee> employeeList = new DataList<Employee>();
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -1070,6 +1323,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1083,6 +1338,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findOne definition
             public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1102,6 +1363,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1117,6 +1380,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1131,7 +1396,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1153,6 +1424,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1160,6 +1433,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1174,7 +1449,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1194,6 +1475,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1201,6 +1484,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1215,7 +1500,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1235,6 +1526,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1242,6 +1535,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1257,6 +1552,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateAttributes definition
             public void updateAttributes(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1278,6 +1579,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1293,6 +1596,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1315,6 +1620,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             //Method confirm definition
             public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -1330,12 +1641,16 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1355,6 +1670,12 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             //Method resetPassword definition
             public void resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -1366,12 +1687,16 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1389,7 +1714,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1407,6 +1738,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1414,6 +1747,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1428,7 +1763,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1446,6 +1787,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1453,6 +1796,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1469,7 +1814,13 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method isAdmin definition
-            public void isAdmin( final Adapter.JsonObjectCallback  callback ){
+            public void isAdmin( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1487,6 +1838,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1494,6 +1847,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 

@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -18,9 +26,14 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.UserRepository;
+//Replaced by Custom  Repo methods
+// import com.strongloop.android.loopback.UserRepository;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
+import android.content.SharedPreferences;
+import android.util.Log;
+import org.json.JSONException;
+import android.content.Context;
 
 
 
@@ -95,7 +108,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
 
 
 
-public class CustomerRepository extends com.strongloop.android.loopback.UserRepository<Customer> {
+public class CustomerRepository extends UserRepository<Customer> {
 
 
     public CustomerRepository(){
@@ -106,6 +119,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
     		//Create public methods..
     		public Customer cachedCurrentUser;
+            private Object currentUserId;
+            private boolean isCurrentUserIdLoaded;
     		public Customer getCachedCurrentUser(){
     			return cachedCurrentUser;
     		}
@@ -114,9 +129,89 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     			cachedCurrentUser = user;
     		}
 
-    		public void setCurrentUserId(Object id){
+    		/* public void setCurrentUserId(Object id){
     			super.setCurrentUserId(id);
-    		}
+    		} */
+
+            public void findCurrentUser(final ObjectCallback<Customer> callback){
+                //Call the onBefore method..
+                callback.onBefore();
+
+                if(getCurrentUserId() == null){
+                    callback.onSuccess(null);
+                    return;
+                }
+
+                HashMap<String, Object> hashMap = new HashMap<>();
+
+                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Customer>() {
+                    @Override
+                    public void onSuccess(Customer user){
+                        cachedCurrentUser = user;
+                        callback.onSuccess(user);
+                        //Call the finally method..
+                        callback.onFinally();
+                    }
+
+                    @Override
+                    public void onError(Throwable t){
+                        callback.onError(t);
+                        //Call the finally method..
+                        callback.onFinally();
+                    }
+                });
+
+            }
+
+            public Object getCurrentUserId(){
+                loadCurrentUserIdIfNotLoaded();
+                return currentUserId;
+            }
+
+            public void setCurrentUserId(Object currentUserId){
+                this.currentUserId = currentUserId;
+                cachedCurrentUser = null;
+                saveCurrentUserId();
+            }
+
+            private void saveCurrentUserId(){
+                final SharedPreferences.Editor editor = getSharedPreferences().edit();
+                final String json = new JSONArray().put(getCurrentUserId()).toString();
+                editor.putString(PROPERTY_CURRENT_USER_ID, json);
+                editor.commit();
+            }
+
+
+            //Add loadCurrentUserIdIfNotLoaded method..
+            private void loadCurrentUserIdIfNotLoaded(){
+                if(isCurrentUserIdLoaded) return;
+
+                isCurrentUserIdLoaded = true;
+                String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
+                if(json == null){
+                    return;
+                }
+
+                if(json.equals("[null]")){
+                    return;
+                }
+
+                try{
+                    Object id = new JSONArray(json).get(0);
+                    setCurrentUserId(id);
+                }catch(JSONException e){
+                    String msg = "Cannot parse user id '" + json + "'";
+                    Log.e("Snaphy", msg, e);
+                }
+            }
+
+            private SharedPreferences getSharedPreferences() {
+                return getApplicationContext().getSharedPreferences(
+                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+            }
+
+
+
 
     
 
@@ -753,6 +848,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method findById__accessTokens definition
             public void findById__accessTokens(  String customerId,  String fk, final ObjectCallback<AccessToken> callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -773,6 +874,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -788,6 +891,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -804,6 +909,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroyById__accessTokens definition
             public void destroyById__accessTokens(  String customerId,  String fk, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -817,12 +928,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -841,6 +956,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__accessTokens definition
             public void updateById__accessTokens(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -864,6 +985,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -879,6 +1002,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -894,6 +1019,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__recipes definition
             public void findById__recipes(  String customerId,  String fk, final ObjectCallback<Recipe> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -915,6 +1046,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -930,6 +1063,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -946,6 +1081,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroyById__recipes definition
             public void destroyById__recipes(  String customerId,  String fk, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -959,12 +1100,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroyById__recipes", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -983,6 +1128,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__recipes definition
             public void updateById__recipes(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1006,6 +1157,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1021,6 +1174,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1036,6 +1191,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__comments definition
             public void findById__comments(  String customerId,  String fk, final ObjectCallback<Comments> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1057,6 +1218,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1072,6 +1235,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1088,6 +1253,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroyById__comments definition
             public void destroyById__comments(  String customerId,  String fk, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -1101,12 +1272,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroyById__comments", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1125,6 +1300,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__comments definition
             public void updateById__comments(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1148,6 +1329,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1163,6 +1346,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1178,6 +1363,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__wishlists definition
             public void get__wishlists(  String customerId,  Boolean refresh, final ObjectCallback<Wishlist> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1199,6 +1390,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1214,6 +1407,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1229,6 +1424,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__wishlists definition
             public void create__wishlists(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1250,6 +1451,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1265,6 +1468,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1280,6 +1485,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method update__wishlists definition
             public void update__wishlists(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1301,6 +1512,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1316,6 +1529,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1332,6 +1547,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroy__wishlists definition
             public void destroy__wishlists(  String customerId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -1343,12 +1564,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroy__wishlists", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1367,6 +1592,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__chefs definition
             public void get__chefs(  String customerId,  Boolean refresh, final ObjectCallback<Chef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1388,6 +1619,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1403,6 +1636,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1418,6 +1653,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__chefs definition
             public void create__chefs(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1439,6 +1680,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1454,6 +1697,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1469,6 +1714,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method update__chefs definition
             public void update__chefs(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1490,6 +1741,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1505,6 +1758,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1521,6 +1776,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroy__chefs definition
             public void destroy__chefs(  String customerId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -1532,12 +1793,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroy__chefs", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1556,6 +1821,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__courses definition
             public void findById__courses(  String customerId,  String fk, final ObjectCallback<Course> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1577,6 +1848,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1592,6 +1865,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1608,6 +1883,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroyById__courses definition
             public void destroyById__courses(  String customerId,  String fk, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -1621,12 +1902,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroyById__courses", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1645,6 +1930,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__courses definition
             public void updateById__courses(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1668,6 +1959,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1683,6 +1976,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1698,6 +1993,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__contactChefs definition
             public void findById__contactChefs(  String customerId,  String fk, final ObjectCallback<ContactChef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1719,6 +2020,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1734,6 +2037,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1750,6 +2055,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroyById__contactChefs definition
             public void destroyById__contactChefs(  String customerId,  String fk, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -1763,12 +2074,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroyById__contactChefs", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1787,6 +2102,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__contactChefs definition
             public void updateById__contactChefs(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1810,6 +2131,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1825,6 +2148,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1840,6 +2165,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById__orders definition
             public void findById__orders(  String customerId,  String fk, final ObjectCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1861,6 +2192,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1876,6 +2209,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1892,6 +2227,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroyById__orders definition
             public void destroyById__orders(  String customerId,  String fk, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -1905,12 +2246,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroyById__orders", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1929,6 +2274,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateById__orders definition
             public void updateById__orders(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1952,6 +2303,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1967,6 +2320,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1982,6 +2337,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method get__facebookAccessToken definition
             public void get__facebookAccessToken(  String customerId,  Boolean refresh, final ObjectCallback<FacebookAccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2003,6 +2364,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2018,6 +2381,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2033,6 +2398,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__facebookAccessToken definition
             public void create__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2054,6 +2425,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2069,6 +2442,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2084,6 +2459,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method update__facebookAccessToken definition
             public void update__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2105,6 +2486,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2120,6 +2503,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2136,6 +2521,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method destroy__facebookAccessToken definition
             public void destroy__facebookAccessToken(  String customerId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -2147,12 +2538,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__destroy__facebookAccessToken", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2170,7 +2565,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__accessTokens definition
-            public void get__accessTokens(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<AccessToken> callback){
+            public void get__accessTokens(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2191,6 +2592,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2199,7 +2602,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<AccessToken> accessTokenList = new ArrayList<AccessToken>();
+                                    DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -2211,6 +2614,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2224,6 +2629,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__accessTokens definition
             public void create__accessTokens(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2245,6 +2656,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2260,6 +2673,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2276,6 +2691,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method delete__accessTokens definition
             public void delete__accessTokens(  String customerId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -2287,12 +2708,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2310,7 +2735,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__accessTokens definition
-            public void count__accessTokens(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__accessTokens(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2332,6 +2763,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2339,6 +2772,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2353,7 +2788,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__recipes definition
-            public void get__recipes(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Recipe> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2374,6 +2815,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2382,7 +2825,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Recipe> recipeList = new ArrayList<Recipe>();
+                                    DataList<Recipe> recipeList = new DataList<Recipe>();
                                     RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -2394,6 +2837,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2407,6 +2852,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__recipes definition
             public void create__recipes(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2428,6 +2879,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2443,6 +2896,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2459,6 +2914,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method delete__recipes definition
             public void delete__recipes(  String customerId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -2470,12 +2931,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__delete__recipes", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2493,7 +2958,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__recipes definition
-            public void count__recipes(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__recipes(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2515,6 +2986,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2522,6 +2995,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2536,7 +3011,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__comments definition
-            public void get__comments(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Comments> callback){
+            public void get__comments(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Comments> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2557,6 +3038,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2565,7 +3048,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Comments> commentsList = new ArrayList<Comments>();
+                                    DataList<Comments> commentsList = new DataList<Comments>();
                                     CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -2577,6 +3060,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2590,6 +3075,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__comments definition
             public void create__comments(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2611,6 +3102,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2626,6 +3119,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2642,6 +3137,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method delete__comments definition
             public void delete__comments(  String customerId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -2653,12 +3154,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__delete__comments", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2676,7 +3181,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__comments definition
-            public void count__comments(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__comments(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2698,6 +3209,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2705,6 +3218,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2719,7 +3234,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__courses definition
-            public void get__courses(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Course> callback){
+            public void get__courses(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Course> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2740,6 +3261,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2748,7 +3271,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Course> courseList = new ArrayList<Course>();
+                                    DataList<Course> courseList = new DataList<Course>();
                                     CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -2760,6 +3283,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2773,6 +3298,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__courses definition
             public void create__courses(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2794,6 +3325,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2809,6 +3342,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2825,6 +3360,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method delete__courses definition
             public void delete__courses(  String customerId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -2836,12 +3377,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__delete__courses", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2859,7 +3404,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__courses definition
-            public void count__courses(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__courses(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2881,6 +3432,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2888,6 +3441,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2902,7 +3457,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__contactChefs definition
-            public void get__contactChefs(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
+            public void get__contactChefs(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<ContactChef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2923,6 +3484,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2931,7 +3494,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
+                                    DataList<ContactChef> contactChefList = new DataList<ContactChef>();
                                     ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -2943,6 +3506,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -2956,6 +3521,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__contactChefs definition
             public void create__contactChefs(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2977,6 +3548,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -2992,6 +3565,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3008,6 +3583,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method delete__contactChefs definition
             public void delete__contactChefs(  String customerId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -3019,12 +3600,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__delete__contactChefs", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3042,7 +3627,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__contactChefs definition
-            public void count__contactChefs(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__contactChefs(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3064,6 +3655,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3071,6 +3664,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3085,7 +3680,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__orders definition
-            public void get__orders(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Order> callback){
+            public void get__orders(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3106,6 +3707,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3114,7 +3717,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Order> orderList = new ArrayList<Order>();
+                                    DataList<Order> orderList = new DataList<Order>();
                                     OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -3126,6 +3729,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3139,6 +3744,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create__orders definition
             public void create__orders(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3160,6 +3771,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3175,6 +3788,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3191,6 +3806,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method delete__orders definition
             public void delete__orders(  String customerId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -3202,12 +3823,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("prototype.__delete__orders", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3225,7 +3850,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__orders definition
-            public void count__orders(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__orders(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3247,6 +3878,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3254,6 +3887,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3269,6 +3904,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method create definition
             public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3288,6 +3929,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3303,6 +3946,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3319,6 +3964,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method upsert definition
             public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3338,6 +3989,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3353,6 +4006,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3367,7 +4022,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3387,6 +4048,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3394,6 +4057,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3409,6 +4074,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findById definition
             public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3430,6 +4101,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3445,6 +4118,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3459,7 +4134,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Customer> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3478,6 +4159,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3486,7 +4169,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Customer> customerList = new ArrayList<Customer>();
+                                    DataList<Customer> customerList = new DataList<Customer>();
                                     CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -3498,6 +4181,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3511,6 +4196,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method findOne definition
             public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3530,6 +4221,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3545,6 +4238,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3559,7 +4254,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3581,6 +4282,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3588,6 +4291,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3602,7 +4307,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3622,6 +4333,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3629,6 +4342,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3643,7 +4358,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3663,6 +4384,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3670,6 +4393,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3685,6 +4410,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
             //Method updateAttributes definition
             public void updateAttributes(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3706,6 +4437,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3721,6 +4454,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3743,6 +4478,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method confirm definition
             public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -3758,12 +4499,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3783,6 +4528,12 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             //Method resetPassword definition
             public void resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -3794,12 +4545,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3817,7 +4572,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3835,6 +4596,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3842,6 +4605,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3856,7 +4621,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3874,6 +4645,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3881,6 +4654,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3897,7 +4672,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method loginWithGoogle definition
-            public void loginWithGoogle(  String accessToken, final Adapter.JsonObjectCallback  callback ){
+            public void loginWithGoogle(  String accessToken, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3917,6 +4698,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3924,6 +4707,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -3938,7 +4723,13 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method loginWithFb definition
-            public void loginWithFb(  String external_access_token, final Adapter.JsonObjectCallback  callback ){
+            public void loginWithFb(  String external_access_token, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3958,6 +4749,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -3965,6 +4758,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 

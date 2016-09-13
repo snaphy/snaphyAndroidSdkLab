@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -18,7 +26,8 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.ModelRepository;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -131,7 +140,13 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -149,6 +164,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -156,6 +173,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -170,7 +189,13 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -188,6 +213,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -195,6 +222,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -211,7 +240,13 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendMail definition
-            public void sendMail(  List<String> to,  String subject,  String html, final Adapter.JsonObjectCallback  callback ){
+            public void sendMail(  List<String> to,  String subject,  String html, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -235,6 +270,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -242,6 +279,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -256,7 +295,13 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendNotice definition
-            public void sendNotice(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
+            public void sendNotice(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -280,6 +325,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -287,6 +334,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -301,7 +350,13 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendOrder definition
-            public void sendOrder(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
+            public void sendOrder(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -325,6 +380,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -332,6 +389,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -346,7 +405,13 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method expiryNotice definition
-            public void expiryNotice(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
+            public void expiryNotice(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -370,6 +435,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -377,6 +444,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -391,7 +460,13 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method getMailSchema definition
-            public void getMailSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getMailSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -409,6 +484,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -416,6 +493,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 

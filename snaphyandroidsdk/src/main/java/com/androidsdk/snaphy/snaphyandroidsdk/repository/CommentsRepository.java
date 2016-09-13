@@ -2,12 +2,18 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 
+import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
+import com.strongloop.android.loopback.callbacks.ListCallback;
+import com.strongloop.android.loopback.callbacks.ObjectCallback;
+import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
-
-
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -20,7 +26,8 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.ModelRepository;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -34,9 +41,20 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Comments;
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
+            
+        
+    
 
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
+
 
 
 public class CommentsRepository extends ModelRepository<Comments> {
@@ -179,6 +197,15 @@ public class CommentsRepository extends ModelRepository<Comments> {
 
                 
 
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/updateComment", "POST"), "Comments.updateComment");
+                
+
+            
+        
+            
+
+                
+
                     contract.addItem(new RestContractItem("/" + "Comments"  + "/getSchema", "POST"), "Comments.getSchema");
                 
 
@@ -249,7 +276,13 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method get__customer definition
             public void get__customer(  String commentsId,  Boolean refresh, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
                 callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -266,17 +299,17 @@ public class CommentsRepository extends ModelRepository<Comments> {
                     
                     
                     invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
-
+                    
                         @Override
                         public void onError(Throwable t) {
-
                             callback.onError(t);
+                            //Call the finally method..
                             callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
-
+                            
                                 if(response != null){
                                     CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
@@ -286,9 +319,9 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                 }else{
                                     callback.onSuccess(null);
                                 }
-
-                                callback.onFinally();
-
+                            
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -305,7 +338,11 @@ public class CommentsRepository extends ModelRepository<Comments> {
             //Method get__recipe definition
             public void get__recipe(  String commentsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
 
-
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -327,6 +364,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -342,6 +381,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -357,6 +398,12 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method create definition
             public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -376,6 +423,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -391,6 +440,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -407,6 +458,12 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method upsert definition
             public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -426,6 +483,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -441,6 +500,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -455,7 +516,13 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -475,6 +542,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -482,6 +551,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -497,6 +568,12 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method findById definition
             public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Comments> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -518,6 +595,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -533,6 +612,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -548,6 +629,12 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method find definition
             public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Comments> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -566,6 +653,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -586,6 +675,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -599,6 +690,12 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method findOne definition
             public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Comments> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -618,6 +715,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -633,6 +732,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -647,7 +748,13 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -669,6 +776,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -676,6 +785,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -690,7 +801,13 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -710,6 +827,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -717,6 +836,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -731,7 +852,13 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -751,6 +878,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -758,6 +887,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -773,6 +904,12 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
             //Method updateAttributes definition
             public void updateAttributes(  String commentsId,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -794,6 +931,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -809,6 +948,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -824,8 +965,60 @@ public class CommentsRepository extends ModelRepository<Comments> {
         
     
         
+            //Method updateComment definition
+            public void updateComment(  Map<String,  ? extends Object> data, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("data", data);
+                
+
+                
+                    invokeStaticMethod("updateComment", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method updateComment definition ends here..
+
+            
+
+        
+    
+        
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -838,21 +1031,23 @@ public class CommentsRepository extends ModelRepository<Comments> {
                 
                     
                     invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
-
-
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
-
+                            
                                 callback.onSuccess(response);
-
+                            
+                            //Call the finally method..
+                            callback.onFinally();
                         }
-
-
                     });
                 
 
@@ -866,7 +1061,13 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -884,6 +1085,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -891,6 +1094,8 @@ public class CommentsRepository extends ModelRepository<Comments> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 

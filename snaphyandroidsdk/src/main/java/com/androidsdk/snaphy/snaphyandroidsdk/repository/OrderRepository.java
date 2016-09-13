@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -18,7 +26,8 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.ModelRepository;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -254,6 +263,14 @@ public class OrderRepository extends ModelRepository<Order> {
             
         
             
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/orderWithoutOTP", "POST"), "Order.orderWithoutOTP");
+                
+
+            
+        
+            
         
             
         
@@ -295,6 +312,12 @@ public class OrderRepository extends ModelRepository<Order> {
             //Method get__customer definition
             public void get__customer(  String orderId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -315,6 +338,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -330,6 +355,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -345,6 +372,12 @@ public class OrderRepository extends ModelRepository<Order> {
         
             //Method findById__orderDetails definition
             public void findById__orderDetails(  String orderId,  String fk, final ObjectCallback<OrderDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -366,6 +399,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -381,6 +416,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -397,6 +434,12 @@ public class OrderRepository extends ModelRepository<Order> {
             //Method destroyById__orderDetails definition
             public void destroyById__orderDetails(  String orderId,  String fk, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -410,12 +453,16 @@ public class OrderRepository extends ModelRepository<Order> {
                     invokeStaticMethod("prototype.__destroyById__orderDetails", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -434,6 +481,12 @@ public class OrderRepository extends ModelRepository<Order> {
         
             //Method updateById__orderDetails definition
             public void updateById__orderDetails(  String orderId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -457,6 +510,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -472,6 +527,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -486,7 +543,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method get__orderDetails definition
-            public void get__orderDetails(  String orderId,  Map<String,  ? extends Object> filter, final ListCallback<OrderDetail> callback){
+            public void get__orderDetails(  String orderId,  Map<String,  ? extends Object> filter, final DataListCallback<OrderDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -507,6 +570,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -515,7 +580,7 @@ public class OrderRepository extends ModelRepository<Order> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
+                                    DataList<OrderDetail> orderDetailList = new DataList<OrderDetail>();
                                     OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -527,6 +592,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -540,6 +607,12 @@ public class OrderRepository extends ModelRepository<Order> {
         
             //Method create__orderDetails definition
             public void create__orderDetails(  String orderId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -561,6 +634,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -576,6 +651,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -592,6 +669,12 @@ public class OrderRepository extends ModelRepository<Order> {
             //Method delete__orderDetails definition
             public void delete__orderDetails(  String orderId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -603,12 +686,16 @@ public class OrderRepository extends ModelRepository<Order> {
                     invokeStaticMethod("prototype.__delete__orderDetails", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -626,7 +713,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method count__orderDetails definition
-            public void count__orderDetails(  String orderId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__orderDetails(  String orderId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -648,6 +741,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -655,6 +750,8 @@ public class OrderRepository extends ModelRepository<Order> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -670,6 +767,12 @@ public class OrderRepository extends ModelRepository<Order> {
         
             //Method create definition
             public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -689,6 +792,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -704,6 +809,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -720,6 +827,12 @@ public class OrderRepository extends ModelRepository<Order> {
         
             //Method upsert definition
             public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -739,6 +852,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -754,6 +869,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -768,7 +885,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -788,6 +911,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -795,6 +920,8 @@ public class OrderRepository extends ModelRepository<Order> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -810,6 +937,12 @@ public class OrderRepository extends ModelRepository<Order> {
         
             //Method findById definition
             public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -831,6 +964,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -846,6 +981,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -860,7 +997,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Order> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -879,6 +1022,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -887,7 +1032,7 @@ public class OrderRepository extends ModelRepository<Order> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Order> orderList = new ArrayList<Order>();
+                                    DataList<Order> orderList = new DataList<Order>();
                                     OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -899,6 +1044,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -912,6 +1059,12 @@ public class OrderRepository extends ModelRepository<Order> {
         
             //Method findOne definition
             public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -931,6 +1084,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -946,6 +1101,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -960,7 +1117,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -982,6 +1145,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -989,6 +1154,8 @@ public class OrderRepository extends ModelRepository<Order> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1003,7 +1170,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1023,6 +1196,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1030,6 +1205,8 @@ public class OrderRepository extends ModelRepository<Order> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1044,7 +1221,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1064,6 +1247,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1071,6 +1256,8 @@ public class OrderRepository extends ModelRepository<Order> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1086,6 +1273,12 @@ public class OrderRepository extends ModelRepository<Order> {
         
             //Method updateAttributes definition
             public void updateAttributes(  String orderId,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1107,6 +1300,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1122,6 +1317,8 @@ public class OrderRepository extends ModelRepository<Order> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1138,7 +1335,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1156,6 +1359,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1163,6 +1368,8 @@ public class OrderRepository extends ModelRepository<Order> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1177,7 +1384,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1195,6 +1408,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1202,6 +1417,8 @@ public class OrderRepository extends ModelRepository<Order> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1218,7 +1435,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method requestOtp definition
-            public void requestOtp(  String number, final Adapter.JsonObjectCallback  callback ){
+            public void requestOtp(  String number, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1238,6 +1461,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1245,6 +1470,8 @@ public class OrderRepository extends ModelRepository<Order> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1259,7 +1486,13 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method orderWithOTP definition
-            public void orderWithOTP(  Map<String,  ? extends Object> order,  List<Map<String,  ? extends Object>> orderDetails,  String code, final Adapter.JsonObjectCallback  callback ){
+            public void orderWithOTP(  Map<String,  ? extends Object> order,  List<Map<String,  ? extends Object>> orderDetails,  String code, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1283,6 +1516,8 @@ public class OrderRepository extends ModelRepository<Order> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1290,6 +1525,8 @@ public class OrderRepository extends ModelRepository<Order> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1297,6 +1534,59 @@ public class OrderRepository extends ModelRepository<Order> {
                 
 
             }//Method orderWithOTP definition ends here..
+
+            
+
+        
+    
+        
+            //Method orderWithoutOTP definition
+            public void orderWithoutOTP(  Map<String,  ? extends Object> order,  List<Map<String,  ? extends Object>> orderDetails, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("order", order);
+                
+                        hashMapObject.put("orderDetails", orderDetails);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("orderWithoutOTP", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method orderWithoutOTP definition ends here..
 
             
 

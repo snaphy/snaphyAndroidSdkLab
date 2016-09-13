@@ -3,7 +3,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
-import com.strongloop.android.loopback.Model;
 
 
 
@@ -12,10 +11,18 @@ import org.json.JSONArray;
 
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
+import com.strongloop.android.remoting.adapters.Adapter;
+
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
-import com.strongloop.android.remoting.adapters.Adapter;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
@@ -47,7 +54,7 @@ public class Order extends Model {
 
 
     //For converting all model values to hashMap
-    private Map<String, Object> hashMap = new HashMap<>();
+    private  transient Map<String, Object> hashMap = new HashMap<>();
 
     public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
@@ -234,7 +241,7 @@ public class Order extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Customer  customer ;
+                    private transient Customer  customer ;
 
                     public Customer getCustomer() {
                         return customer;
@@ -284,6 +291,9 @@ public class Order extends Model {
 
                                     //Write the method here..
                                     public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final OrderRepository  orderRepo = restAdapter.createRepository(OrderRepository.class);
                                         
@@ -307,8 +317,12 @@ public class Order extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -322,6 +336,8 @@ public class Order extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -369,6 +385,7 @@ public class Order extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -383,7 +400,7 @@ public class Order extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private List<OrderDetail>  orderDetails ;
+                    private transient List<OrderDetail>  orderDetails ;
 
                     public List<OrderDetail> getOrderDetails() {
                         return orderDetails;
@@ -486,6 +503,9 @@ public class Order extends Model {
 
                                     //Write the method here..
                                     public void findById__orderDetails( String fk,  RestAdapter restAdapter, final ObjectCallback<OrderDetail> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final OrderRepository  orderRepo = restAdapter.createRepository(OrderRepository.class);
                                         
@@ -509,8 +529,12 @@ public class Order extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -524,6 +548,8 @@ public class Order extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -534,6 +560,9 @@ public class Order extends Model {
 
                                     //Write the method here..
                                     public void destroyById__orderDetails( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final OrderRepository  orderRepo = restAdapter.createRepository(OrderRepository.class);
                                         
@@ -549,6 +578,8 @@ public class Order extends Model {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -561,6 +592,8 @@ public class Order extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -571,6 +604,9 @@ public class Order extends Model {
 
                                     //Write the method here..
                                     public void updateById__orderDetails( String fk,  OrderDetail data,  RestAdapter restAdapter, final ObjectCallback<OrderDetail> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final OrderRepository  orderRepo = restAdapter.createRepository(OrderRepository.class);
                                         
@@ -597,8 +633,12 @@ public class Order extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -612,6 +652,8 @@ public class Order extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -621,7 +663,10 @@ public class Order extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__orderDetails( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<OrderDetail> callback) {
+                                    public void get__orderDetails( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<OrderDetail> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final OrderRepository  orderRepo = restAdapter.createRepository(OrderRepository.class);
                                         
@@ -632,7 +677,7 @@ public class Order extends Model {
 
 
 
-                                        orderRepo.get__orderDetails( (String)that.getId(), filter,  new ListCallback<OrderDetail> (){
+                                        orderRepo.get__orderDetails( (String)that.getId(), filter,  new DataListCallback<OrderDetail> (){
                                             
 
                                             
@@ -641,7 +686,7 @@ public class Order extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<OrderDetail> object) {
+                                                    public void onSuccess(DataList<OrderDetail> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             OrderDetail obj = new OrderDetail();
@@ -653,8 +698,12 @@ public class Order extends Model {
                                                             }*/
 
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -665,6 +714,8 @@ public class Order extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -675,6 +726,9 @@ public class Order extends Model {
 
                                     //Write the method here..
                                     public void create__orderDetails( OrderDetail data,  RestAdapter restAdapter, final ObjectCallback<OrderDetail> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final OrderRepository  orderRepo = restAdapter.createRepository(OrderRepository.class);
                                         
@@ -698,8 +752,12 @@ public class Order extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -713,6 +771,8 @@ public class Order extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -723,6 +783,9 @@ public class Order extends Model {
 
                                     //Write the method here..
                                     public void delete__orderDetails( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final OrderRepository  orderRepo = restAdapter.createRepository(OrderRepository.class);
                                         
@@ -735,6 +798,8 @@ public class Order extends Model {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -747,6 +812,8 @@ public class Order extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -756,7 +823,10 @@ public class Order extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__orderDetails( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__orderDetails( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final OrderRepository  orderRepo = restAdapter.createRepository(OrderRepository.class);
                                         
@@ -767,7 +837,7 @@ public class Order extends Model {
 
 
 
-                                        orderRepo.count__orderDetails( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        orderRepo.count__orderDetails( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -775,6 +845,8 @@ public class Order extends Model {
                                                 
                                                     public void onSuccess(JSONObject object) {
                                                         callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
                                                     }
                                                 
                                             
@@ -786,12 +858,15 @@ public class Order extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

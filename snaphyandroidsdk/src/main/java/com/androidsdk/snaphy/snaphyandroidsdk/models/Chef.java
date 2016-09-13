@@ -3,7 +3,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
-import com.strongloop.android.loopback.Model;
 
 
 
@@ -12,10 +11,18 @@ import org.json.JSONArray;
 
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
+import com.strongloop.android.remoting.adapters.Adapter;
+
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
-import com.strongloop.android.remoting.adapters.Adapter;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
@@ -47,7 +54,7 @@ public class Chef extends Model {
 
 
     //For converting all model values to hashMap
-    private Map<String, Object> hashMap = new HashMap<>();
+    private  transient Map<String, Object> hashMap = new HashMap<>();
 
     public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
@@ -258,7 +265,7 @@ public class Chef extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Customer  customer ;
+                    private transient Customer  customer ;
 
                     public Customer getCustomer() {
                         return customer;
@@ -308,6 +315,9 @@ public class Chef extends Model {
 
                                     //Write the method here..
                                     public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
@@ -331,8 +341,12 @@ public class Chef extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -346,6 +360,8 @@ public class Chef extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -394,7 +410,7 @@ public class Chef extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Popularity  popularities ;
+                    private transient Popularity  popularities ;
 
                     public Popularity getPopularities() {
                         return popularities;
@@ -446,6 +462,9 @@ public class Chef extends Model {
 
                                     //Write the method here..
                                     public void get__popularities( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Popularity> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
@@ -469,8 +488,12 @@ public class Chef extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -484,6 +507,8 @@ public class Chef extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -494,6 +519,9 @@ public class Chef extends Model {
 
                                     //Write the method here..
                                     public void create__popularities( Popularity data,  RestAdapter restAdapter, final ObjectCallback<Popularity> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
@@ -517,8 +545,12 @@ public class Chef extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -532,6 +564,8 @@ public class Chef extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -542,6 +576,9 @@ public class Chef extends Model {
 
                                     //Write the method here..
                                     public void update__popularities( Popularity data,  RestAdapter restAdapter, final ObjectCallback<Popularity> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
@@ -565,8 +602,12 @@ public class Chef extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -580,6 +621,8 @@ public class Chef extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -590,6 +633,9 @@ public class Chef extends Model {
 
                                     //Write the method here..
                                     public void destroy__popularities( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
@@ -602,6 +648,8 @@ public class Chef extends Model {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -614,6 +662,8 @@ public class Chef extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });

@@ -3,7 +3,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
-import com.strongloop.android.loopback.Model;
 
 
 
@@ -12,10 +11,18 @@ import org.json.JSONArray;
 
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
+import com.strongloop.android.remoting.adapters.Adapter;
+
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
-import com.strongloop.android.remoting.adapters.Adapter;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientsRepository;
@@ -50,7 +57,7 @@ public class Ingredients extends Model {
 
 
     //For converting all model values to hashMap
-    private Map<String, Object> hashMap = new HashMap<>();
+    private  transient Map<String, Object> hashMap = new HashMap<>();
 
     public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
@@ -214,7 +221,7 @@ public class Ingredients extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private IngredientCategory  ingredientCategory ;
+                    private transient IngredientCategory  ingredientCategory ;
 
                     public IngredientCategory getIngredientCategory() {
                         return ingredientCategory;
@@ -264,6 +271,9 @@ public class Ingredients extends Model {
 
                                     //Write the method here..
                                     public void get__ingredientCategory( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<IngredientCategory> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -287,8 +297,12 @@ public class Ingredients extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -302,6 +316,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -378,7 +394,7 @@ public class Ingredients extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private List<Recipe>  recipes ;
+                    private transient List<Recipe>  recipes ;
 
                     public List<Recipe> getRecipes() {
                         return recipes;
@@ -462,7 +478,7 @@ public class Ingredients extends Model {
 
                     
                         //Write hasManyThrough def too..
-                        private List<RecipeIngredients>  recipeIngredients ;
+                        private transient List<RecipeIngredients>  recipeIngredients ;
 
                         public List<RecipeIngredients> getRecipeIngredients() {
                             return recipeIngredients;
@@ -515,6 +531,9 @@ public class Ingredients extends Model {
 
                                     //Write the method here..
                                     public void findById__recipes( String fk,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -538,8 +557,12 @@ public class Ingredients extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -553,6 +576,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -563,6 +588,9 @@ public class Ingredients extends Model {
 
                                     //Write the method here..
                                     public void destroyById__recipes( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -578,6 +606,8 @@ public class Ingredients extends Model {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -590,6 +620,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -600,6 +632,9 @@ public class Ingredients extends Model {
 
                                     //Write the method here..
                                     public void updateById__recipes( String fk,  Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -626,8 +661,12 @@ public class Ingredients extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -641,6 +680,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -651,6 +692,9 @@ public class Ingredients extends Model {
 
                                     //Write the method here..
                                     public void link__recipes( String fk,  RecipeIngredients data,  RestAdapter restAdapter, final ObjectCallback<RecipeIngredients> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -677,8 +721,12 @@ public class Ingredients extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -692,6 +740,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -702,6 +752,9 @@ public class Ingredients extends Model {
 
                                     //Write the method here..
                                     public void unlink__recipes( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -717,6 +770,8 @@ public class Ingredients extends Model {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -729,6 +784,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -738,7 +795,10 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void exists__recipes( String fk,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void exists__recipes( String fk,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -749,7 +809,7 @@ public class Ingredients extends Model {
 
 
 
-                                        ingredientsRepo.exists__recipes( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
+                                        ingredientsRepo.exists__recipes( (String)that.getId(), fk,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -757,6 +817,8 @@ public class Ingredients extends Model {
                                                 
                                                     public void onSuccess(JSONObject object) {
                                                         callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
                                                     }
                                                 
                                             
@@ -768,6 +830,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -777,7 +841,10 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
+                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Recipe> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -788,7 +855,7 @@ public class Ingredients extends Model {
 
 
 
-                                        ingredientsRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
+                                        ingredientsRepo.get__recipes( (String)that.getId(), filter,  new DataListCallback<Recipe> (){
                                             
 
                                             
@@ -797,7 +864,7 @@ public class Ingredients extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Recipe> object) {
+                                                    public void onSuccess(DataList<Recipe> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Recipe obj = new Recipe();
@@ -809,8 +876,12 @@ public class Ingredients extends Model {
                                                             }*/
 
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -821,6 +892,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -831,6 +904,9 @@ public class Ingredients extends Model {
 
                                     //Write the method here..
                                     public void create__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -854,8 +930,12 @@ public class Ingredients extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -869,6 +949,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -879,6 +961,9 @@ public class Ingredients extends Model {
 
                                     //Write the method here..
                                     public void delete__recipes( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -891,6 +976,8 @@ public class Ingredients extends Model {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -903,6 +990,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -912,7 +1001,10 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__recipes( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__recipes( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -923,7 +1015,7 @@ public class Ingredients extends Model {
 
 
 
-                                        ingredientsRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        ingredientsRepo.count__recipes( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -931,6 +1023,8 @@ public class Ingredients extends Model {
                                                 
                                                     public void onSuccess(JSONObject object) {
                                                         callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
                                                     }
                                                 
                                             
@@ -942,6 +1036,8 @@ public class Ingredients extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });

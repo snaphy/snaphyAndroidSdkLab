@@ -3,7 +3,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
-import com.strongloop.android.loopback.User;
 
 
 
@@ -12,10 +11,18 @@ import org.json.JSONArray;
 
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
+import com.strongloop.android.remoting.adapters.Adapter;
+
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
-import com.strongloop.android.remoting.adapters.Adapter;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
@@ -88,11 +95,11 @@ import java.util.Map;
 
 
 
-public class Customer extends com.strongloop.android.loopback.User {
+public class Customer extends User {
 
 
     //For converting all model values to hashMap
-    private Map<String, Object> hashMap = new HashMap<>();
+    private  transient Map<String, Object> hashMap = new HashMap<>();
 
     public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
@@ -386,7 +393,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                 
                     
                     //Define hasMany relation method here..
-                    private List<Recipe>  recipes ;
+                    private transient List<Recipe>  recipes ;
 
                     public List<Recipe> getRecipes() {
                         return recipes;
@@ -493,6 +500,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void findById__recipes( String fk,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -516,8 +526,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -531,6 +545,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -541,6 +557,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void destroyById__recipes( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -556,6 +575,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -568,6 +589,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -578,6 +601,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void updateById__recipes( String fk,  Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -604,8 +630,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -619,6 +649,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -684,7 +716,10 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
+                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Recipe> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -695,7 +730,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
+                                        customerRepo.get__recipes( (String)that.getId(), filter,  new DataListCallback<Recipe> (){
                                             
 
                                             
@@ -704,7 +739,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Recipe> object) {
+                                                    public void onSuccess(DataList<Recipe> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Recipe obj = new Recipe();
@@ -716,8 +751,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             }*/
 
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -728,6 +767,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -738,6 +779,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void create__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -761,8 +805,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -776,6 +824,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -786,6 +836,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void delete__recipes( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -798,6 +851,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -810,6 +865,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -819,7 +876,10 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void count__recipes( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__recipes( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -830,7 +890,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        customerRepo.count__recipes( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -838,6 +898,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 
                                                     public void onSuccess(JSONObject object) {
                                                         callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
                                                     }
                                                 
                                             
@@ -849,6 +911,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -939,7 +1003,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                 
                     
                     //Define hasMany relation method here..
-                    private List<Comments>  comments ;
+                    private transient List<Comments>  comments ;
 
                     public List<Comments> getComments() {
                         return comments;
@@ -1052,6 +1116,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void findById__comments( String fk,  RestAdapter restAdapter, final ObjectCallback<Comments> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1075,8 +1142,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -1090,6 +1161,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1100,6 +1173,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void destroyById__comments( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1115,6 +1191,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -1127,6 +1205,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1137,6 +1217,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void updateById__comments( String fk,  Comments data,  RestAdapter restAdapter, final ObjectCallback<Comments> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1163,8 +1246,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -1178,6 +1265,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1245,7 +1334,10 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void get__comments( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Comments> callback) {
+                                    public void get__comments( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Comments> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1256,7 +1348,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.get__comments( (String)that.getId(), filter,  new ListCallback<Comments> (){
+                                        customerRepo.get__comments( (String)that.getId(), filter,  new DataListCallback<Comments> (){
                                             
 
                                             
@@ -1265,7 +1357,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Comments> object) {
+                                                    public void onSuccess(DataList<Comments> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Comments obj = new Comments();
@@ -1277,8 +1369,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             }*/
 
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -1289,6 +1385,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1299,6 +1397,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void create__comments( Comments data,  RestAdapter restAdapter, final ObjectCallback<Comments> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1322,8 +1423,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -1337,6 +1442,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1347,6 +1454,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void delete__comments( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1359,6 +1469,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -1371,6 +1483,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1380,7 +1494,10 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void count__comments( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__comments( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1391,7 +1508,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.count__comments( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        customerRepo.count__comments( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -1399,6 +1516,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 
                                                     public void onSuccess(JSONObject object) {
                                                         callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
                                                     }
                                                 
                                             
@@ -1410,6 +1529,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1490,7 +1611,7 @@ public class Customer extends com.strongloop.android.loopback.User {
         
                 
                     //Define belongsTo relation method here..
-                    private Wishlist  wishlists ;
+                    private transient Wishlist  wishlists ;
 
                     public Wishlist getWishlists() {
                         return wishlists;
@@ -1558,6 +1679,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void get__wishlists( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Wishlist> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1581,8 +1705,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -1596,6 +1724,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1606,6 +1736,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void create__wishlists( Wishlist data,  RestAdapter restAdapter, final ObjectCallback<Wishlist> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1629,8 +1762,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -1644,6 +1781,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1654,6 +1793,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void update__wishlists( Wishlist data,  RestAdapter restAdapter, final ObjectCallback<Wishlist> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1677,8 +1819,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -1692,6 +1838,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1702,6 +1850,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void destroy__wishlists( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1714,6 +1865,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -1726,6 +1879,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1861,7 +2016,7 @@ public class Customer extends com.strongloop.android.loopback.User {
         
                 
                     //Define belongsTo relation method here..
-                    private Chef  chefs ;
+                    private transient Chef  chefs ;
 
                     public Chef getChefs() {
                         return chefs;
@@ -1937,6 +2092,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void get__chefs( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1960,8 +2118,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -1975,6 +2137,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -1985,6 +2149,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void create__chefs( Chef data,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2008,8 +2175,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -2023,6 +2194,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2033,6 +2206,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void update__chefs( Chef data,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2056,8 +2232,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -2071,6 +2251,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2081,6 +2263,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void destroy__chefs( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2093,6 +2278,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -2105,6 +2292,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2234,7 +2423,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                 
                     
                     //Define hasMany relation method here..
-                    private List<ContactChef>  contactChefs ;
+                    private transient List<ContactChef>  contactChefs ;
 
                     public List<ContactChef> getContactChefs() {
                         return contactChefs;
@@ -2375,6 +2564,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void findById__contactChefs( String fk,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2398,8 +2590,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -2413,6 +2609,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2423,6 +2621,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void destroyById__contactChefs( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2438,6 +2639,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -2450,6 +2653,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2460,6 +2665,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void updateById__contactChefs( String fk,  ContactChef data,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2486,8 +2694,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -2501,6 +2713,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2556,7 +2770,10 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void get__contactChefs( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
+                                    public void get__contactChefs( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<ContactChef> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2567,7 +2784,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.get__contactChefs( (String)that.getId(), filter,  new ListCallback<ContactChef> (){
+                                        customerRepo.get__contactChefs( (String)that.getId(), filter,  new DataListCallback<ContactChef> (){
                                             
 
                                             
@@ -2576,7 +2793,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<ContactChef> object) {
+                                                    public void onSuccess(DataList<ContactChef> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             ContactChef obj = new ContactChef();
@@ -2588,8 +2805,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             }*/
 
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -2600,6 +2821,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2610,6 +2833,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void create__contactChefs( ContactChef data,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2633,8 +2859,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -2648,6 +2878,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2658,6 +2890,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void delete__contactChefs( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2670,6 +2905,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -2682,6 +2919,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2691,7 +2930,10 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void count__contactChefs( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__contactChefs( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2702,7 +2944,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.count__contactChefs( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        customerRepo.count__contactChefs( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -2710,6 +2952,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 
                                                     public void onSuccess(JSONObject object) {
                                                         callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
                                                     }
                                                 
                                             
@@ -2721,6 +2965,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2787,7 +3033,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                 
                     
                     //Define hasMany relation method here..
-                    private List<Order>  orders ;
+                    private transient List<Order>  orders ;
 
                     public List<Order> getOrders() {
                         return orders;
@@ -2934,6 +3180,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void findById__orders( String fk,  RestAdapter restAdapter, final ObjectCallback<Order> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2957,8 +3206,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -2972,6 +3225,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -2982,6 +3237,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void destroyById__orders( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2997,6 +3255,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -3009,6 +3269,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3019,6 +3281,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void updateById__orders( String fk,  Order data,  RestAdapter restAdapter, final ObjectCallback<Order> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3045,8 +3310,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -3060,6 +3329,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3117,7 +3388,10 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void get__orders( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Order> callback) {
+                                    public void get__orders( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Order> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3128,7 +3402,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.get__orders( (String)that.getId(), filter,  new ListCallback<Order> (){
+                                        customerRepo.get__orders( (String)that.getId(), filter,  new DataListCallback<Order> (){
                                             
 
                                             
@@ -3137,7 +3411,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Order> object) {
+                                                    public void onSuccess(DataList<Order> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Order obj = new Order();
@@ -3149,8 +3423,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             }*/
 
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -3161,6 +3439,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3171,6 +3451,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void create__orders( Order data,  RestAdapter restAdapter, final ObjectCallback<Order> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3194,8 +3477,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -3209,6 +3496,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3219,6 +3508,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void delete__orders( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3231,6 +3523,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -3243,6 +3537,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3252,7 +3548,10 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void count__orders( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__orders( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3263,7 +3562,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.count__orders( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        customerRepo.count__orders( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -3271,6 +3570,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 
                                                     public void onSuccess(JSONObject object) {
                                                         callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
                                                     }
                                                 
                                             
@@ -3282,6 +3583,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3340,7 +3643,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                 
                     
                     //Define hasMany relation method here..
-                    private List<Course>  courses ;
+                    private transient List<Course>  courses ;
 
                     public List<Course> getCourses() {
                         return courses;
@@ -3475,6 +3778,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void findById__courses( String fk,  RestAdapter restAdapter, final ObjectCallback<Course> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3498,8 +3804,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -3513,6 +3823,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3523,6 +3835,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void destroyById__courses( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3538,6 +3853,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -3550,6 +3867,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3560,6 +3879,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void updateById__courses( String fk,  Course data,  RestAdapter restAdapter, final ObjectCallback<Course> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3586,8 +3908,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -3601,6 +3927,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3654,7 +3982,10 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void get__courses( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Course> callback) {
+                                    public void get__courses( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Course> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3665,7 +3996,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.get__courses( (String)that.getId(), filter,  new ListCallback<Course> (){
+                                        customerRepo.get__courses( (String)that.getId(), filter,  new DataListCallback<Course> (){
                                             
 
                                             
@@ -3674,7 +4005,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Course> object) {
+                                                    public void onSuccess(DataList<Course> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Course obj = new Course();
@@ -3686,8 +4017,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             }*/
 
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -3698,6 +4033,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3708,6 +4045,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void create__courses( Course data,  RestAdapter restAdapter, final ObjectCallback<Course> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3731,8 +4071,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -3746,6 +4090,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3756,6 +4102,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void delete__courses( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3768,6 +4117,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -3780,6 +4131,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3789,7 +4142,10 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void count__courses( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__courses( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -3800,7 +4156,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.count__courses( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        customerRepo.count__courses( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -3808,6 +4164,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 
                                                     public void onSuccess(JSONObject object) {
                                                         callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
                                                     }
                                                 
                                             
@@ -3819,6 +4177,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -3891,7 +4251,7 @@ public class Customer extends com.strongloop.android.loopback.User {
         
                 
                     //Define belongsTo relation method here..
-                    private FacebookAccessToken  facebookAccessToken ;
+                    private transient FacebookAccessToken  facebookAccessToken ;
 
                     public FacebookAccessToken getFacebookAccessToken() {
                         return facebookAccessToken;
@@ -3993,6 +4353,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void get__facebookAccessToken( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<FacebookAccessToken> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -4016,8 +4379,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -4031,6 +4398,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -4041,6 +4410,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void create__facebookAccessToken( FacebookAccessToken data,  RestAdapter restAdapter, final ObjectCallback<FacebookAccessToken> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -4064,8 +4436,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -4079,6 +4455,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -4089,6 +4467,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void update__facebookAccessToken( FacebookAccessToken data,  RestAdapter restAdapter, final ObjectCallback<FacebookAccessToken> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -4112,8 +4493,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -4127,6 +4512,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -4137,6 +4524,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                                     //Write the method here..
                                     public void destroy__facebookAccessToken( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -4149,6 +4539,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -4161,6 +4553,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });

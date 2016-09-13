@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -18,7 +26,8 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.ModelRepository;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -280,6 +289,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             //Method get__recipe definition
             public void get__recipe(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -300,6 +315,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -315,6 +332,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -330,6 +349,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method get__ingredients definition
             public void get__ingredients(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<Ingredients> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -351,6 +376,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -366,6 +393,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -381,6 +410,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method get__orderDetails definition
             public void get__orderDetails(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<OrderDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -402,6 +437,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -417,6 +454,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -432,6 +471,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method create__orderDetails definition
             public void create__orderDetails(  String recipeIngredientsId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -453,6 +498,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -468,6 +515,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -483,6 +532,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method update__orderDetails definition
             public void update__orderDetails(  String recipeIngredientsId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -504,6 +559,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -519,6 +576,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -535,6 +594,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             //Method destroy__orderDetails definition
             public void destroy__orderDetails(  String recipeIngredientsId, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -546,12 +611,16 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                     invokeStaticMethod("prototype.__destroy__orderDetails", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -571,6 +640,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             //Method create definition
             public void create(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -589,6 +664,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -604,6 +681,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -620,6 +699,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method upsert definition
             public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -639,6 +724,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -654,6 +741,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -668,7 +757,13 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -688,6 +783,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -695,6 +792,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -710,6 +809,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method findById definition
             public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<RecipeIngredients> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -731,6 +836,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -746,6 +853,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -760,7 +869,13 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<RecipeIngredients> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<RecipeIngredients> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -779,6 +894,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -787,7 +904,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<RecipeIngredients> recipeIngredientsList = new ArrayList<RecipeIngredients>();
+                                    DataList<RecipeIngredients> recipeIngredientsList = new DataList<RecipeIngredients>();
                                     RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -799,6 +916,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -812,6 +931,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method findOne definition
             public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<RecipeIngredients> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -831,6 +956,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -846,6 +973,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -860,7 +989,13 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -882,6 +1017,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -889,6 +1026,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -903,7 +1042,13 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -923,6 +1068,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -930,6 +1077,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -944,7 +1093,13 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -964,6 +1119,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -971,6 +1128,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -986,6 +1145,12 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
             //Method updateAttributes definition
             public void updateAttributes(  String recipeIngredientsId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1007,6 +1172,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1022,6 +1189,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1038,7 +1207,13 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1056,6 +1231,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1063,6 +1240,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1077,7 +1256,13 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1095,6 +1280,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1102,6 +1289,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
