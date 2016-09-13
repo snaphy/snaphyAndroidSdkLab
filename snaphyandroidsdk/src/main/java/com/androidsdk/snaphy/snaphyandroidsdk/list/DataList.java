@@ -1,12 +1,7 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.list;
 
-
-
-
 import android.util.Log;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;

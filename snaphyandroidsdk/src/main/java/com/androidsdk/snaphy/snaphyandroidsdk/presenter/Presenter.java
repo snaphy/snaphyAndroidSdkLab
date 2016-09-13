@@ -1,13 +1,8 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.presenter;
 
 import android.util.Log;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 
 /**
@@ -33,8 +28,7 @@ public final class Presenter {
      * Constructor
      * */
     public Presenter() {
-        eventTypeHashMap = new HashMap<String, EventType>();
-        Log.i("Snaphy", "Instantiating presenter class.");
+        eventTypeHashMap = new HashMap<>();
     }
 
 
