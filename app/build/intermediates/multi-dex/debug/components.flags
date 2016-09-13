@@ -1,14 +1,14 @@
--injars /home/robins/snaphy/Android/SnaphySdk/app/build/intermediates/multi-dex/debug/allclasses.jar
--outjars /home/robins/snaphy/Android/SnaphySdk/app/build/intermediates/multi-dex/debug/componentClasses.jar
+-injars /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/multi-dex/debug/allclasses.jar
+-outjars /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/multi-dex/debug/componentClasses.jar
 
--libraryjars /home/robins/Android/Sdk/build-tools/23.0.0/lib/shrinkedAndroid.jar
+-libraryjars /home/snaphy/Android/Sdk/build-tools/23.0.0/lib/shrinkedAndroid.jar
 
 -forceprocessing
 -dontoptimize
 -dontobfuscate
 -dontpreverify
 -dontwarn
--printconfiguration /home/robins/snaphy/Android/SnaphySdk/app/build/intermediates/multi-dex/debug/components.flags
+-printconfiguration /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/multi-dex/debug/components.flags
 
 
 -keep class null {
