@@ -101,6 +101,7 @@ android/support/v4/media/session/MediaSessionCompat$QueueItem.class
 com/google/common/collect/ImmutableRangeMap.class
 com/google/common/collect/ArrayTable.class
 com/androidsdk/snaphy/snaphysdk/MainActivity.class
+com/androidsdk/snaphy/snaphysdk/RecipePresenter.class
 com/google/common/collect/Maps$NavigableAsMapView.class
 android/support/v4/view/GravityCompat.class
 android/support/v4/app/FragmentActivity.class
@@ -193,8 +194,8 @@ android/support/v4/app/FragmentManagerState.class
 android/support/v4/view/animation/FastOutSlowInInterpolator.class
 android/support/v4/app/ActionBarDrawerToggle.class
 com/google/common/collect/ImmutableTable.class
-com/google/common/collect/TreeMultiset$AvlNode.class
 com/google/common/collect/ImmutableMapEntry$TerminalEntry.class
+com/google/common/collect/TreeMultiset$AvlNode.class
     void attachBaseContext(android.content.Context);
 android/support/v7/appcompat/R$style.class
 android/support/v4/app/FragmentManagerImpl$FragmentTag.class

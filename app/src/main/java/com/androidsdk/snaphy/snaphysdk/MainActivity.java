@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.Listen;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+import com.androidsdk.snaphy.snaphyandroidsdk.presenter.Presenter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        RecipePresenter recipePresenter = new RecipePresenter();
 
         /*DataList<Customer> customerDataList = new DataList<Customer>();
         customerDataList.subscribe(this, new Listen<Customer>() {
@@ -34,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });*/
+
+
+
+
     }
 
     @Override
