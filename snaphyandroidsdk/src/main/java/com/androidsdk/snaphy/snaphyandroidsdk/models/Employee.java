@@ -32,13 +32,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
     
     
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeDetailsRepository;
-            
-
-        
-    
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,6 +63,7 @@ public class Employee extends User {
     
         
             
+
             
                 private String username;
                 /* Adding Getter and Setter methods */
@@ -89,10 +83,13 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String firstName;
                 /* Adding Getter and Setter methods */
@@ -112,10 +109,13 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String lastName;
                 /* Adding Getter and Setter methods */
@@ -135,10 +135,13 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String date;
                 /* Adding Getter and Setter methods */
@@ -158,10 +161,39 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
+            
+                private String updated;
+                /* Adding Getter and Setter methods */
+                public String getUpdated(){
+                    return updated;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUpdated(String updated){
+                    this.updated = updated;
+                    //Update hashMap value..
+                    hashMap.put("updated", updated);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
             
                 private String email;
                 /* Adding Getter and Setter methods */
@@ -181,10 +213,13 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String password;
                 /* Adding Getter and Setter methods */
@@ -204,85 +239,114 @@ public class Employee extends User {
             
             
 
-        
-    
-        
-            
-            
-            
-            
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
             
 
         
@@ -296,312 +360,6 @@ public class Employee extends User {
     //Now adding relations between related models
     
          
-          
-    
-        
-                
-                    //Define belongsTo relation method here..
-                    private transient EmployeeDetails  employeeDetails ;
-
-                    public EmployeeDetails getEmployeeDetails() {
-                        return employeeDetails;
-                    }
-
-                    public void setEmployeeDetails(EmployeeDetails employeeDetails) {
-                        this.employeeDetails = employeeDetails;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setEmployeeDetails(Map<String, Object> employeeDetails) {
-                        //First create a dummy Repo class object for customer.
-                        EmployeeDetailsRepository employeeDetailsRepository = new EmployeeDetailsRepository();
-                        EmployeeDetails employeeDetails1 = employeeDetailsRepository.createObject(employeeDetails);
-                        setEmployeeDetails(employeeDetails1);
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setEmployeeDetails(HashMap<String, Object> employeeDetails) {
-                        //First create a dummy Repo class object for customer.
-                        EmployeeDetailsRepository employeeDetailsRepository = new EmployeeDetailsRepository();
-                        EmployeeDetails employeeDetails1 = employeeDetailsRepository.createObject(employeeDetails);
-                        setEmployeeDetails(employeeDetails1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(EmployeeDetails employeeDetails) {
-                        that.setEmployeeDetails(employeeDetails);
-                    }
-
-
-
-                
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__employeeDetails( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        employeeRepo.get__employeeDetails( (String)that.getId(), refresh,  new ObjectCallback<EmployeeDetails> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(EmployeeDetails object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void create__employeeDetails( EmployeeDetails data,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        employeeRepo.create__employeeDetails( (String)that.getId(), data.convertMap(),  new ObjectCallback<EmployeeDetails> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(EmployeeDetails object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void update__employeeDetails( EmployeeDetails data,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        employeeRepo.update__employeeDetails( (String)that.getId(), data.convertMap(),  new ObjectCallback<EmployeeDetails> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(EmployeeDetails object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void destroy__employeeDetails( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
-                                        
-                                        
-
-
-
-                                        employeeRepo.destroy__employeeDetails( (String)that.getId(),  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                    //Calling the finally..callback
-                                                    callback.onFinally();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
           
       
 
