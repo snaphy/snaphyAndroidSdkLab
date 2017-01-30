@@ -7,45 +7,30 @@ import android.view.MenuItem;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.Listen;
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
 import com.androidsdk.snaphy.snaphyandroidsdk.presenter.Presenter;
+import com.strongloop.android.loopback.RestAdapter;
 
 public class MainActivity extends AppCompatActivity {
+
+    RestAdapter restAdapter;
+    SnaphyHelper snaphyHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        RecipePresenter recipePresenter = new RecipePresenter();
-
-        /*DataList<Customer> customerDataList = new DataList<Customer>();
-        customerDataList.subscribe(this, new Listen<Customer>() {
-            @Override
-            public void onInit(DataList<Customer> dataList) {
-                super.onInit(dataList);
-            }
-
-            @Override
-            public void onChange(DataList<Customer> dataList) {
-                super.onChange(dataList);
-            }
-
-            @Override
-            public void onClear() {
-                super.onClear();
-            }
-
-        });*/
-        boolean x = true;
-        Presenter.getInstance();
-        Presenter.getInstance().addModel("test", x);
-        boolean y = Presenter.getInstance().getModel(Boolean.class, "test");
-
-
-
+        snaphyHelper = new SnaphyHelper(this);
+        restAdapter = snaphyHelper.getLoopBackAdapter();
+        readChatData();
 
     }
+
+
+    private void readChatData(){
+
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
