@@ -71,11 +71,7 @@ public class Chat extends Model {
         that = this;
     }
 
-    
-        
-            
 
-            
                 private String added;
                 /* Adding Getter and Setter methods */
                 public String getAdded(){

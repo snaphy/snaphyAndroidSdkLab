@@ -43,13 +43,13 @@ public class ChatPresenter {
             }
         });
 
-        Presenter.getInstance().addList("Secret", chats);
+       /* Presenter.getInstance().addList("Secret", chats);
         chats.add(new Chat());
         DataList<Chat> recipeContainer = Presenter.getInstance().getList(Chat.class, "Secret");
         Chat recipe = new Chat();
         recipeContainer.add(recipe);
         recipeContainer.remove(recipe);
-        recipeContainer.clear();
+        recipeContainer.clear();*/
     }
 
     public DataList<Chat> getChats() {

@@ -108,7 +108,6 @@ android/support/v4/media/VolumeProviderCompatApi21$Delegate.class
 com/google/common/base/Equivalence$EquivalentToPredicate.class
 android/support/annotation/Keep.class
 android/support/v4/media/session/PlaybackStateCompat$State.class
-com/androidsdk/snaphy/snaphyandroidsdk/models/Model$1.class
 com/google/common/annotations/VisibleForTesting.class
 android/support/annotation/BinderThread.class
 android/support/v4/view/ViewCompat$MarshmallowViewCompatImpl.class
@@ -117,7 +116,6 @@ android/support/v4/media/MediaMetadataCompat$RatingKey.class
 com/github/nkzawa/engineio/client/Socket$13.class
 com/google/common/cache/LocalCache$ValueReference.class
 com/androidsdk/snaphy/snaphysdk/ChatPresenter$1.class
-com/androidsdk/snaphy/snaphyandroidsdk/models/AppUser.class
 com/google/common/cache/LocalCache.class
 android/support/v4/media/session/MediaSessionCompat$MediaSessionImplApi21.class
 android/support/v4/app/ActivityCompat$OnRequestPermissionsResultCallback.class
@@ -127,7 +125,6 @@ android/support/annotation/DimenRes.class
 android/support/annotation/TransitionRes.class
 com/github/nkzawa/socketio/parser/Packet.class
 android/support/annotation/MainThread.class
-com/strongloop/android/remoting/adapters/Adapter$JsonCallback.class
 com/github/nkzawa/socketio/parser/Binary.class
 com/github/nkzawa/engineio/client/Socket$ReadyState.class
 android/support/annotation/MenuRes.class
@@ -146,7 +143,6 @@ android/support/annotation/StringRes.class
 com/google/common/cache/LocalCache$Segment.class
 com/github/nkzawa/engineio/client/Socket$19.class
 android/support/v4/media/VolumeProviderCompat$ControlType.class
-com/strongloop/android/remoting/BeanUtil.class
 android/support/annotation/AnyRes.class
 android/support/v4/view/ViewCompat$BaseViewCompatImpl.class
 android/support/v4/media/session/MediaSessionCompat$MediaSessionImplBase.class
@@ -184,7 +180,6 @@ com/github/nkzawa/socketio/client/Manager$7.class
 com/google/common/reflect/MutableTypeToInstanceMap.class
 com/google/common/base/Joiner$MapJoiner.class
 com/google/common/collect/ImmutableCollection.class
-com/androidsdk/snaphy/snaphyandroidsdk/models/Model$Callback.class
 android/support/v4/view/ViewCompatJellybeanMr2.class
 com/github/nkzawa/engineio/client/Socket$18.class
 com/github/nkzawa/socketio/client/Manager$1.class
@@ -204,10 +199,8 @@ com/google/common/collect/ArrayTable$ArrayMap.class
 android/support/v7/app/ActionBarActivity.class
 com/github/nkzawa/engineio/client/Socket$17.class
 com/google/common/io/ByteArrayDataOutput.class
-com/androidsdk/snaphy/snaphyandroidsdk/presenter/Presenter$EventType.class
 com/google/common/util/concurrent/package-info.class
 android/support/v4/media/session/MediaSessionCompat$Token.class
-com/androidsdk/snaphy/snaphyandroidsdk/models/Chat$2.class
 android/support/v4/app/ActivityCompatApi23.class
 android/support/v4/util/ContainerHelpers.class
 android/support/annotation/NonNull.class
@@ -219,9 +212,7 @@ android/support/v4/media/MediaDescriptionCompat.class
 android/support/v4/media/session/MediaSessionCompat$QueueItem.class
 android/support/v4/media/MediaBrowserCompat$MediaBrowserImplBase.class
 com/github/nkzawa/socketio/client/Manager$3.class
-com/strongloop/android/loopback/callbacks/VoidCallback.class
 android/support/v7/widget/TintTypedArray.class
-com/androidsdk/snaphy/snaphyandroidsdk/models/Chat$1.class
 com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.class
 com/github/nkzawa/engineio/client/Socket$21.class
 com/google/common/cache/Cache.class
@@ -241,7 +232,6 @@ com/strongloop/android/remoting/Repository.class
 android/support/v4/view/ViewCompat$GBViewCompatImpl.class
 android/support/v7/app/ActionBarDrawerToggle.class
 android/support/v7/app/ActionBar$OnMenuVisibilityListener.class
-com/androidsdk/snaphy/snaphyandroidsdk/models/User.class
 android/support/v4/app/AppOpsManagerCompat.class
 com/google/common/collect/Range.class
 android/support/annotation/FloatRange.class
@@ -268,7 +258,6 @@ android/support/v4/view/ViewCompatLollipop.class
 android/support/v4/media/MediaBrowserCompat$MediaItem$1.class
 android/support/v4/widget/CursorAdapter.class
 com/github/nkzawa/engineio/client/HandshakeData.class
-com/androidsdk/snaphy/snaphyandroidsdk/models/Model$2.class
 android/support/v4/widget/SimpleCursorAdapter.class
 android/support/v4/view/ViewCompat$JbMr1ViewCompatImpl.class
 com/google/common/collect/TreeRangeMap$SubRangeMap.class
@@ -297,10 +286,8 @@ com/github/nkzawa/socketio/client/On.class
 android/support/annotation/AnimatorRes.class
 android/support/v7/app/ActionBar$Tab.class
 android/support/v4/app/ActivityCompatHoneycomb.class
-com/strongloop/android/remoting/adapters/Adapter$BinaryCallback.class
 com/github/nkzawa/socketio/parser/Binary$DeconstructedPacket.class
 android/support/v4/view/ViewCompatGingerbread.class
-com/androidsdk/snaphy/snaphyandroidsdk/models/Model$ListReferences.class
 android/support/v4/view/ViewCompatKitKat.class
 android/support/v4/app/FragmentTransaction.class
 com/google/common/base/Strings.class
@@ -343,10 +330,8 @@ android/support/v4/util/LogWriter.class
 android/support/multidex/MultiDex$V4.class
 com/google/common/collect/StandardTable.class
 android/support/v4/view/OnApplyWindowInsetsListener.class
-com/androidsdk/snaphy/snaphyandroidsdk/repository/UserRepository.class
 android/support/v4/view/ViewCompatBase.class
 com/google/common/collect/RegularImmutableBiMap.class
-com/androidsdk/snaphy/snaphyandroidsdk/repository/AppUserRepository.class
 android/support/v7/appcompat/R$attr.class
 android/support/v4/app/NoSaveStateFrameLayout.class
 android/support/v4/view/ViewCompatJB.class
@@ -373,7 +358,6 @@ com/google/common/util/concurrent/CycleDetectingLockFactory$LockGraphNode.class
 com/google/common/collect/ImmutableMapEntry.class
 android/support/v4/app/SuperNotCalledException.class
 android/support/v4/media/MediaBrowserCompat$1.class
-com/androidsdk/snaphy/snaphyandroidsdk/presenter/Presenter$ModelType.class
 android/support/v4/media/session/PlaybackStateCompat.class
 com/github/nkzawa/engineio/parser/Packet.class
 com/github/nkzawa/engineio/client/Socket$9.class
@@ -439,7 +423,6 @@ com/androidsdk/snaphy/snaphyandroidsdk/list/DataList$Listeners.class
 android/support/v4/media/RatingCompat.class
 android/support/v4/view/accessibility/AccessibilityNodeInfoCompat.class
 android/support/v4/app/BackStackState.class
-com/androidsdk/snaphy/snaphyandroidsdk/models/Brand.class
 android/support/v4/media/session/MediaSessionCompat$SessionFlags.class
 com/google/common/eventbus/AllowConcurrentEvents.class
 android/support/v4/view/ViewCompat$ICSMr1ViewCompatImpl.class
@@ -455,7 +438,6 @@ com/google/common/collect/Multisets$ImmutableEntry.class
 com/google/common/collect/AbstractSortedMultiset.class
 android/support/v4/media/MediaBrowserCompat.class
 android/support/v4/media/session/PlaybackStateCompat$CustomAction.class
-com/strongloop/android/remoting/adapters/Adapter$JsonObjectCallback.class
 com/google/common/base/Joiner.class
 android/support/annotation/WorkerThread.class
 android/support/multidex/ZipUtil.class
@@ -478,7 +460,6 @@ com/google/common/base/Function.class
 android/support/multidex/MultiDex$V14.class
 com/github/nkzawa/engineio/client/Socket$4.class
 android/support/v4/media/session/MediaSessionCompat$MediaSessionImpl.class
-com/androidsdk/snaphy/snaphyandroidsdk/repository/BrandRepository.class
 com/google/common/collect/FluentIterable.class
 android/support/annotation/UiThread.class
 com/google/common/collect/Iterators.class
@@ -489,14 +470,12 @@ com/google/common/cache/ForwardingCache.class
 android/support/v4/app/FragmentManager$OnBackStackChangedListener.class
 com/google/common/base/package-info.class
 com/github/nkzawa/engineio/client/Socket$Options.class
-com/androidsdk/snaphy/snaphyandroidsdk/presenter/Presenter.class
 android/support/v4/media/VolumeProviderCompat$1.class
 com/google/common/collect/TreeMultiset.class
 android/support/v4/view/GravityCompat.class
 android/support/v4/view/ViewCompat$KitKatViewCompatImpl.class
 android/support/v4/media/session/MediaSessionCompat$OnActiveChangeListener.class
 com/androidsdk/snaphy/snaphysdk/MainActivity.class
-com/strongloop/android/remoting/adapters/Adapter$Callback.class
 com/google/common/base/Objects.class
 android/support/v4/view/ViewCompatEclairMr1.class
 com/github/nkzawa/socketio/client/Manager$OpenCallback.class
