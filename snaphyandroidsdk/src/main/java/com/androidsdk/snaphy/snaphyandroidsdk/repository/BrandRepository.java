@@ -74,6 +74,9 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
         
     
 
+    
+    
+
 
 
 
@@ -235,6 +238,38 @@ public class BrandRepository extends ModelRepository<Brand> {
 
                 
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandId/brandManagers/:fk", "PUT"), "Brand.prototype.__updateById__brandManagers");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandId/brandVerifications", "GET"), "Brand.prototype.__get__brandVerifications");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandId/brandVerifications", "POST"), "Brand.prototype.__create__brandVerifications");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandId/brandVerifications", "PUT"), "Brand.prototype.__update__brandVerifications");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandId/brandVerifications", "DELETE"), "Brand.prototype.__destroy__brandVerifications");
                 
 
             
@@ -519,6 +554,30 @@ public class BrandRepository extends ModelRepository<Brand> {
 
                 
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__disconnect__appUsers", "POST"), "Brand.__disconnect__appUsers");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/register", "POST"), "Brand.register");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/verify", "POST"), "Brand.verify");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/sendVerificationMail", "POST"), "Brand.sendVerificationMail");
                 
 
             
@@ -1608,6 +1667,7 @@ public class BrandRepository extends ModelRepository<Brand> {
             }//Method updateById__brandManagers definition ends here..
 
             
+
 
         
     
@@ -3496,6 +3556,167 @@ public class BrandRepository extends ModelRepository<Brand> {
                 
 
             }//Method __disconnect__appUsers definition ends here..
+
+            
+
+        
+    
+        
+            //Method register definition
+            public void register(  Map<String,  ? extends Object> employee,  Map<String,  ? extends Object> brand, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employee", employee);
+                
+                        hashMapObject.put("brand", brand);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("register", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method register definition ends here..
+
+            
+
+        
+    
+        
+            //Method verify definition
+            public void verify(  String code, final ObjectCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("code", code);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("verify", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Brand brand = brandRepo.createObject(result);
+                                    callback.onSuccess(brand);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method verify definition ends here..
+
+            
+
+        
+    
+        
+            //Method sendVerificationMail definition
+            public void sendVerificationMail( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("sendVerificationMail", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method sendVerificationMail definition ends here..
 
             
 

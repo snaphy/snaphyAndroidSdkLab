@@ -2,31 +2,156 @@ package com.androidsdk.snaphy.snaphysdk;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.Listen;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
 import com.androidsdk.snaphy.snaphyandroidsdk.presenter.Presenter;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.Manager;
 import com.strongloop.android.loopback.RestAdapter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    RestAdapter restAdapter;
+    public RestAdapter restAdapter;
     SnaphyHelper snaphyHelper;
+    MainActivity mainActivity;
+    String TAG = "SNAPHY_SDK_MAINACTIVITY";
+    final ChatPresenter chatPresenter = new ChatPresenter();;
+
+    private Manager manager;
+    {
+        try {
+            this.manager = new Manager(new URI(Constants.baseUrl));
+        } catch (URISyntaxException e) {
+            Log.e(TAG, e.toString());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainActivity = this;
         setContentView(R.layout.activity_main);
         snaphyHelper = new SnaphyHelper(this);
         restAdapter = snaphyHelper.getLoopBackAdapter();
         readChatData();
+        subscribe();
     }
 
 
-    private void readChatData(){
 
+    private void subscribe(){
+        ChatRepository chatRepository = restAdapter.createRepository(ChatRepository.class);
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        hashMap.put("from", "brand");
+        chatRepository.subscribe(hashMap, new ObjectCallback<JSONObject>() {
+            @Override
+            public void onBefore() {
+                super.onBefore();
+            }
+
+            @Override
+            public void onSuccess(JSONObject object) {
+                String room = "/brand/";
+                String namespace = "/Chat/from";
+                Socket socket = manager.socket(namespace);
+                socket.connect();
+                joinRoom(socket, room);
+                /*Log.i(TAG, "Chat data fetched");
+                chatPresenter.getChats().addAll(object);*/
+
+                //On Data added
+                socket.on("POST", onNewMessage);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                super.onError(t);
+                Log.e(TAG, t.toString());
+            }
+
+            @Override
+            public void onFinally() {
+                super.onFinally();
+            }
+        });
+    }
+
+    private Emitter.Listener onNewMessage = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            mainActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+                    Map<String, Object> ChatData = Util.fromJson(data);
+                    ChatRepository chatRepository = restAdapter.createRepository(ChatRepository.class);
+                    Chat chat = chatRepository.createObject(ChatData);
+                    Log.i(TAG, "NEW DATA ADDED" + data.toString());
+                    chatPresenter.getChats().add(chat);
+                    Log.i(TAG, "SIZE: " + chatPresenter.getChats().size());
+                }
+            });
+        }
+    };
+
+
+    private void joinRoom(Socket socket, String room){
+        socket.emit("create", room);
+    }
+
+
+
+    private void readChatData(){
+        ChatRepository chatRepository = restAdapter.createRepository(ChatRepository.class);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        final ChatPresenter chatPresenter = new ChatPresenter();
+
+        chatRepository.find(hashMap, new DataListCallback<Chat>() {
+            @Override
+            public void onBefore() {
+                super.onBefore();
+            }
+
+            @Override
+            public void onSuccess(DataList<Chat> objects) {
+                super.onSuccess(objects);
+                Log.i(TAG, "Chat data fetched");
+                chatPresenter.getChats().addAll(objects);
+
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                Log.e(TAG, t.toString());
+                super.onError(t);
+            }
+
+            @Override
+            public void onFinally() {
+                super.onFinally();
+            }
+        });
     }
 
 

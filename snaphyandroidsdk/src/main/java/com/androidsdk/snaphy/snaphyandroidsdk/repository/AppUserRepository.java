@@ -582,7 +582,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchRecentCustomer", "POST"), "AppUser.fetchRecentCustomer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchRecentAppUser", "POST"), "AppUser.fetchRecentAppUser");
                 
 
             
@@ -615,6 +615,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                 
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithFb", "POST"), "AppUser.loginWithFb");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithInstagram", "POST"), "AppUser.loginWithInstagram");
                 
 
             
@@ -3291,8 +3299,8 @@ public class AppUserRepository extends UserRepository<AppUser> {
         
     
         
-            //Method fetchRecentCustomer definition
-            public void fetchRecentCustomer(  String brandId,  double limit,  String query, final ObjectCallback<JSONArray> callback){
+            //Method fetchRecentAppUser definition
+            public void fetchRecentAppUser(  String brandId,  double limit,  String query, final DataListCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -3317,7 +3325,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
 
                 
-                    invokeStaticMethod("fetchRecentCustomer", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("fetchRecentAppUser", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -3328,7 +3336,20 @@ public class AppUserRepository extends UserRepository<AppUser> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
-                                callback.onSuccess(response);
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<AppUser> appUserList = new DataList<AppUser>();
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        AppUser appUser = appUserRepo.createObject(obj);
+                                        appUserList.add(appUser);
+                                    }
+                                    callback.onSuccess(appUserList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                             //Call the finally method..
                             callback.onFinally();
@@ -3336,7 +3357,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
                     });
                 
 
-            }//Method fetchRecentCustomer definition ends here..
+            }//Method fetchRecentAppUser definition ends here..
 
             
 
@@ -3537,6 +3558,57 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
 
             }//Method loginWithFb definition ends here..
+
+            
+
+        
+    
+        
+            //Method loginWithInstagram definition
+            public void loginWithInstagram(  String accessToken, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("accessToken", accessToken);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("loginWithInstagram", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method loginWithInstagram definition ends here..
 
             
 

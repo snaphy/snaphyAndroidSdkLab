@@ -1,10 +1,6 @@
 [
     {
-        "merged": "/home/snaphy/snaphy_clients/brandZoomr/android/BZRReleaseAndroid/snaphyandroidsdk/build/intermediates/res/merged/release/color-v23/abc_color_highlight_material.xml",
-        "source": "/home/snaphy/snaphy_clients/brandZoomr/android/BZRReleaseAndroid/snaphyandroidsdk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color-v23/abc_color_highlight_material.xml"
-    },
-    {
-        "merged": "/home/snaphy/snaphy_clients/brandZoomr/android/BZRReleaseAndroid/E:\\Clients\\BrandZoomr_Main\\snaphyandroidsdk\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_color_highlight_material.xml",
-        "source": "/home/snaphy/snaphy_clients/brandZoomr/android/BZRReleaseAndroid/E:\\Clients\\BrandZoomr_Main\\snaphyandroidsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\color-v23\\abc_color_highlight_material.xml"
+        "merged": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/snaphyandroidsdk/build/intermediates/res/merged/release/color-v23/abc_color_highlight_material.xml",
+        "source": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/snaphyandroidsdk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color-v23/abc_color_highlight_material.xml"
     }
 ]

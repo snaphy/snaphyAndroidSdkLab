@@ -368,6 +368,22 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
             
 
                 
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/resetPasswordToken", "POST"), "BrandManager.resetPasswordToken");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/resetPassword", "POST"), "BrandManager.resetPassword");
+                
+
+            
+        
+            
+
+                
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "BrandManager.getDetailSchema");
                 
 
@@ -1650,6 +1666,58 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
     
         
     
+        
+            //Method resetPasswordToken definition
+            public void resetPasswordToken(  String email, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("email", email);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("resetPasswordToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method resetPasswordToken definition ends here..
+
+            
+
+        
+    
+        
         
             //Method getDetailSchema definition
             public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){

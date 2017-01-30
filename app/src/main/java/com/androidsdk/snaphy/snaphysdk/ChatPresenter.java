@@ -26,7 +26,7 @@ public class ChatPresenter {
             @Override
             public void onChange(DataList<Chat> dataList) {
                 super.onChange(dataList);
-                Log.i("Snaphy", "I am getting changed" + dataList.size());
+                Log.i("Snaphy", "\n\nI am getting changed" + dataList.size());
             }
 
             @Override

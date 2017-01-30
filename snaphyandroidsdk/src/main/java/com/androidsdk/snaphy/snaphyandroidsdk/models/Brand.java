@@ -61,6 +61,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
             
 
+            
+
         
     
 
@@ -201,6 +203,32 @@ public class Brand extends Model {
             
 
             
+                private String trending;
+                /* Adding Getter and Setter methods */
+                public String getTrending(){
+                    return trending;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTrending(String trending){
+                    this.trending = trending;
+                    //Update hashMap value..
+                    hashMap.put("trending", trending);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
                 private String facebookUrl;
                 /* Adding Getter and Setter methods */
                 public String getFacebookUrl(){
@@ -264,6 +292,58 @@ public class Brand extends Model {
                     this.instagramUrl = instagramUrl;
                     //Update hashMap value..
                     hashMap.put("instagramUrl", instagramUrl);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String status;
+                /* Adding Getter and Setter methods */
+                public String getStatus(){
+                    return status;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStatus(String status){
+                    this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String associatedEmail;
+                /* Adding Getter and Setter methods */
+                public String getAssociatedEmail(){
+                    return associatedEmail;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAssociatedEmail(String associatedEmail){
+                    this.associatedEmail = associatedEmail;
+                    //Update hashMap value..
+                    hashMap.put("associatedEmail", associatedEmail);
                 }
 
             
@@ -588,6 +668,14 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -826,6 +914,9 @@ public class Brand extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -1174,6 +1265,14 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1404,6 +1503,9 @@ public class Brand extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -1768,6 +1870,14 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1982,6 +2092,9 @@ public class Brand extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -2354,6 +2467,14 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -2560,6 +2681,9 @@ public class Brand extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
                         
                         
                         
@@ -3055,6 +3179,14 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -3312,6 +3444,9 @@ public class Brand extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -3322,6 +3457,9 @@ public class Brand extends Model {
 
                  
              
+          
+    
+         
           
       
 
