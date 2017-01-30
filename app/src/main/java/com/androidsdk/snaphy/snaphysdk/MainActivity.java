@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         snaphyHelper = new SnaphyHelper(this);
         restAdapter = snaphyHelper.getLoopBackAdapter();
         readChatData();
-
     }
 
 

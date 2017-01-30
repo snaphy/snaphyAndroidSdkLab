@@ -22,6 +22,7 @@ public class SnaphyHelper {
 
             mainActivity.restAdapter = new RestAdapter(
                     mainActivity.getApplicationContext(),
+                    Constants.apiUrl
                     );
         }
         return mainActivity.restAdapter;
