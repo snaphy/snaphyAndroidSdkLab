@@ -85,19 +85,6 @@ public class Chat extends Model {
                     hashMap.put("added", added);
                 }
 
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
                 private String updated;
                 /* Adding Getter and Setter methods */
                 public String getUpdated(){
@@ -111,19 +98,6 @@ public class Chat extends Model {
                     hashMap.put("updated", updated);
                 }
 
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
                 private String message;
                 /* Adding Getter and Setter methods */
                 public String getMessage(){
@@ -137,19 +111,7 @@ public class Chat extends Model {
                     hashMap.put("message", message);
                 }
 
-            
-            
-            
-            
 
-            
-
-        
-    
-        
-            
-
-            
                 private String type;
                 /* Adding Getter and Setter methods */
                 public String getType(){
@@ -163,20 +125,7 @@ public class Chat extends Model {
                     hashMap.put("type", type);
                 }
 
-            
-            
-            
-            
 
-            
-
-        
-    
-        
-            
-
-            
-            
             
                 private Map<String, Object> image;
                 /* Adding Getter and Setter methods */
@@ -191,17 +140,7 @@ public class Chat extends Model {
                     hashMap.put("image", image);
                 }
 
-            
-            
 
-            
-
-        
-    
-        
-            
-
-            
                 private String from;
                 /* Adding Getter and Setter methods */
                 public String getFrom(){
@@ -215,19 +154,6 @@ public class Chat extends Model {
                     hashMap.put("from", from);
                 }
 
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
                 private String guid;
                 /* Adding Getter and Setter methods */
                 public String getGuid(){
@@ -241,17 +167,6 @@ public class Chat extends Model {
                     hashMap.put("guid", guid);
                 }
 
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
 
             
                 private String status;
@@ -267,362 +182,174 @@ public class Chat extends Model {
                     hashMap.put("status", status);
                 }
 
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
-            
-            
-            
-
-            
-
-        
-    
-
-
-    
-
-
 
     //Now adding relations between related models
-    
-        
-                
-                    //Define belongsTo relation method here..
-                    private transient Brand  brand ;
 
-                    public Brand getBrand() {
-                        return brand;
+    //Define belongsTo relation method here..
+    private transient Brand  brand ;
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    //Adding related model automatically in case of include statement from server..
+    public void setBrand(Map<String, Object> brand) {
+        //First create a dummy Repo class object for customer.
+        BrandRepository brandRepository = new BrandRepository();
+        Brand brand1 = brandRepository.createObject(brand);
+        setBrand(brand1);
+    }
+
+    //Adding related model automatically in case of include statement from server..
+    public void setBrand(HashMap<String, Object> brand) {
+        //First create a dummy Repo class object for customer.
+        BrandRepository brandRepository = new BrandRepository();
+        Brand brand1 = brandRepository.createObject(brand);
+        setBrand(brand1);
+    }
+
+    //Adding relation method..
+    public void addRelation(Brand brand) {
+        that.setBrand(brand);
+    }
+
+    //Now add instance methods to fetch the related belongsTo Model..
+
+    //Write the method here..
+    public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
+        //Call the onBefore callback method..
+        callback.onBefore();
+
+        //Define methods here..
+        final ChatRepository  chatRepo = restAdapter.createRepository(ChatRepository.class);
+
+        chatRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
+
+
+
+                @Override
+
+                    public void onSuccess(Brand object) {
+                        if(object != null){
+                            //now add relation to this recipe.
+                            addRelation(object);
+                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                            //object.addRelation(that);
+                            callback.onSuccess(object);
+                            //Calling the finally..callback
+                            callback.onFinally();
+                        }else{
+                            callback.onSuccess(null);
+                            //Calling the finally..callback
+                            callback.onFinally();
+                        }
+
                     }
 
-                    public void setBrand(Brand brand) {
-                        this.brand = brand;
-                    }
 
-                    //Adding related model automatically in case of include statement from server..
-                    public void setBrand(Map<String, Object> brand) {
-                        //First create a dummy Repo class object for customer.
-                        BrandRepository brandRepository = new BrandRepository();
-                        Brand brand1 = brandRepository.createObject(brand);
-                        setBrand(brand1);
-                    }
+            @Override
+            public void onError(Throwable t) {
+                //Now calling the callback
+                callback.onError(t);
+                //Calling the finally..callback
+                callback.onFinally();
+            }
 
-                    //Adding related model automatically in case of include statement from server..
-                    public void setBrand(HashMap<String, Object> brand) {
-                        //First create a dummy Repo class object for customer.
-                        BrandRepository brandRepository = new BrandRepository();
-                        Brand brand1 = brandRepository.createObject(brand);
-                        setBrand(brand1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(Brand brand) {
-                        that.setBrand(brand);
-                    }
+        });
+    } //method def ends here.
 
 
+    //Define belongsTo relation method here..
+    private transient AppUser  appUser ;
 
-                
-                
-                
+    public AppUser getAppUser() {
+        return appUser;
+    }
 
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
+    //Adding related model automatically in case of include statement from server..
+    public void setAppUser(Map<String, Object> appUser) {
+        //First create a dummy Repo class object for customer.
+        AppUserRepository appUserRepository = new AppUserRepository();
+        AppUser appUser1 = appUserRepository.createObject(appUser);
+        setAppUser(appUser1);
+    }
 
+    //Adding related model automatically in case of include statement from server..
+    public void setAppUser(HashMap<String, Object> appUser) {
+        //First create a dummy Repo class object for customer.
+        AppUserRepository appUserRepository = new AppUserRepository();
+        AppUser appUser1 = appUserRepository.createObject(appUser);
+        setAppUser(appUser1);
+    }
 
+    //Adding relation method..
+    public void addRelation(AppUser appUser) {
+        that.setAppUser(appUser);
+    }
 
+    //Now add instance methods to fetch the related belongsTo Model..
+    //Write the method here..
+    public void get__appUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+        //Call the onBefore callback method..
+        callback.onBefore();
 
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final ChatRepository  chatRepo = restAdapter.createRepository(ChatRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
+        //Define methods here..
+        final ChatRepository  chatRepo = restAdapter.createRepository(ChatRepository.class);
 
 
 
-                                        chatRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Brand object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
 
 
-                                            
 
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
 
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
 
-                
+        chatRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
 
-                 
-                 
-             
-          
-    
-        
-                
-                    //Define belongsTo relation method here..
-                    private transient AppUser  appUser ;
 
-                    public AppUser getAppUser() {
-                        return appUser;
-                    }
 
-                    public void setAppUser(AppUser appUser) {
-                        this.appUser = appUser;
-                    }
+                @Override
 
-                    //Adding related model automatically in case of include statement from server..
-                    public void setAppUser(Map<String, Object> appUser) {
-                        //First create a dummy Repo class object for customer.
-                        AppUserRepository appUserRepository = new AppUserRepository();
-                        AppUser appUser1 = appUserRepository.createObject(appUser);
-                        setAppUser(appUser1);
-                    }
+                    public void onSuccess(AppUser object) {
+                        if(object != null){
+                            //now add relation to this recipe.
+                            addRelation(object);
+                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                            //object.addRelation(that);
+                            callback.onSuccess(object);
+                            //Calling the finally..callback
+                            callback.onFinally();
+                        }else{
+                            callback.onSuccess(null);
+                            //Calling the finally..callback
+                            callback.onFinally();
+                        }
 
-                    //Adding related model automatically in case of include statement from server..
-                    public void setAppUser(HashMap<String, Object> appUser) {
-                        //First create a dummy Repo class object for customer.
-                        AppUserRepository appUserRepository = new AppUserRepository();
-                        AppUser appUser1 = appUserRepository.createObject(appUser);
-                        setAppUser(appUser1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(AppUser appUser) {
-                        that.setAppUser(appUser);
                     }
 
 
 
-                
-                
-                
 
 
 
+            @Override
+            public void onError(Throwable t) {
+                //Now calling the callback
+                callback.onError(t);
+                //Calling the finally..callback
+                callback.onFinally();
+            }
+
+        });
+    } //method def ends here.
 
 
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                    
-
-                                    //Write the method here..
-                                    public void get__appUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final ChatRepository  chatRepo = restAdapter.createRepository(ChatRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        chatRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(AppUser object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
-      
 
 }

@@ -14,6 +14,9 @@ import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
 import com.androidsdk.snaphy.snaphyandroidsdk.presenter.Presenter;
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
+import com.colintmiller.simplenosql.NoSQL;
+import com.colintmiller.simplenosql.NoSQLEntity;
+import com.colintmiller.simplenosql.RetrievalCallback;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Manager;
 import com.strongloop.android.loopback.RestAdapter;
@@ -27,6 +30,7 @@ import org.json.JSONObject;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,10 +65,55 @@ public class MainActivity extends AppCompatActivity {
 
     private void subscribe(){
         ChatRepository chatRepository = restAdapter.createRepository(ChatRepository.class);
-        HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, String> hashMap = new HashMap<>();
 
         hashMap.put("from", "brand");
-        chatRepository.subscribe(hashMap, new ObjectCallback<JSONObject>() {
+        SnaphySocket snaphySocket = new SnaphySocket(mainActivity, chatRepository, hashMap);
+        snaphySocket
+                .onDataAdded(new OnData<Chat>() {
+                    @Override
+                    public void onData(Chat data) {
+                        Log.e(TAG, data+"");
+                        Log.e(TAG, "New Data has been added in chaining route");
+                    }
+                })
+                .onDataUpdated(new OnData<Chat>() {
+                    @Override
+                    public void onData(Chat data) {
+                        Log.e(TAG, data+"");
+                        Log.e(TAG, "New Data has been updated in chaining route");
+                    }
+                })
+                .onDataDeleted(new OnData<Chat>() {
+                    @Override
+                    public void onData(Chat data) {
+                        Log.e(TAG, data+"");
+                        Log.e(TAG, "Data has been deleted in chaining route");
+                    }
+                })
+
+                .subscribe(new Subscribe<Chat>() {
+                    @Override
+                    public void onDataAdded(Chat data) {
+                        Log.e(TAG, data+"");
+                        Log.e(TAG, "New Data has been added in route");
+                    }
+
+                    @Override
+                    public void onDataUpdated(Chat data) {
+                        Log.e(TAG, data+"");
+                        Log.e(TAG, "New Data has been updated in route");
+                    }
+
+                    @Override
+                    public void onDataDeleted(Chat data) {
+                        Log.e(TAG, data+"");
+                        Log.e(TAG, "Data has been deleted in route");
+                    }
+                });
+
+
+        /*chatRepository.subscribe(hashMap, new ObjectCallback<JSONObject>() {
             @Override
             public void onBefore() {
                 super.onBefore();
@@ -77,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
                 Socket socket = manager.socket(namespace);
                 socket.connect();
                 joinRoom(socket, room);
-                /*Log.i(TAG, "Chat data fetched");
-                chatPresenter.getChats().addAll(object);*/
+                *//*Log.i(TAG, "Chat data fetched");
+                chatPresenter.getChats().addAll(object);*//*
 
                 //On Data added
                 socket.on("POST", onNewMessage);
@@ -94,10 +143,10 @@ public class MainActivity extends AppCompatActivity {
             public void onFinally() {
                 super.onFinally();
             }
-        });
+        });*/
     }
 
-    private Emitter.Listener onNewMessage = new Emitter.Listener() {
+ /*   private Emitter.Listener onNewMessage = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             mainActivity.runOnUiThread(new Runnable() {
@@ -120,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         socket.emit("create", room);
     }
 
-
+*/
 
     private void readChatData(){
         ChatRepository chatRepository = restAdapter.createRepository(ChatRepository.class);
@@ -138,6 +187,24 @@ public class MainActivity extends AppCompatActivity {
                 super.onSuccess(objects);
                 Log.i(TAG, "Chat data fetched");
                 chatPresenter.getChats().addAll(objects);
+
+                NoSQL.with(getApplicationContext()).using(Chat.class)
+                        .bucketId("snaphy_bucket")
+                        .entityId("123456789")
+                        .retrieve(new RetrievalCallback<Chat>() {
+                            @Override
+                            public void retrievedResults(List<NoSQLEntity<Chat>> noSQLEntities) {
+                                Chat firstBean = noSQLEntities.get(0).getData();
+                                Log.i(TAG, "FETCHING SAVED DATA" + firstBean.getMessage());
+                            }
+                        });
+                        /*.retrieve(new RetrievalCallback<Chat>() {
+                            public void retrieveResults(List<NoSQLEntity<Chat> entities) {
+                                // Display results or something
+                                Chat firstBean = entities.get(0).getData(); // always check length of a list first...
+                            }
+                        });*/
+
 
             }
 
