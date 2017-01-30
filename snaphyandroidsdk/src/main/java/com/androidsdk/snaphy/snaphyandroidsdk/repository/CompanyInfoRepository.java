@@ -13,8 +13,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
-import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -168,6 +168,22 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
         
             
         
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "CompanyInfo.getDetailSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "CompanyInfo.getModelRelationSchema");
+                
+
+            
+        
         return contract;
     }
 
@@ -224,7 +240,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                             
                                 if(response != null){
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     CompanyInfo companyInfo = companyInfoRepo.createObject(result);
                                     callback.onSuccess(companyInfo);
 
@@ -284,7 +300,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                             
                                 if(response != null){
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     CompanyInfo companyInfo = companyInfoRepo.createObject(result);
                                     callback.onSuccess(companyInfo);
 
@@ -396,7 +412,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                             
                                 if(response != null){
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     CompanyInfo companyInfo = companyInfoRepo.createObject(result);
                                     callback.onSuccess(companyInfo);
 
@@ -454,7 +470,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<CompanyInfo> companyInfoList = new DataList<CompanyInfo>();
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
 
@@ -516,7 +532,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                             
                                 if(response != null){
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     CompanyInfo companyInfo = companyInfoRepo.createObject(result);
                                     callback.onSuccess(companyInfo);
 
@@ -732,7 +748,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                             
                                 if(response != null){
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     CompanyInfo companyInfo = companyInfoRepo.createObject(result);
                                     callback.onSuccess(companyInfo);
 
@@ -854,6 +870,104 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
         
     
+        
+    
+        
+            //Method getDetailSchema definition
+            public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getDetailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getDetailSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method getModelRelationSchema definition
+            public void getModelRelationSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getModelRelationSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getModelRelationSchema definition ends here..
+
+            
+
         
     
 

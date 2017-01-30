@@ -13,8 +13,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
-import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -335,6 +335,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/isAdmin", "POST"), "Employee.isAdmin");
+                
+
+            
+        
+            
+
+                
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Employee.getSchema");
                 
 
@@ -353,7 +361,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/isAdmin", "POST"), "Employee.isAdmin");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Employee.getDetailSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Employee.getModelRelationSchema");
                 
 
             
@@ -417,7 +433,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
                                     callback.onSuccess(accessToken);
 
@@ -528,7 +544,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
                                     callback.onSuccess(accessToken);
 
@@ -588,7 +604,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
 
@@ -652,7 +668,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
                                     callback.onSuccess(accessToken);
 
@@ -810,7 +826,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
                                     callback.onSuccess(employee);
 
@@ -870,7 +886,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
                                     callback.onSuccess(employee);
 
@@ -982,7 +998,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
                                     callback.onSuccess(employee);
 
@@ -1040,7 +1056,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Employee> employeeList = new DataList<Employee>();
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
 
@@ -1102,7 +1118,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
                                     callback.onSuccess(employee);
 
@@ -1318,7 +1334,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
                                     callback.onSuccess(employee);
 
@@ -1443,6 +1459,55 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
     
         
+            //Method isAdmin definition
+            public void isAdmin( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("isAdmin", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method isAdmin definition ends here..
+
+            
+
+        
+    
+        
             //Method getSchema definition
             public void getSchema( final ObjectCallback<JSONObject>  callback ){
 
@@ -1543,8 +1608,8 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
     
         
-            //Method isAdmin definition
-            public void isAdmin( final ObjectCallback<JSONObject>  callback ){
+            //Method getDetailSchema definition
+            public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -1562,7 +1627,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
                     
-                    invokeStaticMethod("isAdmin", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getDetailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1585,7 +1650,56 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method isAdmin definition ends here..
+            }//Method getDetailSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method getModelRelationSchema definition
+            public void getModelRelationSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getModelRelationSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getModelRelationSchema definition ends here..
 
             
 

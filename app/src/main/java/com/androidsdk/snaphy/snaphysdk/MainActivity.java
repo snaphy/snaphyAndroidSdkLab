@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });*/
+        boolean x = true;
+        Presenter.getInstance();
+        Presenter.getInstance().addModel("test", x);
+        boolean y = Presenter.getInstance().getModel(Boolean.class, "test");
 
 
 

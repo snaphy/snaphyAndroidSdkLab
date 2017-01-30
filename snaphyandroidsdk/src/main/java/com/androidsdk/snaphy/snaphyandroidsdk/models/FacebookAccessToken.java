@@ -30,7 +30,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepo
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
             
 
         
@@ -204,35 +204,35 @@ public class FacebookAccessToken extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Customer  customer ;
+                    private transient AppUser  appUser ;
 
-                    public Customer getCustomer() {
-                        return customer;
+                    public AppUser getAppUser() {
+                        return appUser;
                     }
 
-                    public void setCustomer(Customer customer) {
-                        this.customer = customer;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(Map<String, Object> customer) {
-                        //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                    public void setAppUser(AppUser appUser) {
+                        this.appUser = appUser;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
+                    public void setAppUser(Map<String, Object> appUser) {
                         //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                        AppUserRepository appUserRepository = new AppUserRepository();
+                        AppUser appUser1 = appUserRepository.createObject(appUser);
+                        setAppUser(appUser1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setAppUser(HashMap<String, Object> appUser) {
+                        //First create a dummy Repo class object for customer.
+                        AppUserRepository appUserRepository = new AppUserRepository();
+                        AppUser appUser1 = appUserRepository.createObject(appUser);
+                        setAppUser(appUser1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Customer customer) {
-                        that.setCustomer(customer);
+                    public void addRelation(AppUser appUser) {
+                        that.setAppUser(appUser);
                     }
 
 
@@ -253,7 +253,7 @@ public class FacebookAccessToken extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                    public void get__appUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -267,13 +267,13 @@ public class FacebookAccessToken extends Model {
 
 
 
-                                        facebookAccessTokenRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        facebookAccessTokenRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Customer object) {
+                                                    public void onSuccess(AppUser object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -307,6 +307,11 @@ public class FacebookAccessToken extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
