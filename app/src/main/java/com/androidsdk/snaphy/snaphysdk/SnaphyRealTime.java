@@ -53,20 +53,6 @@ public class SnaphyRealTime {
         socket.emit("create", room);
     }
 
-   /* private Emitter.Listener onNewMessage = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            mainActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject data = (JSONObject) args[0];
-                    Map<String, Object> ChatData = Util.fromJson(data);
-                    Chat chat = chatRepository.createObject(ChatData);
-                    Log.i(TAG, "NEW DATA ADDED" + data.toString());
-                }
-            });
-        }
-    };*/
 
     private void getDetails(){
         namespace = "/Chat";
@@ -119,6 +105,12 @@ public class SnaphyRealTime {
         //On Data added
         socket.on("POST", onDataAdded);
         return this;
+    }
+
+
+    public void leave(){
+        //socket.emit('leave', this.room);
+        socket.emit("leave", room);
     }
 
 
@@ -180,7 +172,10 @@ public class SnaphyRealTime {
         return this;
     }
 
-
+    /**
+     * Listen for real time data change for onNewData added, deleted and updated..
+     * @param onDataReceived
+     */
     public void subscribe(final Subscribe<Chat> onDataReceived) {
         Emitter.Listener onDataAdded = new Emitter.Listener() {
             @Override

@@ -10,27 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c37bd06c-9018-4ebb-add7-b415960b4fd1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/OnData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyRealTime.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/Subscribe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/ChatPresenter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/ChatPresenter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/multi-dex/debug/componentClasses.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/multi-dex/debug/componentClasses.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/jarMerging/debug/jars/1/1f/combined.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/jarMerging/debug/jars/1/1f/combined.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/multi-dex/debug/maindexlist.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/multi-dex/debug/maindexlist.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/ChatPresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/ChatPresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyRealTime.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyRealTime.java" />
     </list>
     <ignored path="SnaphySdk.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -110,36 +90,36 @@
       <file leaf-file-name="SnaphyRealTime.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyRealTime.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1073">
-              <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+            <state relative-caret-position="443">
+              <caret line="113" column="5" selection-start-line="113" selection-start-column="5" selection-end-line="113" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1538#1539#0" expanded="true" />
                 <element signature="e#1581#1582#0" expanded="true" />
-                <element signature="e#3086#3721#0" expanded="true" />
-                <element signature="e#3229#3695#0" expanded="true" />
-                <element signature="e#3694#3695#0" expanded="true" />
-                <element signature="e#3720#3721#0" expanded="true" />
-                <element signature="e#4105#4738#0" expanded="true" />
-                <element signature="e#4248#4712#0" expanded="true" />
-                <element signature="e#4711#4712#0" expanded="true" />
-                <element signature="e#4737#4738#0" expanded="true" />
-                <element signature="e#5117#5750#0" expanded="true" />
-                <element signature="e#5260#5724#0" expanded="true" />
-                <element signature="e#5723#5724#0" expanded="true" />
-                <element signature="e#5749#5750#0" expanded="true" />
-                <element signature="e#5952#6592#0" expanded="true" />
-                <element signature="e#6095#6566#0" expanded="true" />
-                <element signature="e#6565#6566#0" expanded="true" />
-                <element signature="e#6591#6592#0" expanded="true" />
-                <element signature="e#6729#7369#0" expanded="true" />
-                <element signature="e#6872#7343#0" expanded="true" />
-                <element signature="e#7342#7343#0" expanded="true" />
-                <element signature="e#7368#7369#0" expanded="true" />
-                <element signature="e#7507#8147#0" expanded="true" />
-                <element signature="e#7650#8121#0" expanded="true" />
-                <element signature="e#8120#8121#0" expanded="true" />
-                <element signature="e#8146#8147#0" expanded="true" />
+                <element signature="e#2506#3141#0" expanded="true" />
+                <element signature="e#2649#3115#0" expanded="true" />
+                <element signature="e#3114#3115#0" expanded="true" />
+                <element signature="e#3140#3141#0" expanded="true" />
+                <element signature="e#3637#4270#0" expanded="true" />
+                <element signature="e#3780#4244#0" expanded="true" />
+                <element signature="e#4243#4244#0" expanded="true" />
+                <element signature="e#4269#4270#0" expanded="true" />
+                <element signature="e#4649#5282#0" expanded="true" />
+                <element signature="e#4792#5256#0" expanded="true" />
+                <element signature="e#5255#5256#0" expanded="true" />
+                <element signature="e#5281#5282#0" expanded="true" />
+                <element signature="e#5611#6251#0" expanded="true" />
+                <element signature="e#5754#6225#0" expanded="true" />
+                <element signature="e#6224#6225#0" expanded="true" />
+                <element signature="e#6250#6251#0" expanded="true" />
+                <element signature="e#6388#7028#0" expanded="true" />
+                <element signature="e#6531#7002#0" expanded="true" />
+                <element signature="e#7001#7002#0" expanded="true" />
+                <element signature="e#7027#7028#0" expanded="true" />
+                <element signature="e#7166#7806#0" expanded="true" />
+                <element signature="e#7309#7780#0" expanded="true" />
+                <element signature="e#7779#7780#0" expanded="true" />
+                <element signature="e#7805#7806#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -3525,36 +3505,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyRealTime.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1073">
-          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+        <state relative-caret-position="443">
+          <caret line="113" column="5" selection-start-line="113" selection-start-column="5" selection-end-line="113" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1538#1539#0" expanded="true" />
             <element signature="e#1581#1582#0" expanded="true" />
-            <element signature="e#3086#3721#0" expanded="true" />
-            <element signature="e#3229#3695#0" expanded="true" />
-            <element signature="e#3694#3695#0" expanded="true" />
-            <element signature="e#3720#3721#0" expanded="true" />
-            <element signature="e#4105#4738#0" expanded="true" />
-            <element signature="e#4248#4712#0" expanded="true" />
-            <element signature="e#4711#4712#0" expanded="true" />
-            <element signature="e#4737#4738#0" expanded="true" />
-            <element signature="e#5117#5750#0" expanded="true" />
-            <element signature="e#5260#5724#0" expanded="true" />
-            <element signature="e#5723#5724#0" expanded="true" />
-            <element signature="e#5749#5750#0" expanded="true" />
-            <element signature="e#5952#6592#0" expanded="true" />
-            <element signature="e#6095#6566#0" expanded="true" />
-            <element signature="e#6565#6566#0" expanded="true" />
-            <element signature="e#6591#6592#0" expanded="true" />
-            <element signature="e#6729#7369#0" expanded="true" />
-            <element signature="e#6872#7343#0" expanded="true" />
-            <element signature="e#7342#7343#0" expanded="true" />
-            <element signature="e#7368#7369#0" expanded="true" />
-            <element signature="e#7507#8147#0" expanded="true" />
-            <element signature="e#7650#8121#0" expanded="true" />
-            <element signature="e#8120#8121#0" expanded="true" />
-            <element signature="e#8146#8147#0" expanded="true" />
+            <element signature="e#2506#3141#0" expanded="true" />
+            <element signature="e#2649#3115#0" expanded="true" />
+            <element signature="e#3114#3115#0" expanded="true" />
+            <element signature="e#3140#3141#0" expanded="true" />
+            <element signature="e#3637#4270#0" expanded="true" />
+            <element signature="e#3780#4244#0" expanded="true" />
+            <element signature="e#4243#4244#0" expanded="true" />
+            <element signature="e#4269#4270#0" expanded="true" />
+            <element signature="e#4649#5282#0" expanded="true" />
+            <element signature="e#4792#5256#0" expanded="true" />
+            <element signature="e#5255#5256#0" expanded="true" />
+            <element signature="e#5281#5282#0" expanded="true" />
+            <element signature="e#5611#6251#0" expanded="true" />
+            <element signature="e#5754#6225#0" expanded="true" />
+            <element signature="e#6224#6225#0" expanded="true" />
+            <element signature="e#6250#6251#0" expanded="true" />
+            <element signature="e#6388#7028#0" expanded="true" />
+            <element signature="e#6531#7002#0" expanded="true" />
+            <element signature="e#7001#7002#0" expanded="true" />
+            <element signature="e#7027#7028#0" expanded="true" />
+            <element signature="e#7166#7806#0" expanded="true" />
+            <element signature="e#7309#7780#0" expanded="true" />
+            <element signature="e#7779#7780#0" expanded="true" />
+            <element signature="e#7805#7806#0" expanded="true" />
           </folding>
         </state>
       </provider>
