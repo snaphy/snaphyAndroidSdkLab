@@ -1,11 +1,4 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.models;
-
-
-
-
-
-
-
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -30,27 +23,21 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
-            
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
 
-        
-    
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
-            
 
-        
-    
+
+
+
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
-public class Chat extends Model {
+public class Chat extends Model implements java.io.Serializable {
 
 
     //For converting all model values to hashMap
@@ -64,6 +51,7 @@ public class Chat extends Model {
             return hashMap;
         }
     }
+
 
     private Chat that ;
 

@@ -10,22 +10,535 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c37bd06c-9018-4ebb-add7-b415960b4fd1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/simplenosql_0_5_1.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyRealTime.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphySocket.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_2_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/ChatHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyModel.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/simplenosql_0_5_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/MainActivity$2$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/exploded-aar/SnaphySdk/snaphyandroidsdk/unspecified/aapt/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.satyan/sugar/1.4/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.satyan/sugar/1.4/aapt/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.satyan/sugar/1.4/jars/classes.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/AbstractWrappedByteChannel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/SSLSocketChannel2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/SocketChannelIOHelper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/WebSocket$READYSTATE.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/WebSocket$Role.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/WebSocket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/WebSocketAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/WebSocketFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/WebSocketImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/WebSocketListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/WrappedByteChannel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/client/AbstractClientProxyChannel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/client/DefaultSSLWebSocketClientFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/client/DefaultWebSocketClientFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/client/WebSocketClient$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/client/WebSocketClient$DefaultClientProxyChannel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/client/WebSocketClient$WebSocketClientFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/client/WebSocketClient$WebsocketWriteThread.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/client/WebSocketClient.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/drafts/Draft$CloseHandshakeType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/drafts/Draft$HandshakeState.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/drafts/Draft.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/drafts/Draft_10$IncompleteException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/drafts/Draft_10.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/drafts/Draft_17.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/drafts/Draft_75.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/drafts/Draft_76.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/exceptions/IncompleteHandshakeException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/exceptions/InvalidDataException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/exceptions/InvalidFrameException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/exceptions/InvalidHandshakeException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/exceptions/LimitExedeedException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/exceptions/NotSendableException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/exceptions/WebsocketNotConnectedException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/framing/CloseFrame.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/framing/CloseFrameBuilder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/framing/FrameBuilder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/framing/Framedata$Opcode.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/framing/Framedata.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/framing/FramedataImpl1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/handshake/ClientHandshake.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/handshake/ClientHandshakeBuilder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/handshake/HandshakeBuilder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/handshake/HandshakeImpl1Client.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/handshake/HandshakeImpl1Server.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/handshake/Handshakedata.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/handshake/HandshakedataImpl1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/handshake/ServerHandshake.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/handshake/ServerHandshakeBuilder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/server/DefaultSSLWebSocketServerFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/server/DefaultWebSocketServerFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/server/WebSocketServer$WebSocketServerFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/server/WebSocketServer$WebSocketWorker$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/server/WebSocketServer$WebSocketWorker.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/server/WebSocketServer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/util/Base64$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/util/Base64$InputStream.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/util/Base64$OutputStream.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/util/Base64.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/Java-WebSocket-1.3.0.jar_a8s0i77gz53d581vlefcbwtox/org/java_websocket/util/Charsetfunctions.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/emitter/Emitter$Listener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/emitter/Emitter$OnceListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/emitter/Emitter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/EngineIOException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/HandshakeData.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$10.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$11.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$12.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$13.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$14.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$15$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$15.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$16$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$16.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$17.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$18.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$19.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$2$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$20$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$20$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$20$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$20$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$20.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$21.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$6.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$7$1$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$7$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$7.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$8.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$9.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$Options.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket$ReadyState.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Socket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Transport$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Transport$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Transport$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Transport$Options.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Transport$ReadyState.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/Transport.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/Polling$1$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/Polling$1$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/Polling$1$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/Polling$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/Polling$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/Polling$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/Polling$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/Polling$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/Polling.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$1$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$3$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$4$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$5$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$6$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$6.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$Request$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$Request$Options.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR$Request.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/PollingXHR.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/WebSocket$1$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/WebSocket$1$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/WebSocket$1$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/WebSocket$1$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/WebSocket$1$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/WebSocket$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/WebSocket$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/WebSocket$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/client/transports/WebSocket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/parser/Buffer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/parser/Packet.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/parser/Parser$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/parser/Parser$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/parser/Parser$DecodePayloadCallback.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/parser/Parser$EncodeCallback.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/engineio/parser/Parser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/global/Global.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/parseqs/ParseQS.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/thread/EventThread$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/thread/EventThread$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/thread/EventThread.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/utf8/UTF8.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/engine.io-client-0.3.1.jar_2ayfya2loowqvo028ravco5bk/com/github/nkzawa/utf8/UTF8Exception.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/hasbinary/HasBinary.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Ack.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/IO$Options.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/IO.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$1$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$1$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$1$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$1$4$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$1$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$1$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$6.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$7.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$8$1$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$8$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$8.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$9.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$Engine.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$OpenCallback.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$Options.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager$ReadyState.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Manager.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/On$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/On$Handle.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/On.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$2$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$2$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$2$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$6$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$6.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$7$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$7.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket$8.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Socket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/SocketIOException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/client/Url.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/parser/Binary$DeconstructedPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/parser/Binary.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/parser/Packet.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/parser/Parser$BinaryReconstructor.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/parser/Parser$Decoder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/parser/Parser$Encoder$Callback.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/parser/Parser$Encoder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/socket.io-client-0.3.0.jar_7bgrnxa8ix3kco87eogdcb8il/com/github/nkzawa/socketio/parser/Parser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/bundles/debug/aapt/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/bundles/debug/classes.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/bundles/release/aapt/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/BuildConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$anim.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$attr.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$bool.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$color.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$dimen.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$drawable.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$id.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$integer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$layout.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$string.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$style.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R$styleable.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphyandroidsdk/R.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/aidl/androidTest/debug/dependency.store" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/aidl/debug/dependency.store" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/aidl/release/dependency.store" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeAssets/androidTest/debug/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeAssets/debug/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeAssets/release/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeResourcesandroidTest/debug/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeResourcesdebug/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeResourcesrelease/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/packageResourcesdebug/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/packageResourcesrelease/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/manifest/tmp/manifestMerger6845462791692517137.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/DefaultDateTypeAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/ExclusionStrategy.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/FieldAttributes.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/FieldNamingPolicy$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/FieldNamingPolicy$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/FieldNamingPolicy$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/FieldNamingPolicy$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/FieldNamingPolicy$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/FieldNamingPolicy.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/FieldNamingStrategy.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/Gson$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/Gson$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/Gson$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/Gson$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/Gson$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/Gson$FutureTypeAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/Gson.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/GsonBuilder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/InstanceCreator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonArray.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonDeserializationContext.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonDeserializer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonElement.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonIOException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonNull.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonObject.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonParseException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonParser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonPrimitive.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonSerializationContext.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonSerializer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonStreamParser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/JsonSyntaxException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/LongSerializationPolicy$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/LongSerializationPolicy$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/LongSerializationPolicy.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/TreeTypeAdapter$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/TreeTypeAdapter$SingleTypeFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/TreeTypeAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/TypeAdapter$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/TypeAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/TypeAdapterFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/annotations/Expose.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/annotations/JsonAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/annotations/SerializedName.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/annotations/Since.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/annotations/Until.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/$Gson$Preconditions.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/$Gson$Types$GenericArrayTypeImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/$Gson$Types$ParameterizedTypeImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/$Gson$Types$WildcardTypeImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/$Gson$Types.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$10.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$11.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$12.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$6.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$7.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$8.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor$9.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ConstructorConstructor.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/Excluder$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/Excluder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/JsonReaderInternalAccess.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LazilyParsedNumber.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedHashTreeMap$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedHashTreeMap$AvlBuilder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedHashTreeMap$AvlIterator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedHashTreeMap$EntrySet$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedHashTreeMap$EntrySet.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedHashTreeMap$KeySet$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedHashTreeMap$KeySet.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedHashTreeMap$LinkedTreeMapIterator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedHashTreeMap$Node.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedHashTreeMap.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedTreeMap$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedTreeMap$EntrySet$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedTreeMap$EntrySet.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedTreeMap$KeySet$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedTreeMap$KeySet.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedTreeMap$LinkedTreeMapIterator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedTreeMap$Node.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/LinkedTreeMap.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/ObjectConstructor.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/Primitives.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/Streams$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/Streams$AppendableWriter$CurrentWrite.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/Streams$AppendableWriter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/Streams.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/UnsafeAllocator$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/UnsafeAllocator$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/UnsafeAllocator$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/UnsafeAllocator$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/UnsafeAllocator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/ArrayTypeAdapter$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/ArrayTypeAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/CollectionTypeAdapterFactory$Adapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/CollectionTypeAdapterFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/DateTypeAdapter$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/DateTypeAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/JsonTreeReader$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/JsonTreeReader.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/JsonTreeWriter$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/JsonTreeWriter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/MapTypeAdapterFactory$Adapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/MapTypeAdapterFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/ObjectTypeAdapter$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/ObjectTypeAdapter$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/ObjectTypeAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory$Adapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory$BoundField.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/SqlDateTypeAdapter$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/SqlDateTypeAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TimeTypeAdapter$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TimeTypeAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapterRuntimeTypeWrapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$10.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$11.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$12.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$13.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$14.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$15.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$16.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$17.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$18.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$19.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$20.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$21.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$22$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$22.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$23.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$24.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$25.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$26.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$27.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$28.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$29.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$30.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$31.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$32.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$6.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$7.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$8.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$9.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters$EnumTypeAdapter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/internal/bind/TypeAdapters.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/reflect/TypeToken.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/stream/JsonReader$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/stream/JsonReader.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/stream/JsonScope.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/stream/JsonToken.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/stream/JsonWriter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/gson-2.3.jar_3agywfs0s7kl5l0pn6ow4fggj/com/google/gson/stream/MalformedJsonException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/BuildConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/CancellableOperation.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/DataComparator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/DataDeserializer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/DataFilter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/DataSerializer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/GsonSerialization.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/NoSQL.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/NoSQLEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/NoSQLQuery$NoSQLOperation.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/NoSQLQuery.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/OperationObserver.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/QueryBuilder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/RetrievalCallback.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/db/SimpleNoSQLContract$EntityEntry.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/db/SimpleNoSQLContract.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/db/SimpleNoSQLDBHelper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/threading/DataDispatcher$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/threading/DataDispatcher.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/threading/QueryDelivery$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/threading/QueryDelivery$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/threading/QueryDelivery$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/threading/QueryDelivery.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/expandedArchives/simplenosql-0.5.1.jar_7ejcg8jhfq8ek72ip216lveek/com/colintmiller/simplenosql/toolbox/SynchronousRetrieval.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/packageDebugJar/MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/tmp/packageReleaseJar/MANIFEST.MF" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_snaphyandroidsdk_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_snaphyandroidsdk_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_snaphyandroidsdk_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_snaphyandroidsdk_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_snaphyandroidsdk_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_snaphyandroidsdk_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_snaphyandroidsdk_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_snaphyandroidsdk_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/MainActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/MainActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/MainActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/MainActivity$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/MainActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/MainActivity$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/MainActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/androidsdk/snaphy/snaphysdk/MainActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/exploded-aar/SnaphySdk/snaphyandroidsdk/unspecified/jars/classes.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/exploded-aar/SnaphySdk/snaphyandroidsdk/unspecified/jars/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/zip-cache/S6GIzNcNFI6LBN2GWsjdde0jo7U=" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/zip-cache/S6GIzNcNFI6LBN2GWsjdde0jo7U=" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/multi-dex/debug/componentClasses.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/multi-dex/debug/componentClasses.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-ldrtl-hdpi/abc_ic_ab_back_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-ldrtl-hdpi/abc_ic_ab_back_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug-androidTest.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/jarMerging/debug/jars/1/1f/combined.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/jarMerging/debug/jars/1/1f/combined.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat$1.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat$2.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$10.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$10.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$11.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$11.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$12.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$12.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$13.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$13.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$14.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$14.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$15.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$15.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$16.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$16.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$17.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$17.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$7.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$8.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$8.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$9.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository$9.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.class" afterPath="$PROJECT_DIR$/app/build/tmp/expandedArchives/classes.jar_2oh7zjgbe04fa3aqs7i7rxidv/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/bundles/release/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/release/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat$1.class" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/release/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/release/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat$2.class" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/release/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/release/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.class" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/classes/release/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_ic_commit_search_api_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_ic_commit_search_api_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_ic_menu_copy_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_ic_menu_cut_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_ic_menu_cut_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-hdpi/abc_ic_menu_cut_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-hdpi/abc_ic_menu_cut_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xhdpi/abc_ic_ab_back_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xhdpi/abc_ic_ab_back_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xhdpi/abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xhdpi/abc_ic_menu_copy_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xhdpi/abc_ic_menu_cut_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xhdpi/abc_ic_menu_cut_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_btn_check_to_on_mtrl_000.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_btn_check_to_on_mtrl_000.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_btn_check_to_on_mtrl_015.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_btn_check_to_on_mtrl_015.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_btn_rating_star_off_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_btn_rating_star_off_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_ic_go_search_api_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_ic_go_search_api_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_ic_menu_paste_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_scrubber_control_to_pressed_mtrl_005.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_scrubber_control_to_pressed_mtrl_005.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_btn_radio_to_on_mtrl_000.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_btn_radio_to_on_mtrl_000.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_btn_rating_star_off_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_btn_rating_star_off_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_ic_menu_cut_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_ic_menu_cut_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_ic_menu_paste_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_copy_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_search_api_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_search_api_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/resources-debug-androidTest.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/outputs/aar/snaphyandroidsdk-debug.aar" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/outputs/aar/snaphyandroidsdk-debug.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/outputs/aar/snaphyandroidsdk-release.aar" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/outputs/aar/snaphyandroidsdk-release.aar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/file-input-save-data.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/file-input-save-data.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/multi-dex/debug/maindexlist.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/multi-dex/debug/maindexlist.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/Subscribe.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/Subscribe.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build.gradle" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/blame/res/androidTest/debug/single/drawable-mdpi.json" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/blame/res/androidTest/debug/single/drawable-mdpi.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/blame/res/debug/single/drawable-mdpi-v4.json" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/blame/res/debug/single/drawable-mdpi-v4.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/blame/res/release/single/drawable-mdpi-v4.json" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/blame/res/release/single/drawable-mdpi-v4.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugAndroidTestResources/merger.xml" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugAndroidTestResources/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugResources/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeReleaseResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeReleaseResources/merger.xml" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeReleaseResources/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/snaphyandroidsdk.iml" afterPath="$PROJECT_DIR$/snaphyandroidsdk/snaphyandroidsdk.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java" />
@@ -61,15 +574,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ChatRepository.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChatRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
-              <caret line="674" column="103" selection-start-line="674" selection-start-column="90" selection-end-line="674" selection-end-column="103" />
+            <state relative-caret-position="567">
+              <caret line="608" column="78" selection-start-line="606" selection-start-column="36" selection-end-line="608" selection-end-column="78" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#19870#19876#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Chat.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2520">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Presenter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/presenter/Presenter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-234">
+              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,40 +609,36 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="197" column="4" selection-start-line="197" selection-start-column="4" selection-end-line="197" selection-end-column="31" />
+            <state relative-caret-position="288">
+              <caret line="138" column="91" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="91" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2483#2751#0" expanded="true" />
-                <element signature="e#2750#2751#0" expanded="true" />
-                <element signature="e#2784#3054#0" expanded="true" />
-                <element signature="e#3053#3054#0" expanded="true" />
-                <element signature="e#3087#3353#0" expanded="true" />
-                <element signature="e#3352#3353#0" expanded="true" />
-                <element signature="e#6880#7276#0" expanded="true" />
-                <element signature="e#7275#7276#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="288">
+              <caret line="19" column="79" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="79" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SnaphySocket.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphySocket.java">
+      <file leaf-file-name="ChatHandler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/ChatHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state relative-caret-position="803">
+              <caret line="197" column="5" selection-start-line="197" selection-start-column="5" selection-end-line="197" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4415#4421#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2223,7 +2751,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5930853969660" />
+        <entry key="$PROJECT_DIR$" value="5931058675846" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2649,13 +3177,19 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/OnData.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyRealTime.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphySocket.java" />
-        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/snaphyandroidsdk/build.gradle" />
         <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyContext.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyOrm.java" />
+        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/DatabaseHandler.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/snaphyandroidsdk/build.gradle" />
+        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/ChatHandler.java" />
       </list>
     </option>
   </component>
@@ -2689,24 +3223,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
-      <pane id="Scratches">
-        <subPane />
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Problems" />
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2735,11 +3251,137 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="snaphyandroidsdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SnaphySdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snaphyandroidsdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snaphyandroidsdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SnaphySdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snaphyandroidsdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snaphyandroidsdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="presenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SnaphySdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snaphyandroidsdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snaphyandroidsdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="list" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SnaphySdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SnaphySdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SnaphySdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snaphysdk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="Scratches">
+        <subPane />
       </pane>
     </panes>
   </component>
@@ -2747,7 +3389,7 @@
     <property name="settings.editor.selected.configurable" value="com.genymobile.genymotion.ide.idea.GdmSettings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="show.do.not.ask.upgrade.gradle.plugin.version" value="1.3.0" />
+    <property name="show.do.not.ask.upgrade.gradle.plugin.version" value="2.1.0" />
     <property name="ignore_missing_gitignore" value="true" />
     <property name="device.picker.selection" value="192.168.59.101:5555" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
@@ -3063,36 +3705,36 @@
     <frame x="0" y="24" width="1920" height="993" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26697353" sideWeight="0.49786553" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3256617" sideWeight="0.49786553" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46144995" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2278481" sideWeight="0.49786553" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19332567" sideWeight="0.49786553" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="100" y="224" width="1720" height="793" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20490928" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18623266" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="100" y="224" width="1720" height="793" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3111,45 +3753,28 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java</url>
-          <line>674</line>
-          <properties />
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java</url>
-          <line>675</line>
-          <properties />
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/MainActivity.java</url>
-          <line>197</line>
-          <properties />
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/MainActivity.java</url>
-          <line>196</line>
-          <properties />
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="25" />
+      <option name="time" value="64" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="app">
+        <watch expression="new Gson().toJson(chat, Chat.class)" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#19870#19876#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3169,14 +3794,6 @@
           <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2483#2751#0" expanded="true" />
-            <element signature="e#2750#2751#0" expanded="true" />
-            <element signature="e#2784#3054#0" expanded="true" />
-            <element signature="e#3053#3054#0" expanded="true" />
-            <element signature="e#3087#3353#0" expanded="true" />
-            <element signature="e#3352#3353#0" expanded="true" />
-            <element signature="e#6880#7276#0" expanded="true" />
-            <element signature="e#7275#7276#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3194,7 +3811,7 @@
         <state relative-caret-position="306">
           <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <marker date="1485759168144" expanded="false" signature="5404:5423" ph=" { " />
             <marker date="1485759168144" expanded="false" signature="5440:5454" ph=" }" />
             <marker date="1485759168144" expanded="false" signature="5880:5899" ph=" { " />
@@ -3222,6 +3839,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
@@ -3229,9 +3849,6 @@
             <element signature="e#496#517#0" expanded="false" />
           </folding>
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/Constants.java">
@@ -3254,13 +3871,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="188" column="25" selection-start-line="188" selection-start-column="25" selection-end-line="188" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.strongloop/loopback-sdk-android/1.5.2/6de2e866659b1cd61d07307b8b562542cce65b68/loopback-sdk-android-1.5.2-sources.jar!/com/strongloop/android/remoting/Repository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1523">
-          <caret line="119" column="3" selection-start-line="119" selection-start-column="3" selection-end-line="119" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -3279,6 +3889,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3287,7 +3898,7 @@
         <state relative-caret-position="234">
           <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <marker date="1485759168144" expanded="false" signature="5404:5423" ph=" { " />
             <marker date="1485759168144" expanded="false" signature="5440:5454" ph=" }" />
             <marker date="1485759168144" expanded="false" signature="5880:5899" ph=" { " />
@@ -3309,7 +3920,7 @@
         <state relative-caret-position="157">
           <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3318,7 +3929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3326,15 +3936,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-788">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/list/DataList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="183" column="5" selection-start-line="183" selection-start-column="5" selection-end-line="183" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3342,7 +3943,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3350,40 +3950,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="31" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Model.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.colintmiller/simplenosql/0.5.1/42a9fcdef19035bb967eb9ade45864135a11d7eb/simplenosql-0.5.1-sources.jar!/com/colintmiller/simplenosql/NoSQLQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="21" column="3" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="3" />
-          <folding>
-            <element signature="e#1240#1241#0" expanded="true" />
-            <element signature="e#1265#1266#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="137">
+          <caret line="117" column="16" selection-start-line="117" selection-start-column="16" selection-end-line="117" selection-end-column="16" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="41" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphySocket.java">
@@ -3391,12 +3965,155 @@
         <state relative-caret-position="288">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.snappydb/snappydb-lib/0.5.2/30e7cdc8f81f09bfd6b003c4079193c3512875c9/snappydb-lib-0.5.2-sources.jar!/com/snappydb/DB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1044">
+          <caret line="74" column="17" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.satyan/sugar/1.4/ac921efcdd0fffb788bb8569c8cdbceb6738a922/sugar-1.4-sources.jar!/com/orm/dsl/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.satyan/sugar/1.4/ac921efcdd0fffb788bb8569c8cdbceb6738a922/sugar-1.4-sources.jar!/com/orm/SugarContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+          <folding>
+            <element signature="e#1521#1522#0" expanded="true" />
+            <element signature="e#1551#1552#0" expanded="true" />
+            <element signature="e#1603#1604#0" expanded="true" />
+            <element signature="e#1637#1638#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyOrm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.satyan/sugar/1.4/ac921efcdd0fffb788bb8569c8cdbceb6738a922/sugar-1.4-sources.jar!/com/orm/SugarRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1341">
+          <caret line="186" column="30" selection-start-line="186" selection-start-column="30" selection-end-line="186" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13575#13576#0" expanded="true" />
+            <element signature="e#13648#13649#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.colintmiller/simplenosql/0.5.1/42a9fcdef19035bb967eb9ade45864135a11d7eb/simplenosql-0.5.1-sources.jar!/com/colintmiller/simplenosql/NoSQLEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.colintmiller/simplenosql/0.5.1/42a9fcdef19035bb967eb9ade45864135a11d7eb/simplenosql-0.5.1-sources.jar!/com/colintmiller/simplenosql/QueryBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="224" column="43" selection-start-line="224" selection-start-column="43" selection-end-line="224" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.strongloop/loopback-sdk-android/1.5.2/6de2e866659b1cd61d07307b8b562542cce65b68/loopback-sdk-android-1.5.2-sources.jar!/com/strongloop/android/remoting/Repository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-20">
+          <caret line="97" column="7" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/list/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="50" column="23" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="19" column="79" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="57" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/SnaphyModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
@@ -3404,47 +4121,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/build.gradle">
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/list/DataList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state relative-caret-position="1829">
+          <caret line="170" column="8" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="197" column="4" selection-start-line="197" selection-start-column="4" selection-end-line="197" selection-end-column="31" />
+        <state relative-caret-position="288">
+          <caret line="138" column="91" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="91" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2483#2751#0" expanded="true" />
-            <element signature="e#2750#2751#0" expanded="true" />
-            <element signature="e#2784#3054#0" expanded="true" />
-            <element signature="e#3053#3054#0" expanded="true" />
-            <element signature="e#3087#3353#0" expanded="true" />
-            <element signature="e#3352#3353#0" expanded="true" />
-            <element signature="e#6880#7276#0" expanded="true" />
-            <element signature="e#7275#7276#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/presenter/Presenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-234">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="674" column="103" selection-start-line="674" selection-start-column="90" selection-end-line="674" selection-end-column="103" />
+        <state relative-caret-position="567">
+          <caret line="608" column="78" selection-start-line="606" selection-start-column="36" selection-end-line="608" selection-end-column="78" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#19870#19876#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2520">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/ChatHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="803">
+          <caret line="197" column="5" selection-start-line="197" selection-start-column="5" selection-end-line="197" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4415#4421#0" expanded="true" />
           </folding>
         </state>
       </provider>

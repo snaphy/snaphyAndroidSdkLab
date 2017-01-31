@@ -20,6 +20,22 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="DATABASE"
+            android:value="snaphy.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="2" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.example" />
+        <meta-data
+            android:name="snaphy.database.name"
+            android:value="snaphy.db" />
+
         <activity
             android:name="com.androidsdk.snaphy.snaphysdk.MainActivity"
             android:label="@string/app_name" >

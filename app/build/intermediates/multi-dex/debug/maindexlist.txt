@@ -11,6 +11,7 @@ com/google/common/hash/BloomFilter.class
 com/androidsdk/snaphy/snaphyandroidsdk/list/DataList.class
 android/support/v4/view/MenuCompat.class
 android/support/v4/media/session/MediaControllerCompat.class
+com/google/gson/JsonNull.class
 com/strongloop/android/loopback/LocalInstallation.class
 android/support/annotation/IdRes.class
 android/support/v4/util/DebugUtils.class
@@ -21,7 +22,6 @@ com/google/common/collect/Maps$FilteredEntryNavigableMap.class
 android/support/annotation/RawRes.class
 com/androidsdk/snaphy/snaphysdk/MainActivity$3.class
 com/github/nkzawa/engineio/client/Socket$8.class
-com/androidsdk/snaphy/snaphysdk/MainActivity$2$1.class
 com/google/common/cache/package-info.class
 android/support/v4/app/ActivityCompat21.class
 android/support/v4/widget/MaterialProgressDrawable$3.class
@@ -94,7 +94,6 @@ android/support/v4/util/ArrayMap$1.class
 com/google/common/collect/ArrayTable.class
 android/support/annotation/RequiresPermission$Read.class
 android/support/annotation/ArrayRes.class
-com/androidsdk/snaphy/snaphyandroidsdk/callbacks/ObjectCallback.class
 android/support/v7/app/AppCompatCallback.class
 com/github/nkzawa/socketio/client/Manager$9.class
 com/google/common/collect/ImmutableClassToInstanceMap.class
@@ -223,11 +222,13 @@ com/github/nkzawa/engineio/client/Socket$14.class
 android/support/v4/media/MediaMetadataCompat$BitmapKey.class
 com/google/common/collect/Maps.class
 com/google/common/collect/TreeRangeMap.class
+com/androidsdk/snaphy/snaphysdk/MainActivity$4.class
 com/google/common/reflect/TypeToken.class
 android/support/v4/util/MapCollections.class
 android/support/v4/graphics/drawable/DrawableCompat.class
 android/support/multidex/ZipUtil$CentralDirectory.class
 com/google/common/collect/Multisets.class
+com/androidsdk/snaphy/snaphysdk/MainActivity$5.class
 com/strongloop/android/remoting/Repository.class
 android/support/v4/view/ViewCompat$GBViewCompatImpl.class
 android/support/v7/app/ActionBarDrawerToggle.class
@@ -258,6 +259,7 @@ android/support/v4/view/ViewCompatLollipop.class
 android/support/v4/media/MediaBrowserCompat$MediaItem$1.class
 android/support/v4/widget/CursorAdapter.class
 com/github/nkzawa/engineio/client/HandshakeData.class
+com/androidsdk/snaphy/snaphysdk/Subscribe.class
 android/support/v4/widget/SimpleCursorAdapter.class
 android/support/v4/view/ViewCompat$JbMr1ViewCompatImpl.class
 com/google/common/collect/TreeRangeMap$SubRangeMap.class
@@ -272,6 +274,7 @@ android/support/v4/view/ViewCompat$ICSViewCompatImpl.class
 android/support/annotation/AnimRes.class
 android/support/v4/view/ViewCompat$EclairMr1ViewCompatImpl.class
 android/support/v4/view/ViewPropertyAnimatorCompat.class
+com/androidsdk/snaphy/snaphysdk/SnaphySocket$Listeners.class
 android/support/v4/app/FragmentManagerState.class
 com/github/nkzawa/engineio/client/Socket$16.class
 com/github/nkzawa/socketio/client/Manager$5.class
@@ -299,8 +302,10 @@ com/strongloop/android/remoting/Transient.class
 com/google/common/collect/ImmutableSortedMapFauxverideShim.class
 android/support/v4/media/RatingCompat$1.class
 android/support/v4/view/ViewCompat$JBViewCompatImpl.class
+com/google/gson/reflect/TypeToken.class
 com/google/common/collect/ImmutableTable.class
 com/google/common/collect/GeneralRange.class
+com/google/gson/annotations/SerializedName.class
 android/support/v4/media/MediaMetadataCompatApi21.class
 com/google/common/reflect/Types$ClassOwnership$1.class
 com/google/common/collect/ImmutableMapEntry$TerminalEntry.class
@@ -352,6 +357,7 @@ com/google/common/net/package-info.class
 android/support/annotation/RequiresPermission.class
 com/google/common/util/concurrent/MoreExecutors.class
 com/androidsdk/snaphy/snaphysdk/ChatPresenter.class
+com/google/gson/annotations/Until.class
 com/google/common/base/Converter$ConverterComposition.class
 android/support/v4/widget/MaterialProgressDrawable$Ring.class
 com/google/common/util/concurrent/CycleDetectingLockFactory$LockGraphNode.class
@@ -370,7 +376,6 @@ android/support/annotation/IntDef.class
 com/google/common/collect/RegularImmutableBiMap$NonTerminalBiMapEntry.class
 com/github/nkzawa/engineio/client/Transport.class
 com/google/common/io/CharSource.class
-com/androidsdk/snaphy/snaphyandroidsdk/callbacks/ObjectCallbackInterface.class
 com/github/nkzawa/engineio/client/Socket$5.class
 com/github/nkzawa/engineio/client/Transport$2.class
 android/support/v4/media/MediaMetadataCompat$LongKey.class
@@ -420,6 +425,7 @@ com/google/common/collect/ImmutableSortedMultisetFauxverideShim.class
 android/support/v7/app/ActionBar$DisplayOptions.class
 com/github/nkzawa/engineio/client/Transport$Options.class
 com/androidsdk/snaphy/snaphyandroidsdk/list/DataList$Listeners.class
+com/google/gson/annotations/Since.class
 android/support/v4/media/RatingCompat.class
 android/support/v4/view/accessibility/AccessibilityNodeInfoCompat.class
 android/support/v4/app/BackStackState.class
@@ -455,12 +461,14 @@ com/androidsdk/snaphy/snaphyandroidsdk/repository/ModelRepository.class
 com/github/nkzawa/engineio/client/Socket$1.class
 android/support/v4/widget/SwipeRefreshLayout.class
 android/support/v4/media/session/PlaybackStateCompatApi22.class
+com/androidsdk/snaphy/snaphysdk/OnData.class
 android/support/v4/content/ContextCompat.class
 com/google/common/base/Function.class
 android/support/multidex/MultiDex$V14.class
 com/github/nkzawa/engineio/client/Socket$4.class
 android/support/v4/media/session/MediaSessionCompat$MediaSessionImpl.class
 com/google/common/collect/FluentIterable.class
+com/androidsdk/snaphy/snaphysdk/SnaphySocket.class
 android/support/annotation/UiThread.class
 com/google/common/collect/Iterators.class
 com/google/common/io/BaseEncoding$StandardBaseEncoding.class
@@ -471,6 +479,7 @@ android/support/v4/app/FragmentManager$OnBackStackChangedListener.class
 com/google/common/base/package-info.class
 com/github/nkzawa/engineio/client/Socket$Options.class
 android/support/v4/media/VolumeProviderCompat$1.class
+com/google/gson/annotations/Expose.class
 com/google/common/collect/TreeMultiset.class
 android/support/v4/view/GravityCompat.class
 android/support/v4/view/ViewCompat$KitKatViewCompatImpl.class

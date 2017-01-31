@@ -14,11 +14,9 @@ import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
 import com.androidsdk.snaphy.snaphyandroidsdk.presenter.Presenter;
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
-import com.colintmiller.simplenosql.NoSQL;
-import com.colintmiller.simplenosql.NoSQLEntity;
-import com.colintmiller.simplenosql.RetrievalCallback;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Manager;
+import com.google.gson.Gson;
 import com.strongloop.android.loopback.RestAdapter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
@@ -30,6 +28,7 @@ import org.json.JSONObject;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -112,71 +111,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
-        /*chatRepository.subscribe(hashMap, new ObjectCallback<JSONObject>() {
-            @Override
-            public void onBefore() {
-                super.onBefore();
-            }
-
-            @Override
-            public void onSuccess(JSONObject object) {
-                String room = "/brand/";
-                String namespace = "/Chat/from";
-                Socket socket = manager.socket(namespace);
-                socket.connect();
-                joinRoom(socket, room);
-                *//*Log.i(TAG, "Chat data fetched");
-                chatPresenter.getChats().addAll(object);*//*
-
-                //On Data added
-                socket.on("POST", onNewMessage);
-            }
-
-            @Override
-            public void onError(Throwable t) {
-                super.onError(t);
-                Log.e(TAG, t.toString());
-            }
-
-            @Override
-            public void onFinally() {
-                super.onFinally();
-            }
-        });*/
     }
 
- /*   private Emitter.Listener onNewMessage = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            mainActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject data = (JSONObject) args[0];
-                    Map<String, Object> ChatData = Util.fromJson(data);
-                    ChatRepository chatRepository = restAdapter.createRepository(ChatRepository.class);
-                    Chat chat = chatRepository.createObject(ChatData);
-                    Log.i(TAG, "NEW DATA ADDED" + data.toString());
-                    chatPresenter.getChats().add(chat);
-                    Log.i(TAG, "SIZE: " + chatPresenter.getChats().size());
-                }
-            });
-        }
-    };
-
-
-    private void joinRoom(Socket socket, String room){
-        socket.emit("create", room);
-    }
-
-*/
 
     private void readChatData(){
         ChatRepository chatRepository = restAdapter.createRepository(ChatRepository.class);
-        HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, Object> filter = new HashMap<>();
+        filter.put("include", "brand");
+
         final ChatPresenter chatPresenter = new ChatPresenter();
 
-        chatRepository.find(hashMap, new DataListCallback<Chat>() {
+        chatRepository.find(filter, new DataListCallback<Chat>() {
             @Override
             public void onBefore() {
                 super.onBefore();
@@ -186,26 +131,13 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(DataList<Chat> objects) {
                 super.onSuccess(objects);
                 Log.i(TAG, "Chat data fetched");
+
+
                 chatPresenter.getChats().addAll(objects);
-
-                NoSQL.with(getApplicationContext()).using(Chat.class)
-                        .bucketId("snaphy_bucket")
-                        .entityId("123456789")
-                        .retrieve(new RetrievalCallback<Chat>() {
-                            @Override
-                            public void retrievedResults(List<NoSQLEntity<Chat>> noSQLEntities) {
-                                Chat firstBean = noSQLEntities.get(0).getData();
-                                Log.i(TAG, "FETCHING SAVED DATA" + firstBean.getMessage());
-                            }
-                        });
-                        /*.retrieve(new RetrievalCallback<Chat>() {
-                            public void retrieveResults(List<NoSQLEntity<Chat> entities) {
-                                // Display results or something
-                                Chat firstBean = entities.get(0).getData(); // always check length of a list first...
-                            }
-                        });*/
-
-
+                Chat chat = objects.get(0);
+                String json = new Gson().toJson(chat.convertMap(), HashMap.class);
+                HashMap<String, Object> newData = new Gson().fromJson(json, HashMap.class);
+                Log.i(TAG, newData.toString());
             }
 
             @Override

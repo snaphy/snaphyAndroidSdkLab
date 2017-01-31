@@ -128,12 +128,12 @@
         "source": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/res/layout/activity_main.xml"
     },
     {
-        "merged": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
-        "source": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_select_dialog_material.xml"
-    },
-    {
         "merged": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
         "source": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
+        "source": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_select_dialog_material.xml"
     },
     {
         "merged": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",

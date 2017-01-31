@@ -18,8 +18,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
-import com.colintmiller.simplenosql.NoSQL;
-import com.colintmiller.simplenosql.NoSQLEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -671,21 +669,11 @@ public class ChatRepository extends ModelRepository<Chat> {
 
                                     for (Map<String, Object> obj : result) {
 
-                                        /*Store data for offline storage..*/
-                                        NoSQLEntity<Chat> entity = new NoSQLEntity<Chat>("snaphy_bucket", "123456789");
-                                        /*Chat data = new Chat();
-                                        data.setName("Colin");
-                                        Map<String, Integer> birthday = new HashMap<String, Integer>();
-                                        birthday.put("day", 17);
-                                        birthday.put("month", 2);
-                                        birthday.put("year", 1982);
-                                        data.setBirthdayMap(birthday);*/
 
 
 
                                         Chat chat = chatRepo.createObject(obj);
-                                        entity.setData(chat);
-                                        NoSQL.with(getApplicationContext()).using(Chat.class).save(entity);
+
                                         chatList.add(chat);
                                     }
                                     callback.onSuccess(chatList);
