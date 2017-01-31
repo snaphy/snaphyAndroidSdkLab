@@ -40,26 +40,11 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
-
 //Now import model of related models..
-
-    
             import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
-            
-        
-    
-
-    
             import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
-            
-        
-    
-
-
-
-
 
 public class ChatRepository extends ModelRepository<Chat> {
 
