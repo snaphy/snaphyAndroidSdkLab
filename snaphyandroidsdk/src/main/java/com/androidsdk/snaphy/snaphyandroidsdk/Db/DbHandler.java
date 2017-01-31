@@ -45,14 +45,6 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
 
 
 
-    //Flag to check either to store data locally or not..
-    private boolean STORE_LOCALLY = true;
-
-    public boolean isSTORE_LOCALLY() {
-        return STORE_LOCALLY;
-    }
-
-
 
     public DbHandler(Context context, String tableName, RestAdapter restAdapter) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -71,10 +63,10 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        if(isSTORE_LOCALLY()){
+
             String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE + " IF NOT EXISTS ( ID TEXT PRIMARY KEY, OBJECT TEXT )";
             db.execSQL(CREATE_CONTACTS_TABLE);
-        }
+
 
     }
 
@@ -82,71 +74,67 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(isSTORE_LOCALLY()) {
+
             // Drop older table if existed
             db.execSQL("DROP TABLE IF EXISTS " + TABLE);
             // Create tables again
             onCreate(db);
-        }
+
     }
 
 
     public void insert__db (String id, String object) {
-        if(isSTORE_LOCALLY()) {
-            /*Chat chat = new Chat();*/
-            SQLiteDatabase db = this.getWritableDatabase();
-        /*    HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
-            String object = toJsonString(hashMap);
-            ContentValues values = new ContentValues();
-            values.put("ID", chat.getId().toString()); // Contact Name
-            values.put("OBJECT", object); // Contact Phone Number*/
+        /*Chat chat = new Chat();*/
+        SQLiteDatabase db = this.getWritableDatabase();
+    /*    HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
+        String object = toJsonString(hashMap);
+        ContentValues values = new ContentValues();
+        values.put("ID", chat.getId().toString()); // Contact Name
+        values.put("OBJECT", object); // Contact Phone Number*/
 
-            // Inserting Row
-            ContentValues values = new ContentValues();
-            values.put("ID", id); // Contact Name
-            values.put("OBJECT", object); // Contact Phone Number
-            db.insert(TABLE, null, values);
-            db.close(); // Closing database connection
-        }
+        // Inserting Row
+        ContentValues values = new ContentValues();
+        values.put("ID", id); // Contact Name
+        values.put("OBJECT", object); // Contact Phone Number
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+
     }
 
     // Getting single cont
     public  M get__db(Class<R> type, String id) {
-        if(isSTORE_LOCALLY()) {
-            if (id != null) {
-                SQLiteDatabase db = this.getReadableDatabase();
+        if (id != null) {
+            SQLiteDatabase db = this.getReadableDatabase();
 
-                Cursor cursor = db.query(TABLE, new String[]{"",
-                                KEY_ID, KEY_OBJECT}, KEY_ID + "=?",
-                        new String[]{id}, null, null, null, null);
-                if (cursor != null) {
-                    cursor.moveToFirst();
+            Cursor cursor = db.query(TABLE, new String[]{"",
+                            KEY_ID, KEY_OBJECT}, KEY_ID + "=?",
+                    new String[]{id}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
 
-                    //String model_id = cursor.getString(0);
-                    String object = cursor.getString(1);
-                    cursor.close();
-                    db.close(); // Closing database connection
-                    if (object != null) {
-                        HashMap<String, Object> chatHashMap = toHashMap(object);
-                        if (chatHashMap != null) {
-                            R repo = restAdapter.createRepository(type);
-                            return (M)repo.createObject(chatHashMap);
-                        } else {
-                            return null;
-                        }
+                //String model_id = cursor.getString(0);
+                String object = cursor.getString(1);
+                cursor.close();
+                db.close(); // Closing database connection
+                if (object != null) {
+                    HashMap<String, Object> chatHashMap = toHashMap(object);
+                    if (chatHashMap != null) {
+                        R repo = restAdapter.createRepository(type);
+                        return (M)repo.createObject(chatHashMap);
                     } else {
                         return null;
                     }
-
                 } else {
                     return null;
                 }
+
             } else {
                 return null;
             }
-        }else{
+        } else {
             return null;
         }
+
     }
 
 
@@ -181,7 +169,7 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
 
 
     // Getting All Contacts
-    public DataList<M> getAll__db(Class<R> type) {
+    public <M> DataList<M>  getAll__db(Class<R> type) {
         DataList<M> modelList = new DataList<M>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE;

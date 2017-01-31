@@ -10,18 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c37bd06c-9018-4ebb-add7-b415960b4fd1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/Db/DbHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build.gradle" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/snaphyandroidsdk.iml" afterPath="$PROJECT_DIR$/snaphyandroidsdk/snaphyandroidsdk.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/Db/DbHandler.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/Db/DbHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/AppUserRepository.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/AppUserRepository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/BrandRepository.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/BrandRepository.java" />
@@ -58,27 +47,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Chat.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Chat.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+            <state relative-caret-position="-80">
+              <caret line="177" column="22" selection-start-line="177" selection-start-column="22" selection-end-line="177" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6599#6600#0" expanded="true" />
-                <element signature="e#6635#6636#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Model.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Model.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#8287#8288#0" expanded="true" />
+                <element signature="e#8323#8324#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,8 +64,8 @@
       <file leaf-file-name="ChatRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1476">
-              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+            <state relative-caret-position="1062">
+              <caret line="98" column="55" selection-start-line="98" selection-start-column="55" selection-end-line="98" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2011#2012#0" expanded="true" />
@@ -107,8 +84,8 @@
       <file leaf-file-name="BrandRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/BrandRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="659">
-              <caret line="127" column="0" selection-start-line="94" selection-start-column="4" selection-end-line="127" selection-end-column="0" />
+            <state relative-caret-position="227">
+              <caret line="94" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="4" />
               <folding>
                 <element signature="e#2578#2579#0" expanded="true" />
                 <element signature="e#2610#2611#0" expanded="true" />
@@ -126,8 +103,8 @@
       <file leaf-file-name="AppUserRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/AppUserRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+            <state relative-caret-position="684">
+              <caret line="110" column="61" selection-start-line="110" selection-start-column="61" selection-end-line="110" selection-end-column="61" />
               <folding>
                 <element signature="e#2407#2408#0" expanded="true" />
                 <element signature="e#2439#2440#0" expanded="true" />
@@ -142,15 +119,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DbHandler.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DbHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/Db/DbHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="619">
-              <caret line="199" column="69" selection-start-line="199" selection-start-column="69" selection-end-line="199" selection-end-column="69" />
+            <state relative-caret-position="198">
+              <caret line="104" column="12" selection-start-line="104" selection-start-column="12" selection-end-line="104" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1517#1518#0" expanded="true" />
-                <element signature="e#1553#1554#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -159,7 +134,7 @@
       <file leaf-file-name="Presenter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/presenter/Presenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-54">
+            <state relative-caret-position="270">
               <caret line="65" column="48" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="48" />
               <folding />
             </state>
@@ -2725,11 +2700,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/androidsdk/snaphy/snaphysdk/DbHandler.java" />
         <option value="$PROJECT_DIR$/snaphyandroidsdk/build.gradle" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java" />
-        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/BrandRepository.java" />
         <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/AppUserRepository.java" />
-        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" />
+        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/BrandRepository.java" />
+        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java" />
         <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/Db/DbHandler.java" />
+        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" />
       </list>
     </option>
   </component>
@@ -3352,8 +3327,8 @@
           <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6599#6600#0" expanded="true" />
-            <element signature="e#6635#6636#0" expanded="true" />
+            <element signature="e#8287#8288#0" expanded="true" />
+            <element signature="e#8323#8324#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3676,41 +3651,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/BrandRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="659">
-          <caret line="127" column="0" selection-start-line="94" selection-start-column="4" selection-end-line="127" selection-end-column="0" />
-          <folding>
-            <element signature="e#2578#2579#0" expanded="true" />
-            <element signature="e#2610#2611#0" expanded="true" />
-            <element signature="e#2663#2664#0" expanded="true" />
-            <element signature="e#2705#2706#0" expanded="true" />
-            <element signature="e#2882#2883#0" expanded="true" />
-            <element signature="e#2918#2919#0" expanded="true" />
-            <element signature="e#2967#2968#0" expanded="true" />
-            <element signature="e#3006#3007#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Model.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6599#6600#0" expanded="true" />
-            <element signature="e#6635#6636#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3723,10 +3669,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/AppUserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="110" column="61" selection-start-line="110" selection-start-column="61" selection-end-line="110" selection-end-column="61" />
+          <folding>
+            <element signature="e#2407#2408#0" expanded="true" />
+            <element signature="e#2439#2440#0" expanded="true" />
+            <element signature="e#2492#2493#0" expanded="true" />
+            <element signature="e#2534#2535#0" expanded="true" />
+            <element signature="e#2711#2712#0" expanded="true" />
+            <element signature="e#2747#2748#0" expanded="true" />
+            <element signature="e#2796#2797#0" expanded="true" />
+            <element signature="e#2835#2836#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1476">
-          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+        <state relative-caret-position="1062">
+          <caret line="98" column="55" selection-start-line="98" selection-start-column="55" selection-end-line="98" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2011#2012#0" expanded="true" />
@@ -3741,26 +3704,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/AppUserRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding>
-            <element signature="e#2407#2408#0" expanded="true" />
-            <element signature="e#2439#2440#0" expanded="true" />
-            <element signature="e#2492#2493#0" expanded="true" />
-            <element signature="e#2534#2535#0" expanded="true" />
-            <element signature="e#2711#2712#0" expanded="true" />
-            <element signature="e#2747#2748#0" expanded="true" />
-            <element signature="e#2796#2797#0" expanded="true" />
-            <element signature="e#2835#2836#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/presenter/Presenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-54">
+        <state relative-caret-position="270">
           <caret line="65" column="48" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="48" />
           <folding />
         </state>
@@ -3768,12 +3714,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/Db/DbHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
-          <caret line="199" column="69" selection-start-line="199" selection-start-column="69" selection-end-line="199" selection-end-column="69" />
+        <state relative-caret-position="198">
+          <caret line="104" column="12" selection-start-line="104" selection-start-column="12" selection-end-line="104" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1517#1518#0" expanded="true" />
-            <element signature="e#1553#1554#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/BrandRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="94" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="4" />
+          <folding>
+            <element signature="e#2578#2579#0" expanded="true" />
+            <element signature="e#2610#2611#0" expanded="true" />
+            <element signature="e#2663#2664#0" expanded="true" />
+            <element signature="e#2705#2706#0" expanded="true" />
+            <element signature="e#2882#2883#0" expanded="true" />
+            <element signature="e#2918#2919#0" expanded="true" />
+            <element signature="e#2967#2968#0" expanded="true" />
+            <element signature="e#3006#3007#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-80">
+          <caret line="177" column="22" selection-start-line="177" selection-start-column="22" selection-end-line="177" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8287#8288#0" expanded="true" />
+            <element signature="e#8323#8324#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -118,7 +118,7 @@ public class BrandRepository extends ModelRepository<Brand> {
 
 
     private void addStorage(Context context){
-        setDbHandler(new DbHandler(context, "Brand", getRestAdapter()));
+        setDbHandler(new DbHandler<Brand, BrandRepository>(context, "Brand", getRestAdapter()));
         //allow data storage locally..
         persistData(true);
     }

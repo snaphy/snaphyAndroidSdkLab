@@ -108,7 +108,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
 
     private void addStorage(Context context){
-        setDbHandler(new DbHandler(context, "AppUser", getRestAdapter()));
+        setDbHandler(new DbHandler<AppUser, AppUserRepository>(context, "AppUser", getRestAdapter()));
         //allow data storage locally..
         persistData(true);
     }

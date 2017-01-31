@@ -96,7 +96,7 @@ public class ChatRepository extends ModelRepository<Chat> {
 
 
     private void addStorage(Context context){
-        setDbHandler(new DbHandler(context, "Chat", getRestAdapter()));
+        setDbHandler(new DbHandler<Chat, ChatRepository>(context, "Chat", getRestAdapter()));
         //allow data storage locally..
         persistData(true);
     }

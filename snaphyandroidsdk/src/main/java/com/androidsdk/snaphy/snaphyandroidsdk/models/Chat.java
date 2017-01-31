@@ -1,4 +1,5 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.models;
+import android.content.ContentValues;
 import android.content.Context;
 
 import org.json.JSONObject;
@@ -173,19 +174,68 @@ public class Chat extends Model {
     //Define belongsTo relation method here..
     private transient Brand  brand ;
 
-    public Brand getBrand() {
+    public Brand getBrand(RestAdapter restAdapter) {
+        //TODO: EDITED
+        if(brand == null){
+            if(restAdapter != null){
+                //Fetch locally from db
+                brand = get__brand__db(restAdapter);
+            }
+        }
+
         return brand;
     }
 
     public void setBrand(Brand brand) {
-        //Add
+        //TODO: save to database..
         this.brand = brand;
     }
 
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+        //Save to database..
+        save__db();
         //Also save to database..
-
         super.save(callback);
+    }
+
+
+    public void save__db(String id){
+        ChatRepository chatRepository = (ChatRepository) getRepository();
+        if(id != null){
+            HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
+            String object = chatRepository.getDbHandler().toJsonString(hashMap);
+            ContentValues values = new ContentValues();
+            values.put("ID", id); // Contact Name
+            values.put("OBJECT", object); // Contact Phone Number*/
+            chatRepository.getDbHandler().upsert__db(id, object);
+        }
+    }
+
+
+    public void save__db(){
+        if(getId() == null){
+            return;
+        }
+        String id = getId().toString();
+        save__db(id);
+    }
+
+    //TODO: Add a brandId identifier as property
+
+    public Brand get__brand__db(RestAdapter restAdapter){
+        //TODO: replace brandid with gloabl
+        String brandId = "BRAND ID";
+        if(brandId != null){
+            BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
+            Brand brand = (Brand) brandRepository.getDbHandler().get__db(Brand.class, brandId);
+            if(brand != null){
+                return brand;
+            }else{
+                return null;
+            }
+        }else{
+            return null;
+        }
     }
 
 
@@ -194,6 +244,8 @@ public class Chat extends Model {
         //First create a dummy Repo class object for customer.
         BrandRepository brandRepository = new BrandRepository();
         Brand brand1 = brandRepository.createObject(brand);
+        //TODO: Save brand  to database..
+
         setBrand(brand1);
     }
 
