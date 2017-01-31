@@ -23,7 +23,7 @@ import java.util.Map;
  * Created by snaphy on 31/1/17.
  */
 
-public class ChatHandler extends SQLiteOpenHelper {
+public class DbHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
@@ -41,10 +41,10 @@ public class ChatHandler extends SQLiteOpenHelper {
     private static String DATABASE_NAME;
 
     // Contacts table name
-    private static String TABLE = "CHAT";
+    private static String TABLE;
 
 
-    public ChatHandler(Context context, String tableName, RestAdapter restAdapter) {
+    public DbHandler(Context context, String tableName, RestAdapter restAdapter) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.restAdapter = restAdapter;
         TABLE = tableName;
@@ -54,10 +54,9 @@ public class ChatHandler extends SQLiteOpenHelper {
         }
         catch (Exception e){
             Log.e(TAG, e.toString());
-
         }
-
     }
+
 
     // Creating Tables
     @Override
@@ -65,6 +64,7 @@ public class ChatHandler extends SQLiteOpenHelper {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE + " IF NOT EXISTS ( ID TEXT PRIMARY KEY, OBJECT TEXT )";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
+
 
     // Upgrading database
     @Override
@@ -75,17 +75,62 @@ public class ChatHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Adding new contact
-    public void save__db (Chat chat) {
+
+    public void insert__db (String id, String object) {
+        /*Chat chat = new Chat();*/
         SQLiteDatabase db = this.getWritableDatabase();
-        HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
+    /*    HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
         String object = toJsonString(hashMap);
         ContentValues values = new ContentValues();
         values.put("ID", chat.getId().toString()); // Contact Name
-        values.put("OBJECT", object); // Contact Phone Number
+        values.put("OBJECT", object); // Contact Phone Number*/
+
         // Inserting Row
+        ContentValues values = new ContentValues();
+        values.put("ID", id); // Contact Name
+        values.put("OBJECT", object); // Contact Phone Number
         db.insert(TABLE, null, values);
         db.close(); // Closing database connection
+    }
+
+    // Getting single cont
+    public Chat get__db(String id) {
+        if(id != null){
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cursor = db.query(TABLE, new String[] { "",
+                            KEY_ID, KEY_OBJECT }, KEY_ID + "=?",
+                    new String[] { id }, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+
+                //String model_id = cursor.getString(0);
+                String object = cursor.getString(1);
+                cursor.close();
+                db.close(); // Closing database connection
+                if(object != null){
+                    HashMap<String, Object> chatHashMap = toHashMap(object);
+                    if (chatHashMap != null) {
+                        ChatRepository chatRepo = restAdapter.createRepository(ChatRepository.class);
+                        return chatRepo.createObject(chatHashMap);
+                    } else {
+                        return null;
+                    }
+                }else{
+                    return null;
+                }
+
+            }else{
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+
+    public void upsert__db(String id, String object){
+
     }
 
 
@@ -108,33 +153,7 @@ public class ChatHandler extends SQLiteOpenHelper {
     }
 
 
-    // Getting single cont
-    public Chat get__db(String id) {
-        if(id != null){
-            SQLiteDatabase db = this.getReadableDatabase();
 
-            Cursor cursor = db.query(TABLE, new String[] { "",
-                            KEY_ID, KEY_OBJECT }, KEY_ID + "=?",
-                    new String[] { id }, null, null, null, null);
-            if (cursor != null)
-                cursor.moveToFirst();
-
-            //String model_id = cursor.getString(0);
-            String object = cursor.getString(1);
-            cursor.close();
-            db.close(); // Closing database connection
-            HashMap<String, Object> chatHashMap = toHashMap(object);
-            if(chatHashMap != null){
-                ChatRepository chatRepo = restAdapter.createRepository(ChatRepository.class);
-                return  chatRepo.createObject(chatHashMap);
-            }else{
-                return null;
-            }
-        }else{
-            return null;
-        }
-
-    }
 
     // Getting All Contacts
     public DataList<Chat> getAll__db() {
@@ -163,6 +182,8 @@ public class ChatHandler extends SQLiteOpenHelper {
         return chatList;
     }
 
+
+
     // Getting contacts Count
     public int count__db() {
         String countQuery = "SELECT  * FROM " + TABLE;
@@ -173,27 +194,42 @@ public class ChatHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
+    
+    /**
+     * Get count by Id..
+     * @param id
+     * @return
+     */
+    public int count__db(String id){
+        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID=" + id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        cursor.close();
+        // return count
+        return cursor.getCount();
+    }
+
 
     // Updating single contact
-    public int update__db(Chat chat) {
+    public int update__db(String id, String object) {
         SQLiteDatabase db = this.getWritableDatabase();
-        HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
-        String object = toJsonString(hashMap);
+        /*HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
+        String object = toJsonString(hashMap);*/
         ContentValues values = new ContentValues();
-        values.put("ID", chat.getId().toString()); // Contact Name
+        values.put("ID", id); // Contact Name
         values.put("OBJECT", object); // Contact Phone Number
 
         // updating row
         return db.update(TABLE, values, KEY_ID + " = ?",
-                new String[] { chat.getId().toString() });
+                new String[] { id });
     }
 
 
     // Deleting single contact
-    public void deleteContact(Chat chat) {
+    public void deleteContact(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE, KEY_ID + " = ?",
-                new String[] { chat.getId().toString() });
+                new String[] { id });
         db.close();
     }
 }
