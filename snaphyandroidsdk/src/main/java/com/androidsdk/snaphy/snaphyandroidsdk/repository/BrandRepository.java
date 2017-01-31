@@ -2,6 +2,9 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.Db.DbHandler;
 import com.google.common.collect.ImmutableMap;
 /*
 Replacing with custom Snaphy callback methods
@@ -86,9 +89,39 @@ public class BrandRepository extends ModelRepository<Brand> {
 
     public BrandRepository(){
         super("Brand", null, Brand.class);
+        addStorage(getApplicationContext());
+    }
+
+    public DbHandler getDbHandler() {
+        return dbHandler;
+    }
+
+    public void setDbHandler(DbHandler dbHandler) {
+        this.dbHandler = dbHandler;
+    }
+
+    private DbHandler dbHandler;
+
+
+
+    //Flag to check either to store data locally or not..
+    private boolean STORE_LOCALLY = true;
+
+    public boolean isSTORE_LOCALLY() {
+        return STORE_LOCALLY;
     }
 
 
+    public void  persistData(boolean persist){
+        STORE_LOCALLY = persist;
+    }
+
+
+    private void addStorage(Context context){
+        setDbHandler(new DbHandler(context, "Brand", getRestAdapter()));
+        //allow data storage locally..
+        persistData(true);
+    }
     
 
 

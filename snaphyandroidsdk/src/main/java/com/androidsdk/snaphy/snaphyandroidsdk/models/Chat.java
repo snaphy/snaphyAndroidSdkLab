@@ -1,8 +1,12 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.models;
+import android.content.Context;
+
 import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.Db.DbHandler;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 
@@ -21,27 +25,16 @@ import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
 
 //Now import repository of related models..
-
-    
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
-
-
-
-
-
-
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Chat extends Model implements java.io.Serializable {
-
-
+public class Chat extends Model {
     //For converting all model values to hashMap
     private  transient Map<String, Object> hashMap = new HashMap<>();
+
 
     public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
@@ -57,6 +50,8 @@ public class Chat extends Model implements java.io.Serializable {
 
     public Chat (){
         that = this;
+
+
     }
 
 
@@ -118,7 +113,9 @@ public class Chat extends Model implements java.io.Serializable {
                 private Map<String, Object> image;
                 /* Adding Getter and Setter methods */
                 public Map<String, Object> getImage(){
+
                     return image;
+
                 }
 
                 /* Adding Getter and Setter methods */
@@ -181,8 +178,16 @@ public class Chat extends Model implements java.io.Serializable {
     }
 
     public void setBrand(Brand brand) {
+        //Add
         this.brand = brand;
     }
+
+    public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+        //Also save to database..
+
+        super.save(callback);
+    }
+
 
     //Adding related model automatically in case of include statement from server..
     public void setBrand(Map<String, Object> brand) {
@@ -255,6 +260,7 @@ public class Chat extends Model implements java.io.Serializable {
     private transient AppUser  appUser ;
 
     public AppUser getAppUser() {
+
         return appUser;
     }
 

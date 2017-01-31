@@ -2,6 +2,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 
+import com.androidsdk.snaphy.snaphyandroidsdk.Db.DbHandler;
 import com.google.common.collect.ImmutableMap;
 /*
 Replacing with custom Snaphy callback methods
@@ -78,11 +79,47 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
     public AppUserRepository(){
         super("AppUser", null, AppUser.class);
+        addStorage(getApplicationContext());
+    }
+
+    public DbHandler getDbHandler() {
+        return dbHandler;
+    }
+
+    public void setDbHandler(DbHandler dbHandler) {
+        this.dbHandler = dbHandler;
+    }
+
+    private DbHandler dbHandler;
+
+
+
+    //Flag to check either to store data locally or not..
+    private boolean STORE_LOCALLY = true;
+
+    public boolean isSTORE_LOCALLY() {
+        return STORE_LOCALLY;
     }
 
 
-    
-    		//Create public methods..
+    public void  persistData(boolean persist){
+        STORE_LOCALLY = persist;
+    }
+
+
+    private void addStorage(Context context){
+        setDbHandler(new DbHandler(context, "AppUser", getRestAdapter()));
+        //allow data storage locally..
+        persistData(true);
+    }
+
+
+
+
+
+
+
+    //Create public methods..
     		public AppUser cachedCurrentUser;
             private Object currentUserId;
             private boolean isCurrentUserIdLoaded;

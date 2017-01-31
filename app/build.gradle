@@ -27,7 +27,6 @@ dependencies {
     compile ('com.github.nkzawa:socket.io-client:0.3.0'){
         exclude group: 'org.json', module: 'json'
     }
-    compile 'com.google.code.gson:gson:2.2.4'
 
 }
 

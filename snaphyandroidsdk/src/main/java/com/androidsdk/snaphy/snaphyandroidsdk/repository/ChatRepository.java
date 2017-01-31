@@ -2,6 +2,9 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.Db.DbHandler;
 import com.google.common.collect.ImmutableMap;
 /*
 Replacing with custom Snaphy callback methods
@@ -15,6 +18,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
+import com.google.common.primitives.Booleans;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -62,11 +66,40 @@ public class ChatRepository extends ModelRepository<Chat> {
 
     public ChatRepository(){
         super("Chat", null, Chat.class);
+        addStorage(getApplicationContext());
     }
 
 
-    
+    public DbHandler getDbHandler() {
+        return dbHandler;
+    }
 
+    public void setDbHandler(DbHandler dbHandler) {
+        this.dbHandler = dbHandler;
+    }
+
+    private DbHandler dbHandler;
+
+
+
+    //Flag to check either to store data locally or not..
+    private boolean STORE_LOCALLY = true;
+
+    public boolean isSTORE_LOCALLY() {
+        return STORE_LOCALLY;
+    }
+
+
+    public void  persistData(boolean persist){
+        STORE_LOCALLY = persist;
+    }
+
+
+    private void addStorage(Context context){
+        setDbHandler(new DbHandler(context, "Chat", getRestAdapter()));
+        //allow data storage locally..
+        persistData(true);
+    }
 
 
 
