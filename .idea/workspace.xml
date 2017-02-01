@@ -52,8 +52,8 @@
       <file leaf-file-name="Brand.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Brand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="445" column="59" selection-start-line="445" selection-start-column="59" selection-end-line="445" selection-end-column="59" />
+            <state relative-caret-position="335">
+              <caret line="449" column="88" selection-start-line="449" selection-start-column="81" selection-end-line="449" selection-end-column="88" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -64,7 +64,7 @@
       <file leaf-file-name="Chat.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
+            <state relative-caret-position="-99">
               <caret line="435" column="85" selection-start-line="435" selection-start-column="85" selection-end-line="435" selection-end-column="85" />
               <folding />
             </state>
@@ -2178,7 +2178,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5931172951676" />
+        <entry key="$PROJECT_DIR$" value="5931173059400" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2626,8 +2626,8 @@
         <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/repository/ChatRepository.java" />
         <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java" />
         <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/db/BrandDb.java" />
-        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Brand.java" />
         <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/db/ChatDb.java" />
+        <option value="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Brand.java" />
       </list>
     </option>
   </component>
@@ -3551,7 +3551,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Chat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
+        <state relative-caret-position="-99">
           <caret line="435" column="85" selection-start-line="435" selection-start-column="85" selection-end-line="435" selection-end-column="85" />
           <folding />
         </state>
@@ -3559,8 +3559,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Brand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="445" column="59" selection-start-line="445" selection-start-column="59" selection-end-line="445" selection-end-column="59" />
+        <state relative-caret-position="335">
+          <caret line="449" column="88" selection-start-line="449" selection-start-column="81" selection-end-line="449" selection-end-column="88" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
