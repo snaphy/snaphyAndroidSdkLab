@@ -1,4 +1,4 @@
-package com.androidsdk.snaphy.snaphyandroidsdk.Db;
+package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,9 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.ModelRepository;
 import com.google.gson.Gson;
 import com.strongloop.android.loopback.RestAdapter;
@@ -74,12 +72,10 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
             // Drop older table if existed
             db.execSQL("DROP TABLE IF EXISTS " + TABLE);
             // Create tables again
             onCreate(db);
-
     }
 
 
@@ -239,10 +235,18 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
 
 
     // Deleting single contact
-    public void deleteContact(String id) {
+    public void delete__db(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE, KEY_ID + " = ?",
                 new String[] { id });
         db.close();
     }
+
+
+    public void reset__db(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE,null,null);
+        db.close();
+    }
+
 }

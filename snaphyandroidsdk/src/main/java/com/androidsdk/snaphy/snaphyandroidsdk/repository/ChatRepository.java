@@ -4,8 +4,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 import android.content.Context;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.Db.DbHandler;
-import com.google.common.collect.ImmutableMap;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.DbHandler;
 /*
 Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
@@ -14,17 +13,13 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 */
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
-import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
-import com.google.common.primitives.Booleans;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -42,9 +37,7 @@ import org.json.JSONObject;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
 //Now import model of related models..
             import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
 
 public class ChatRepository extends ModelRepository<Chat> {
 
@@ -85,6 +78,13 @@ public class ChatRepository extends ModelRepository<Chat> {
         //allow data storage locally..
         persistData(true);
     }
+
+    public void reset__db(){
+        if(isSTORE_LOCALLY()){
+            getDbHandler().reset__db();
+        }
+    }
+
 
 
 

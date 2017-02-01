@@ -41,6 +41,8 @@ public class ModelRepository<T extends Model> extends RestRepository<T> {
         this(className, null, modelClass);
     }
 
+
+
     /**
      * Creates a new Repository, associating it with the named remote class.
      * @param className The remote class name.

@@ -2,8 +2,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 
-import com.androidsdk.snaphy.snaphyandroidsdk.Db.DbHandler;
-import com.google.common.collect.ImmutableMap;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.DbHandler;
 /*
 Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
@@ -20,8 +19,6 @@ import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -51,27 +48,12 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
-            
-        
-    
 
 
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
 
+
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
 
 
 public class AppUserRepository extends UserRepository<AppUser> {
