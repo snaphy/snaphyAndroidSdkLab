@@ -15,8 +15,51 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_btn_radio_to_on_mtrl_000.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_btn_radio_to_on_mtrl_000.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_btn_radio_to_on_mtrl_015.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_btn_radio_to_on_mtrl_015.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_btn_rating_star_on_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_btn_rating_star_on_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_ic_search_api_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-hdpi/abc_ic_search_api_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-hdpi/abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-hdpi/abc_ic_menu_copy_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-hdpi/abc_ic_menu_cut_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-hdpi/abc_ic_menu_cut_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-mdpi/abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-mdpi/abc_ic_menu_copy_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xhdpi/abc_ic_ab_back_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xhdpi/abc_ic_ab_back_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xxhdpi/abc_ic_menu_cut_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-ldrtl-xxhdpi/abc_ic_menu_cut_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-mdpi/abc_btn_check_to_on_mtrl_000.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-mdpi/abc_btn_check_to_on_mtrl_000.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-mdpi/abc_btn_rating_star_on_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-mdpi/abc_btn_rating_star_on_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-mdpi/abc_ic_go_search_api_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-mdpi/abc_ic_go_search_api_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-mdpi/abc_ic_voice_search_api_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-mdpi/abc_ic_voice_search_api_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_btn_check_to_on_mtrl_000.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_btn_check_to_on_mtrl_000.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_btn_check_to_on_mtrl_015.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_btn_check_to_on_mtrl_015.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_ic_commit_search_api_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_ic_commit_search_api_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_ic_menu_copy_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_ic_menu_selectall_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_ic_menu_selectall_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_scrubber_control_to_pressed_mtrl_000.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi/abc_scrubber_control_to_pressed_mtrl_000.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_btn_rating_star_off_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_btn_rating_star_off_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_btn_rating_star_on_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_btn_rating_star_on_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_ic_menu_cut_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_ic_menu_cut_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_ic_menu_share_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi/abc_ic_menu_share_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_btn_radio_to_on_mtrl_015.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_btn_radio_to_on_mtrl_015.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_copy_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_cut_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_cut_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_moreoverflow_mtrl_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_ic_menu_paste_mtrl_am_alpha.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_scrubber_control_to_pressed_mtrl_005.png" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/merged/androidTest/debug/drawable-xxxhdpi/abc_scrubber_control_to_pressed_mtrl_005.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/res/resources-debug-androidTest.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/outputs/aar/snaphyandroidsdk-debug.aar" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/outputs/aar/snaphyandroidsdk-debug.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/outputs/aar/snaphyandroidsdk-release.aar" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/outputs/aar/snaphyandroidsdk-release.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/blame/res/debug/single/drawable-xxhdpi-v4.json" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/blame/res/debug/single/drawable-xxhdpi-v4.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/snaphyandroidsdk/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/snaphyandroidsdk.iml" afterPath="$PROJECT_DIR$/snaphyandroidsdk/snaphyandroidsdk.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/AppUser.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/AppUser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Brand.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Brand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Category.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Category.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Role.java" afterPath="$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Role.java" />
     </list>
     <ignored path="SnaphySdk.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,8 +95,8 @@
       <file leaf-file-name="Brand.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Brand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="449" column="88" selection-start-line="449" selection-start-column="81" selection-end-line="449" selection-end-column="88" />
+            <state relative-caret-position="281">
+              <caret line="449" column="80" selection-start-line="449" selection-start-column="80" selection-end-line="449" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -2178,7 +2221,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5931173059400" />
+        <entry key="$PROJECT_DIR$" value="5931173157584" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -3559,8 +3602,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/snaphyandroidsdk/src/main/java/com/androidsdk/snaphy/snaphyandroidsdk/models/Brand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="449" column="88" selection-start-line="449" selection-start-column="81" selection-end-line="449" selection-end-column="88" />
+        <state relative-caret-position="281">
+          <caret line="449" column="80" selection-start-line="449" selection-start-column="80" selection-end-line="449" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
