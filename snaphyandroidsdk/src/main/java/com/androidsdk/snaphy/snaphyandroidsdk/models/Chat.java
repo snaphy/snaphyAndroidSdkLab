@@ -91,11 +91,6 @@ public class Chat extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -117,11 +112,6 @@ public class Chat extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -143,11 +133,6 @@ public class Chat extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -169,18 +154,11 @@ public class Chat extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
             
 
-            
-            
             
                 private Map<String, Object> image;
                 /* Adding Getter and Setter methods */
@@ -197,9 +175,6 @@ public class Chat extends Model {
 
             
             
-
-            
-
         
     
         
@@ -221,11 +196,6 @@ public class Chat extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -247,11 +217,6 @@ public class Chat extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -273,11 +238,6 @@ public class Chat extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -285,11 +245,6 @@ public class Chat extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -297,11 +252,6 @@ public class Chat extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -309,18 +259,13 @@ public class Chat extends Model {
 
             
             
-            
-            
-
-            
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

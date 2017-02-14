@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, FacebookAccessTokenRepository> {
-  public FacebookAccessTokenDb(Context context, RestAdapter restAdapter){
-    super(context, "FacebookAccessToken", restAdapter);
+  public FacebookAccessTokenDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "FacebookAccessToken", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                          
-    String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE  FacebookAccessToken IF NOT EXISTS (  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT)";
+                                                                                                                                                                      
+    
+    String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE IF NOT EXISTS FacebookAccessToken (  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_FacebookAccessToken_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS FacebookAccessToken");
+            //db.execSQL("DROP TABLE IF EXISTS FacebookAccessToken");
             // Create tables again
             onCreate(db);
     }
@@ -76,10 +79,18 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                         }
                                                 values.put("expires", expiresData);
                                 
-                                                            String userIdData = "";
-                        if(modelData.getUserId() != null){
-                          userIdData =modelData.getUserId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String userIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getUserId");
+                              if(method.invoke(modelData) != null){
+                                //userIdData = modelData.getUserId().toString();
+                                userIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("userId", userIdData);
                                 
                                                             String typeData = "";
@@ -88,18 +99,29 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                         }
                                                 values.put("type", typeData);
                                 
-                                                            String appUserIdData = "";
-                        if(modelData.getAppUserId() != null){
-                          appUserIdData =modelData.getAppUserId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String appUserIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getAppUserId");
+                              if(method.invoke(modelData) != null){
+                                //appUserIdData = modelData.getAppUserId().toString();
+                                appUserIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("appUserId", appUserIdData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   FacebookAccessToken get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -110,7 +132,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
                     return (FacebookAccessToken)repo.createObject(hashMap);
@@ -222,7 +244,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -250,7 +272,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
@@ -262,14 +284,14 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         db.close();
         // return contact list
         return (DataList<FacebookAccessToken>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<FacebookAccessToken>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM FacebookAccessToken WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM FacebookAccessToken WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -277,7 +299,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
@@ -299,6 +321,24 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         // updating row
         return db.update("FacebookAccessToken", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("FacebookAccessToken", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("FacebookAccessToken", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

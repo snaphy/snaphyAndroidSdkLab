@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository> {
-  public AmazonImageDb(Context context, RestAdapter restAdapter){
-    super(context, "AmazonImage", restAdapter);
+  public AmazonImageDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "AmazonImage", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                               
-    String CREATE_AmazonImage_TABLE = "CREATE TABLE  AmazonImage IF NOT EXISTS (  name TEXT, container TEXT, type TEXT, url TEXT, id TEXT PRIMARY KEY)";
+                                                                                                                                           
+    
+    String CREATE_AmazonImage_TABLE = "CREATE TABLE IF NOT EXISTS AmazonImage (  name TEXT, container TEXT, type TEXT, url TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_AmazonImage_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS AmazonImage");
+            //db.execSQL("DROP TABLE IF EXISTS AmazonImage");
             // Create tables again
             onCreate(db);
     }
@@ -82,18 +85,29 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                         }
                                                 values.put("url", urlData);
                                 
-                                                            String idData = "";
-                        if(modelData.getId() != null){
-                          idData =modelData.getId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getId");
+                              if(method.invoke(modelData) != null){
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("id", idData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   AmazonImage get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -104,7 +118,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
                     return (AmazonImage)repo.createObject(hashMap);
@@ -206,7 +220,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -234,7 +248,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
@@ -246,14 +260,14 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         db.close();
         // return contact list
         return (DataList<AmazonImage>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<AmazonImage>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<AmazonImage> modelList = new DataList<AmazonImage>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM AmazonImage WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM AmazonImage WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -261,7 +275,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
@@ -283,6 +297,24 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         // updating row
         return db.update("AmazonImage", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("AmazonImage", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("AmazonImage", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

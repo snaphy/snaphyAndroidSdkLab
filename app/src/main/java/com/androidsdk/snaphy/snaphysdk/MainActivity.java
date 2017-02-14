@@ -12,6 +12,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.Listen;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
 import com.androidsdk.snaphy.snaphyandroidsdk.presenter.Presenter;
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
 import com.github.nkzawa.emitter.Emitter;
@@ -67,50 +68,34 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> hashMap = new HashMap<>();
 
         hashMap.put("from", "brand");
-        SnaphySocket snaphySocket = new SnaphySocket(mainActivity, chatRepository, hashMap);
-        snaphySocket
-                .onDataAdded(new OnData<Chat>() {
-                    @Override
-                    public void onData(Chat data) {
-                        Log.e(TAG, data+"");
-                        Log.e(TAG, "New Data has been added in chaining route");
-                    }
-                })
-                .onDataUpdated(new OnData<Chat>() {
-                    @Override
-                    public void onData(Chat data) {
-                        Log.e(TAG, data+"");
-                        Log.e(TAG, "New Data has been updated in chaining route");
-                    }
-                })
-                .onDataDeleted(new OnData<Chat>() {
-                    @Override
-                    public void onData(Chat data) {
-                        Log.e(TAG, data+"");
-                        Log.e(TAG, "Data has been deleted in chaining route");
-                    }
-                })
+        SnaphySocket<Chat, ChatRepository> snaphySocket = new SnaphySocket<>(mainActivity, chatRepository, hashMap);
+        snaphySocket.onDataAdded(new OnData<Chat>() {
+            @Override
+            public void onData(Chat data) {
+                Log.e(TAG, data+"");
+                Log.e(TAG, "New Data has been added in route");
+            }
+        });
 
-                .subscribe(new Subscribe<Chat>() {
-                    @Override
-                    public void onDataAdded(Chat data) {
-                        Log.e(TAG, data+"");
-                        Log.e(TAG, "New Data has been added in route");
-                    }
+        snaphySocket.subscribe(new Subscribe<Chat>() {
+            @Override
+            public void onDataAdded(Chat data) {
+                Log.e(TAG, data+"");
+                Log.e(TAG, "New Data has been added in route");
+            }
 
-                    @Override
-                    public void onDataUpdated(Chat data) {
-                        Log.e(TAG, data+"");
-                        Log.e(TAG, "New Data has been updated in route");
-                    }
+            @Override
+            public void onDataUpdated(Chat data) {
+                Log.e(TAG, data+"");
+                Log.e(TAG, "New Data has been updated in route");
+            }
 
-                    @Override
-                    public void onDataDeleted(Chat data) {
-                        Log.e(TAG, data+"");
-                        Log.e(TAG, "Data has been deleted in route");
-                    }
-                });
-
+            @Override
+            public void onDataDeleted(Chat data) {
+                Log.e(TAG, data+"");
+                Log.e(TAG, "Data has been deleted in route");
+            }
+        });
     }
 
 

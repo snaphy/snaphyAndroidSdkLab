@@ -91,11 +91,6 @@ public class HotDeal extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -117,18 +112,11 @@ public class HotDeal extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
             
 
-            
-            
             
                 private Map<String, Object> image;
                 /* Adding Getter and Setter methods */
@@ -145,9 +133,6 @@ public class HotDeal extends Model {
 
             
             
-
-            
-
         
     
         
@@ -169,17 +154,11 @@ public class HotDeal extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
             
 
-            
             
                 private double price;
                 /* Adding Getter and Setter methods */
@@ -196,10 +175,6 @@ public class HotDeal extends Model {
 
             
             
-            
-
-            
-
         
     
         
@@ -221,11 +196,6 @@ public class HotDeal extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -247,11 +217,6 @@ public class HotDeal extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -273,11 +238,6 @@ public class HotDeal extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -299,11 +259,6 @@ public class HotDeal extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -311,11 +266,6 @@ public class HotDeal extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -323,11 +273,6 @@ public class HotDeal extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -335,18 +280,13 @@ public class HotDeal extends Model {
 
             
             
-            
-            
-
-            
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository> {
-  public RoleMappingDb(Context context, RestAdapter restAdapter){
-    super(context, "RoleMapping", restAdapter);
+  public RoleMappingDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "RoleMapping", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                    
-    String CREATE_RoleMapping_TABLE = "CREATE TABLE  RoleMapping IF NOT EXISTS (  id TEXT PRIMARY KEY, principalType TEXT, principalId TEXT, roleId TEXT)";
+                                                                                                                
+    
+    String CREATE_RoleMapping_TABLE = "CREATE TABLE IF NOT EXISTS RoleMapping (  id TEXT PRIMARY KEY, principalType TEXT, principalId TEXT, roleId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_RoleMapping_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS RoleMapping");
+            //db.execSQL("DROP TABLE IF EXISTS RoleMapping");
             // Create tables again
             onCreate(db);
     }
@@ -58,10 +61,18 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
     public ContentValues getContentValues(RoleMapping modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String idData = "";
-                        if(modelData.getId() != null){
-                          idData =modelData.getId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getId");
+                              if(method.invoke(modelData) != null){
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("id", idData);
                                 
                                                             String principalTypeData = "";
@@ -70,24 +81,43 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
                         }
                                                 values.put("principalType", principalTypeData);
                                 
-                                                            String principalIdData = "";
-                        if(modelData.getPrincipalId() != null){
-                          principalIdData =modelData.getPrincipalId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String principalIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getPrincipalId");
+                              if(method.invoke(modelData) != null){
+                                //principalIdData = modelData.getPrincipalId().toString();
+                                principalIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("principalId", principalIdData);
                                 
-                                                            String roleIdData = "";
-                        if(modelData.getRoleId() != null){
-                          roleIdData =modelData.getRoleId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String roleIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getRoleId");
+                              if(method.invoke(modelData) != null){
+                                //roleIdData = modelData.getRoleId().toString();
+                                roleIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("roleId", roleIdData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   RoleMapping get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -98,7 +128,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
                     return (RoleMapping)repo.createObject(hashMap);
@@ -190,7 +220,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -218,7 +248,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
@@ -230,14 +260,14 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         db.close();
         // return contact list
         return (DataList<RoleMapping>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<RoleMapping>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<RoleMapping> modelList = new DataList<RoleMapping>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM RoleMapping WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM RoleMapping WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -245,7 +275,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
@@ -267,6 +297,24 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         // updating row
         return db.update("RoleMapping", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("RoleMapping", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("RoleMapping", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

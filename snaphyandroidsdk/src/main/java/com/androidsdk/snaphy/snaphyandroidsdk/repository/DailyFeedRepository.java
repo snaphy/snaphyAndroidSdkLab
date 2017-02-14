@@ -23,7 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-
+import java.lang.reflect.Method;
+import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
 
 
 //Replaced by Custom ModelRepository method
@@ -37,9 +42,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.DailyFeed;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.DailyFeedDb;
 
 //Now import model of related models..
@@ -58,8 +61,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.DailyFeedDb;
 public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
+
     public DailyFeedRepository(){
         super("DailyFeed", null, DailyFeed.class);
+
     }
 
 
@@ -67,7 +75,7 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
 
-    
+
 
 
 
@@ -105,11 +113,19 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
 
-private void addStorage(Context context){
-    setDailyFeedDb(new DailyFeedDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setDailyFeedDb(new DailyFeedDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
+    }
 
 
     public RestContract createContract() {
@@ -349,13 +365,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brand);
@@ -414,13 +448,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //dailyFeedRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          dailyFeed.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = dailyFeed.getClass().getMethod("save__db");
+                                                    method.invoke(dailyFeed);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(dailyFeed);
@@ -480,13 +532,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //dailyFeedRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          dailyFeed.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = dailyFeed.getClass().getMethod("save__db");
+                                                    method.invoke(dailyFeed);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(dailyFeed);
@@ -598,13 +668,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //dailyFeedRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          dailyFeed.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = dailyFeed.getClass().getMethod("save__db");
+                                                    method.invoke(dailyFeed);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(dailyFeed);
@@ -665,15 +753,30 @@ private void addStorage(Context context){
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<DailyFeed> dailyFeedList = new DataList<DailyFeed>();
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
+
                                         DailyFeed dailyFeed = dailyFeedRepo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 dailyFeed.save__db();
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = dailyFeed.getClass().getMethod("save__db");
+                                                      method.invoke(dailyFeed);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         dailyFeedList.add(dailyFeed);
                                     }
@@ -731,13 +834,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //dailyFeedRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          dailyFeed.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = dailyFeed.getClass().getMethod("save__db");
+                                                    method.invoke(dailyFeed);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(dailyFeed);
@@ -953,13 +1074,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //dailyFeedRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          dailyFeed.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = dailyFeed.getClass().getMethod("save__db");
+                                                    method.invoke(dailyFeed);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(dailyFeed);

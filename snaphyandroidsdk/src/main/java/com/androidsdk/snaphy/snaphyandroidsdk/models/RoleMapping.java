@@ -70,11 +70,6 @@ public class RoleMapping extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -96,11 +91,6 @@ public class RoleMapping extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -108,11 +98,6 @@ public class RoleMapping extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -120,18 +105,13 @@ public class RoleMapping extends Model {
 
             
             
-            
-            
-
-            
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

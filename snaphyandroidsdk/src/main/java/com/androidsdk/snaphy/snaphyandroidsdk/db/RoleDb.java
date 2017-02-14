@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class RoleDb extends DbHandler<Role, RoleRepository> {
-  public RoleDb(Context context, RestAdapter restAdapter){
-    super(context, "Role", restAdapter);
+  public RoleDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "Role", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                               
-    String CREATE_Role_TABLE = "CREATE TABLE  Role IF NOT EXISTS (  id TEXT PRIMARY KEY, name TEXT, description TEXT, created TEXT, modified TEXT)";
+                                                                                                                                           
+    
+    String CREATE_Role_TABLE = "CREATE TABLE IF NOT EXISTS Role (  id TEXT PRIMARY KEY, name TEXT, description TEXT, created TEXT, modified TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Role_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Role");
+            //db.execSQL("DROP TABLE IF EXISTS Role");
             // Create tables again
             onCreate(db);
     }
@@ -58,10 +61,18 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
     public ContentValues getContentValues(Role modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String idData = "";
-                        if(modelData.getId() != null){
-                          idData =modelData.getId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getId");
+                              if(method.invoke(modelData) != null){
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("id", idData);
                                 
                                                             String nameData = "";
@@ -70,30 +81,57 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
                         }
                                                 values.put("name", nameData);
                                 
-                                                            String descriptionData = "";
-                        if(modelData.getDescription() != null){
-                          descriptionData =modelData.getDescription().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String descriptionData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getDescription");
+                              if(method.invoke(modelData) != null){
+                                //descriptionData = modelData.getDescription().toString();
+                                descriptionData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("description", descriptionData);
                                 
-                                                            String createdData = "";
-                        if(modelData.getCreated() != null){
-                          createdData =modelData.getCreated().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String createdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getCreated");
+                              if(method.invoke(modelData) != null){
+                                //createdData = modelData.getCreated().toString();
+                                createdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("created", createdData);
                                 
-                                                            String modifiedData = "";
-                        if(modelData.getModified() != null){
-                          modifiedData =modelData.getModified().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String modifiedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getModified");
+                              if(method.invoke(modelData) != null){
+                                //modifiedData = modelData.getModified().toString();
+                                modifiedData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("modified", modifiedData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Role get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -104,7 +142,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
                     return (Role)repo.createObject(hashMap);
@@ -206,7 +244,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -234,7 +272,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
@@ -246,14 +284,14 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         db.close();
         // return contact list
         return (DataList<Role>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<Role>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Role> modelList = new DataList<Role>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Role WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Role WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -261,7 +299,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
@@ -283,6 +321,24 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         // updating row
         return db.update("Role", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("Role", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("Role", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

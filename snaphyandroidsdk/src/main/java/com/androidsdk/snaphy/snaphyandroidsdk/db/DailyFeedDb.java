@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
-  public DailyFeedDb(Context context, RestAdapter restAdapter){
-    super(context, "DailyFeed", restAdapter);
+  public DailyFeedDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "DailyFeed", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                     
-    String CREATE_DailyFeed_TABLE = "CREATE TABLE  DailyFeed IF NOT EXISTS (  added TEXT, updated TEXT, title TEXT, description TEXT, image TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
+                                                                                                                                                                                                 
+    
+    String CREATE_DailyFeed_TABLE = "CREATE TABLE IF NOT EXISTS DailyFeed (  added TEXT, updated TEXT, title TEXT, description TEXT, image TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_DailyFeed_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS DailyFeed");
+            //db.execSQL("DROP TABLE IF EXISTS DailyFeed");
             // Create tables again
             onCreate(db);
     }
@@ -88,24 +91,43 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                         }
                                                 values.put("image", imageData);
                                 
-                                                            String idData = "";
-                        if(modelData.getId() != null){
-                          idData =modelData.getId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getId");
+                              if(method.invoke(modelData) != null){
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("id", idData);
                                 
-                                                            String brandIdData = "";
-                        if(modelData.getBrandId() != null){
-                          brandIdData =modelData.getBrandId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String brandIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getBrandId");
+                              if(method.invoke(modelData) != null){
+                                //brandIdData = modelData.getBrandId().toString();
+                                brandIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("brandId", brandIdData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   DailyFeed get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -116,7 +138,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
                     return (DailyFeed)repo.createObject(hashMap);
@@ -238,7 +260,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -266,7 +288,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
@@ -278,14 +300,14 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         db.close();
         // return contact list
         return (DataList<DailyFeed>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<DailyFeed>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<DailyFeed> modelList = new DataList<DailyFeed>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM DailyFeed WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM DailyFeed WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -293,7 +315,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
@@ -315,6 +337,24 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         // updating row
         return db.update("DailyFeed", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("DailyFeed", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("DailyFeed", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

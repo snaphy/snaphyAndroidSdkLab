@@ -84,11 +84,6 @@ public class DailyFeed extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -110,11 +105,6 @@ public class DailyFeed extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -136,11 +126,6 @@ public class DailyFeed extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -162,18 +147,11 @@ public class DailyFeed extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
             
 
-            
-            
             
                 private Map<String, Object> image;
                 /* Adding Getter and Setter methods */
@@ -190,9 +168,6 @@ public class DailyFeed extends Model {
 
             
             
-
-            
-
         
     
         
@@ -200,11 +175,6 @@ public class DailyFeed extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -212,18 +182,13 @@ public class DailyFeed extends Model {
 
             
             
-            
-            
-
-            
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class BrandDb extends DbHandler<Brand, BrandRepository> {
-  public BrandDb(Context context, RestAdapter restAdapter){
-    super(context, "Brand", restAdapter);
+  public BrandDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "Brand", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                 
-    String CREATE_Brand_TABLE = "CREATE TABLE  Brand IF NOT EXISTS (  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY)";
+                                                                                                                                                                                                                                                                                                             
+    
+    String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand (  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Brand_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Brand");
+            //db.execSQL("DROP TABLE IF EXISTS Brand");
             // Create tables again
             onCreate(db);
     }
@@ -118,18 +121,29 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 values.put("associatedEmail", associatedEmailData);
                                 
-                                                            String idData = "";
-                        if(modelData.getId() != null){
-                          idData =modelData.getId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getId");
+                              if(method.invoke(modelData) != null){
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("id", idData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Brand get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -140,7 +154,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
                     return (Brand)repo.createObject(hashMap);
@@ -302,7 +316,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -330,7 +344,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
@@ -342,14 +356,14 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         db.close();
         // return contact list
         return (DataList<Brand>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<Brand>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Brand> modelList = new DataList<Brand>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Brand WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Brand WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -357,7 +371,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
@@ -379,6 +393,24 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         // updating row
         return db.update("Brand", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("Brand", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("Brand", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

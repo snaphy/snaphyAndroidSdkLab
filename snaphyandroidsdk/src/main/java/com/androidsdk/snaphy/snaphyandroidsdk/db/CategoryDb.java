@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class CategoryDb extends DbHandler<Category, CategoryRepository> {
-  public CategoryDb(Context context, RestAdapter restAdapter){
-    super(context, "Category", restAdapter);
+  public CategoryDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "Category", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                    
-    String CREATE_Category_TABLE = "CREATE TABLE  Category IF NOT EXISTS (  name TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY)";
+                                                                                                                
+    
+    String CREATE_Category_TABLE = "CREATE TABLE IF NOT EXISTS Category (  name TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Category_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Category");
+            //db.execSQL("DROP TABLE IF EXISTS Category");
             // Create tables again
             onCreate(db);
     }
@@ -76,18 +79,29 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                         }
                                                 values.put("updated", updatedData);
                                 
-                                                            String idData = "";
-                        if(modelData.getId() != null){
-                          idData =modelData.getId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getId");
+                              if(method.invoke(modelData) != null){
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("id", idData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Category get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -98,7 +112,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
                     return (Category)repo.createObject(hashMap);
@@ -190,7 +204,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -218,7 +232,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
@@ -230,14 +244,14 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         db.close();
         // return contact list
         return (DataList<Category>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<Category>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Category> modelList = new DataList<Category>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Category WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Category WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -245,7 +259,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
@@ -267,6 +281,24 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         // updating row
         return db.update("Category", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("Category", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("Category", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

@@ -11,8 +11,8 @@ com/google/common/hash/BloomFilter.class
 com/androidsdk/snaphy/snaphyandroidsdk/list/DataList.class
 android/support/v4/view/MenuCompat.class
 android/support/v4/media/session/MediaControllerCompat.class
-com/google/gson/JsonNull.class
 com/strongloop/android/loopback/LocalInstallation.class
+com/google/gson/JsonNull.class
 android/support/annotation/IdRes.class
 android/support/v4/util/DebugUtils.class
 android/support/v4/app/Fragment$SavedState.class
@@ -222,13 +222,11 @@ com/github/nkzawa/engineio/client/Socket$14.class
 android/support/v4/media/MediaMetadataCompat$BitmapKey.class
 com/google/common/collect/Maps.class
 com/google/common/collect/TreeRangeMap.class
-com/androidsdk/snaphy/snaphysdk/MainActivity$4.class
 com/google/common/reflect/TypeToken.class
 android/support/v4/util/MapCollections.class
 android/support/v4/graphics/drawable/DrawableCompat.class
 android/support/multidex/ZipUtil$CentralDirectory.class
 com/google/common/collect/Multisets.class
-com/androidsdk/snaphy/snaphysdk/MainActivity$5.class
 com/strongloop/android/remoting/Repository.class
 android/support/v4/view/ViewCompat$GBViewCompatImpl.class
 android/support/v7/app/ActionBarDrawerToggle.class
@@ -302,8 +300,8 @@ com/strongloop/android/remoting/Transient.class
 com/google/common/collect/ImmutableSortedMapFauxverideShim.class
 android/support/v4/media/RatingCompat$1.class
 android/support/v4/view/ViewCompat$JBViewCompatImpl.class
-com/google/gson/reflect/TypeToken.class
 com/google/common/collect/ImmutableTable.class
+com/google/gson/reflect/TypeToken.class
 com/google/common/collect/GeneralRange.class
 com/google/gson/annotations/SerializedName.class
 android/support/v4/media/MediaMetadataCompatApi21.class

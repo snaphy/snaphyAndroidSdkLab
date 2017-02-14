@@ -58,14 +58,14 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandVerificationRepository;
             
 
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandVerificationRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.FollowBrandRepository;
             
 
         
@@ -119,11 +119,6 @@ public class Brand extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -145,11 +140,6 @@ public class Brand extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -171,18 +161,11 @@ public class Brand extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
             
 
-            
-            
             
                 private Map<String, Object> image;
                 /* Adding Getter and Setter methods */
@@ -199,9 +182,6 @@ public class Brand extends Model {
 
             
             
-
-            
-
         
     
         
@@ -223,11 +203,6 @@ public class Brand extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -249,11 +224,6 @@ public class Brand extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -275,11 +245,6 @@ public class Brand extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -301,11 +266,6 @@ public class Brand extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -327,11 +287,6 @@ public class Brand extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -353,11 +308,6 @@ public class Brand extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -365,18 +315,13 @@ public class Brand extends Model {
 
             
             
-            
-            
-
-            
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -442,13 +387,13 @@ public class Brand extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   BrandRepository brandRepository = (BrandRepository) getRepository();
-                                 
+                                   HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
+
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
                                  // Getting single cont
-                                 hotDeals = brandRepository.getBrandDb().getAll__db("brandId", that.getId().toString());
-                              
+                                 hotDeals = hotDealRepository.getHotDealDb().getAll__db("brandId", that.getId().toString());
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return hotDeals;
@@ -471,7 +416,11 @@ public class Brand extends Model {
                             this.hotDeals = hotDeals;
                             //TODO: Warning move this to new thread
                             for(HotDeal data: hotDeals){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -520,8 +469,13 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(HotDeal hotDeals) {
                         try{
-                            //Save to database..
-                            hotDeals.save__db();
+                            try{
+
+                                  //Save to database..
+                                  hotDeals.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getHotDeals().add(hotDeals);
                         }catch(Exception e){
                             DataList< HotDeal> hotDeals1 = new DataList();
@@ -711,12 +665,6 @@ public class Brand extends Model {
                                         });
                                     } //method def ends here.
                                  
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -1016,16 +964,6 @@ public class Brand extends Model {
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                     
 
                 
@@ -1051,13 +989,13 @@ public class Brand extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   BrandRepository brandRepository = (BrandRepository) getRepository();
-                                 
+                                   ChatRepository chatRepository = (ChatRepository) getRepository();
+
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
                                  // Getting single cont
-                                 chats = brandRepository.getBrandDb().getAll__db("brandId", that.getId().toString());
-                              
+                                 chats = chatRepository.getChatDb().getAll__db("brandId", that.getId().toString());
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return chats;
@@ -1080,7 +1018,11 @@ public class Brand extends Model {
                             this.chats = chats;
                             //TODO: Warning move this to new thread
                             for(Chat data: chats){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -1129,8 +1071,13 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(Chat chats) {
                         try{
-                            //Save to database..
-                            chats.save__db();
+                            try{
+
+                                  //Save to database..
+                                  chats.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getChats().add(chats);
                         }catch(Exception e){
                             DataList< Chat> chats1 = new DataList();
@@ -1326,12 +1273,6 @@ public class Brand extends Model {
                                         });
                                     } //method def ends here.
                                  
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -1625,16 +1566,6 @@ public class Brand extends Model {
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                     
 
                 
@@ -1660,13 +1591,13 @@ public class Brand extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   BrandRepository brandRepository = (BrandRepository) getRepository();
-                                 
+                                   DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
+
                                  //Fetch locally from db
                                  //dailyFeeds = getDailyFeeds__db(restAdapter);
                                  // Getting single cont
-                                 dailyFeeds = brandRepository.getBrandDb().getAll__db("brandId", that.getId().toString());
-                              
+                                 dailyFeeds = dailyFeedRepository.getDailyFeedDb().getAll__db("brandId", that.getId().toString());
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return dailyFeeds;
@@ -1689,7 +1620,11 @@ public class Brand extends Model {
                             this.dailyFeeds = dailyFeeds;
                             //TODO: Warning move this to new thread
                             for(DailyFeed data: dailyFeeds){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -1738,8 +1673,13 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(DailyFeed dailyFeeds) {
                         try{
-                            //Save to database..
-                            dailyFeeds.save__db();
+                            try{
+
+                                  //Save to database..
+                                  dailyFeeds.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getDailyFeeds().add(dailyFeeds);
                         }catch(Exception e){
                             DataList< DailyFeed> dailyFeeds1 = new DataList();
@@ -1770,18 +1710,6 @@ public class Brand extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -1953,8 +1881,6 @@ public class Brand extends Model {
                                         });
                                     } //method def ends here.
                                  
-                            
-                         
                             
                          
                             
@@ -2206,16 +2132,14 @@ public class Brand extends Model {
                             
                          
                             
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -2269,13 +2193,13 @@ public class Brand extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   BrandRepository brandRepository = (BrandRepository) getRepository();
-                                 
+                                   BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
+
                                  //Fetch locally from db
                                  //brandManagers = getBrandManagers__db(restAdapter);
                                  // Getting single cont
-                                 brandManagers = brandRepository.getBrandDb().getAll__db("brandId", that.getId().toString());
-                              
+                                 brandManagers = brandManagerRepository.getBrandManagerDb().getAll__db("brandId", that.getId().toString());
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return brandManagers;
@@ -2298,7 +2222,11 @@ public class Brand extends Model {
                             this.brandManagers = brandManagers;
                             //TODO: Warning move this to new thread
                             for(BrandManager data: brandManagers){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -2347,8 +2275,13 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(BrandManager brandManagers) {
                         try{
-                            //Save to database..
-                            brandManagers.save__db();
+                            try{
+
+                                  //Save to database..
+                                  brandManagers.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getBrandManagers().add(brandManagers);
                         }catch(Exception e){
                             DataList< BrandManager> brandManagers1 = new DataList();
@@ -2379,18 +2312,6 @@ public class Brand extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -2568,8 +2489,6 @@ public class Brand extends Model {
                                         });
                                     } //method def ends here.
                                  
-                            
-                         
                             
                          
                             
@@ -2815,16 +2734,14 @@ public class Brand extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -2868,91 +2785,76 @@ public class Brand extends Model {
         
         
                 
-
-                
-                
-                    //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..warning backward compatibility may leads to cyclic error..
                     //Define belongsTo relation method here..
-                    private transient DataList<AppUser>  appUsers ;
+                    private transient BrandVerification  brandVerifications ;
+                    private String brandVerificationId;
 
-                    public DataList<AppUser> getAppUsers() {
-                        return appUsers;
+                    public String getBrandVerificationId(){
+                         return brandVerificationId;
+                    }
+
+                    public void setBrandVerificationId(Object brandVerificationId){
+                        if(brandVerificationId != null){
+                          this.brandVerificationId = brandVerificationId.toString();
+                        }
+                    }
+
+                    public BrandVerification getBrandVerifications() {
+                        //Adding database method for fetching from relation if not present..
+                        if(brandVerifications == null){
+                          BrandRepository brandRepository = (BrandRepository) getRepository();
+                          RestAdapter restAdapter = brandRepository.getRestAdapter();
+                          if(restAdapter != null){
+                            //Fetch locally from db
+                            brandVerifications = getBrandVerifications__db(restAdapter);
+                          }
+                        }
+                        return brandVerifications;
+                    }
+
+                    public void setBrandVerifications(BrandVerification brandVerifications) {
+                        this.brandVerifications = brandVerifications;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setBrandVerifications(Map<String, Object> brandVerifications) {
+                        //First create a dummy Repo class object for customer.
+                        BrandVerificationRepository brandVerificationsRepository = new BrandVerificationRepository();
+                        BrandVerification brandVerifications1 = brandVerificationsRepository.createObject(brandVerifications);
+                        setBrandVerifications(brandVerifications1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setBrandVerifications(HashMap<String, Object> brandVerifications) {
+                        //First create a dummy Repo class object for customer.
+                        BrandVerificationRepository brandVerificationsRepository = new BrandVerificationRepository();
+                        BrandVerification brandVerifications1 = brandVerificationsRepository.createObject(brandVerifications);
+                        setBrandVerifications(brandVerifications1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(BrandVerification brandVerifications) {
+                        that.setBrandVerifications(brandVerifications);
                     }
 
 
-                    public void setAppUsers(DataList<AppUser> appUsers) {
-                        boolean hashType = false;
-                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: appUsers){
-                            if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
-                            }
-                        }
-
-                        if(hashType){
-                            setAppUsers1(hashMaps);
+                    //Fetch related data from local database if present a brandVerificationId identifier as property for belongsTo
+                    public BrandVerification getBrandVerifications__db(RestAdapter restAdapter){
+                      if(brandVerificationId != null){
+                        BrandVerificationRepository brandVerificationsRepository = restAdapter.createRepository(BrandVerificationRepository.class);
+                        BrandVerification brandVerifications = (BrandVerification) brandVerificationsRepository.getBrandVerificationDb().get__db(brandVerificationId);
+                        if(brandVerifications != null){
+                          return brandVerifications;
                         }else{
-                            this.appUsers = appUsers;
+                          return null;
                         }
+                        }else{
+                          return null;
+                      }
                     }
+                
 
-                    /*
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setAppUsers1(List<Map<String, Object>> appUsers) {
-                        //First create a dummy Repo class object for ..
-                        AppUserRepository appUsersRepository = new AppUserRepository();
-                        List<AppUser> result = new ArrayList<>();
-                        for (Map<String, Object> obj : appUsers) {
-                            //Also add relation to child type for two way communication..
-                            AppUser obj1 = appUsersRepository.createObject(obj);
-                            result.add(obj1);
-                        }
-                        setAppUsers(result);
-                    }
-
-                    */
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setAppUsers1(DataList<HashMap<String, Object>> appUsers) {
-                        //First create a dummy Repo class object for ..
-                        AppUserRepository appUsersRepository = new AppUserRepository();
-                        DataList<AppUser> result = new DataList<>();
-                        for (HashMap<String, Object> obj : appUsers) {
-                            //Also add relation to child type for two way communication..
-                            AppUser obj1 = appUsersRepository.createObject(obj);
-                            result.add(obj1);
-                        }
-                        setAppUsers(result);
-                    }
-
-
-                    //Adding relation method..
-                    public void addRelation(DataList<AppUser> appUsers, AppUser dummyClassInstance) {
-                        that.setAppUsers(appUsers);
-                    }
-
-
-                    //Adding relation method..
-                    //This will add a new data to the list relation object..
-                    public void addRelation(AppUser appUsers) {
-                        try{
-                            that.getAppUsers().add(appUsers);
-                        }catch(Exception e){
-                            DataList< AppUser> appUsers1 = new DataList();
-                            //Now add this item to list..
-                            appUsers1.add(appUsers);
-                            //Now set data....
-                            that.setAppUsers(appUsers1);
-                        }
-                    }
-
+                
                 
 
 
@@ -2976,10 +2878,22 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
-                                    public void findById__appUsers( String fk,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                    public void get__brandVerifications( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<BrandVerification> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2993,13 +2907,13 @@ public class Brand extends Model {
 
 
 
-                                        brandRepo.findById__appUsers( (String)that.getId(), fk,  new ObjectCallback<AppUser> (){
+                                        brandRepo.get__brandVerifications( (String)that.getId(), refresh,  new ObjectCallback<BrandVerification> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(AppUser object) {
+                                                    public void onSuccess(BrandVerification object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -3036,7 +2950,7 @@ public class Brand extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__appUsers( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void create__brandVerifications( BrandVerification data,  RestAdapter restAdapter, final ObjectCallback<BrandVerification> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3050,7 +2964,465 @@ public class Brand extends Model {
 
 
 
-                                        brandRepo.destroyById__appUsers( (String)that.getId(), fk,  new VoidCallback (){
+                                        brandRepo.create__brandVerifications( (String)that.getId(), data.convertMap(),  new ObjectCallback<BrandVerification> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(BrandVerification object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void update__brandVerifications( BrandVerification data,  RestAdapter restAdapter, final ObjectCallback<BrandVerification> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.update__brandVerifications( (String)that.getId(), data.convertMap(),  new ObjectCallback<BrandVerification> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(BrandVerification object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroy__brandVerifications( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+
+
+
+                                        brandRepo.destroy__brandVerifications( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<FollowBrand>  followBrands ;
+
+                    public DataList< FollowBrand > getFollowBrands() {
+                        //Check for pure case of hasMany
+                                                    if(that.getId() != null){
+                                   //TODO: Modify foreign key name..
+                                   FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
+
+                                 //Fetch locally from db
+                                 //followBrands = getFollowBrands__db(restAdapter);
+                                 // Getting single cont
+                                 followBrands = followBrandRepository.getFollowBrandDb().getAll__db("brandId", that.getId().toString());
+
+                                   //lowercaseFirstLetter(modelName)
+                            }
+                                                return followBrands;
+                    }
+
+                    public void setFollowBrands(DataList<FollowBrand> followBrands) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: followBrands){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setFollowBrands1(hashMaps);
+                        }else{
+                            this.followBrands = followBrands;
+                            //TODO: Warning move this to new thread
+                            for(FollowBrand data: followBrands){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setFollowBrands1(List<Map<String, Object>> followBrands) {
+                        //First create a dummy Repo class object for ..
+                        FollowBrandRepository followBrandsRepository = new FollowBrandRepository();
+                        List<FollowBrand> result = new ArrayList<>();
+                        for (Map<String, Object> obj : followBrands) {
+                            //Also add relation to child type for two way communication..
+                            FollowBrand obj1 = followBrandsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setFollowBrands(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setFollowBrands1(DataList<HashMap<String, Object>> followBrands) {
+                        //First create a dummy Repo class object for ..
+                        FollowBrandRepository followBrandsRepository = new FollowBrandRepository();
+                        DataList<FollowBrand> result = new DataList<>();
+                        for (HashMap<String, Object> obj : followBrands) {
+                            //Also add relation to child type for two way communication..
+                            FollowBrand obj1 = followBrandsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setFollowBrands(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<FollowBrand> followBrands, FollowBrand dummyClassInstance) {
+                        that.setFollowBrands(followBrands);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(FollowBrand followBrands) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  followBrands.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getFollowBrands().add(followBrands);
+                        }catch(Exception e){
+                            DataList< FollowBrand> followBrands1 = new DataList();
+                            //Now add this item to list..
+                            followBrands1.add(followBrands);
+                            //Now set data....
+                            that.setFollowBrands(followBrands1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__followBrands( String fk,  RestAdapter restAdapter, final ObjectCallback<FollowBrand> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.findById__followBrands( (String)that.getId(), fk,  new ObjectCallback<FollowBrand> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(FollowBrand object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__followBrands( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.destroyById__followBrands( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -3080,7 +3452,7 @@ public class Brand extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__appUsers( String fk,  AppUser data,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                    public void updateById__followBrands( String fk,  FollowBrand data,  RestAdapter restAdapter, final ObjectCallback<FollowBrand> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3097,13 +3469,13 @@ public class Brand extends Model {
 
 
 
-                                        brandRepo.updateById__appUsers( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<AppUser> (){
+                                        brandRepo.updateById__followBrands( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<FollowBrand> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(AppUser object) {
+                                                    public void onSuccess(FollowBrand object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -3137,10 +3509,42 @@ public class Brand extends Model {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
-                                    public void link__appUsers( String fk,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                    public void get__followBrands( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<FollowBrand> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3151,211 +3555,25 @@ public class Brand extends Model {
                                         
                                         
                                         
-                                        
-                                        
-                                        
 
 
 
-                                        brandRepo.link__appUsers( (String)that.getId(), fk,  new ObjectCallback<AppUser> (){
+                                        brandRepo.get__followBrands( (String)that.getId(), filter,  new DataListCallback<FollowBrand> (){
                                             
+
+                                            
+
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(AppUser object) {
+                                                    public void onSuccess(DataList<FollowBrand> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void unlink__appUsers( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        brandRepo.unlink__appUsers( (String)that.getId(), fk,  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                    //Calling the finally..callback
-                                                    callback.onFinally();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void exists__appUsers( String fk,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        brandRepo.exists__appUsers( (String)that.getId(), fk,  new ObjectCallback<JSONObject>(){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__appUsers( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<AppUser> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        brandRepo.get__appUsers( (String)that.getId(), filter,  new DataListCallback<AppUser> (){
-                                            
-
-                                            
-
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(DataList<AppUser> object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            AppUser obj = new AppUser();
+                                                            FollowBrand obj = new FollowBrand();
                                                             addRelation(object, obj);
                                                             //Disabling two way communication for cyclic error..
-                                                            /*for (AppUser obj : object) {
+                                                            /*for (FollowBrand obj : object) {
                                                                 //Also add relation to child type for two way communication..
                                                                 obj.addRelation(that);
                                                             }*/
@@ -3388,7 +3606,7 @@ public class Brand extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__appUsers( AppUser data,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                    public void create__followBrands( FollowBrand data,  RestAdapter restAdapter, final ObjectCallback<FollowBrand> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3402,13 +3620,13 @@ public class Brand extends Model {
 
 
 
-                                        brandRepo.create__appUsers( (String)that.getId(), data.convertMap(),  new ObjectCallback<AppUser> (){
+                                        brandRepo.create__followBrands( (String)that.getId(), data.convertMap(),  new ObjectCallback<FollowBrand> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(AppUser object) {
+                                                    public void onSuccess(FollowBrand object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -3445,7 +3663,7 @@ public class Brand extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__appUsers( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__followBrands( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3456,7 +3674,7 @@ public class Brand extends Model {
 
 
 
-                                        brandRepo.delete__appUsers( (String)that.getId(),  new VoidCallback (){
+                                        brandRepo.delete__followBrands( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -3486,7 +3704,7 @@ public class Brand extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__appUsers( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__followBrands( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3500,7 +3718,7 @@ public class Brand extends Model {
 
 
 
-                                        brandRepo.count__appUsers( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                        brandRepo.count__followBrands( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -3529,32 +3747,6 @@ public class Brand extends Model {
                                     } //method def ends here.
                                  
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                         
@@ -3587,15 +3779,12 @@ public class Brand extends Model {
 
                 
 
-                 
                 
-                    //Define hasAndBelongsToMany..
+                    //Define hasMany, hasManyThrough method here..
 
                  
+                 
              
-          
-    
-         
           
       
 

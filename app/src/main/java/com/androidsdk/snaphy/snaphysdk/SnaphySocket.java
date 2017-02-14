@@ -3,8 +3,8 @@ package com.androidsdk.snaphy.snaphysdk;
 import android.util.Log;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ModelRepository;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Manager;
 import com.github.nkzawa.socketio.client.Socket;
@@ -20,8 +20,8 @@ import java.util.Map;
  * Created by snaphy on 30/1/17.
  */
 
-public class SnaphySocket {
-    private ChatRepository chatRepository;
+public class SnaphySocket<M extends Model, R extends ModelRepository<M>> {
+    private R dataRepository;
     private HashMap<String, String> where;
     private Socket socket;
     private String room = "";
@@ -37,9 +37,11 @@ public class SnaphySocket {
         }
     }
 
-    public SnaphySocket(MainActivity mainActivity, ChatRepository chatRepository, HashMap<String, String> where){
+
+    public SnaphySocket(MainActivity mainActivity, R dataRepository, HashMap<String, String> where){
         this.mainActivity = mainActivity;
-        this.chatRepository = chatRepository;
+        this.dataRepository = dataRepository;
+
         this.where = where;
         //Get the room and namespace.
         getDetails();
@@ -54,11 +56,12 @@ public class SnaphySocket {
 
 
     private void getDetails(){
-        namespace = "/Chat";
+        namespace = "/" + dataRepository.getClassName();
+        Log.i("SnaphySocket", namespace);
         room = "/";
         // Iterating over keys only
         for (String key : where.keySet()) {
-            System.out.println("Key = " + key);
+            //System.out.println("Key = " + key);
             namespace =  namespace + "/" + key;
             room = room + where.get(key) + "/";
         }
@@ -66,14 +69,12 @@ public class SnaphySocket {
 
 
     //Implementing the interface for events..
-    public interface Listeners<T> {
+    public interface Listeners<M> {
         //On Initialization of the Constructors..
-        public void onDataAdded(T data);
+        public void onDataAdded(M data);
         // When any Change appears in the list..
-        public void onDataUpdated(T data);
-        public void onDataDeleted(T data);
-
-
+        public void onDataUpdated(M data);
+        public void onDataDeleted(M data);
     }
 
 
@@ -83,7 +84,7 @@ public class SnaphySocket {
      * @param onDataReceived
      * @return {SnaphyRealTime} Return self to maintain chaining.
      */
-    public SnaphySocket onDataAdded(final OnData<Chat> onDataReceived){
+    public SnaphySocket onDataAdded(final OnData<M> onDataReceived){
         Emitter.Listener onDataAdded = new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
@@ -91,10 +92,15 @@ public class SnaphySocket {
                     @Override
                     public void run() {
                         JSONObject data = (JSONObject) args[0];
-                        Map<String, Object> ChatData = Util.fromJson(data);
-                        Chat chat = chatRepository.createObject(ChatData);
-                        Log.i(TAG, "NEW DATA ADDED" + data.toString());
-                        onDataReceived.onData(chat);
+                        Map<String, Object> Data = Util.fromJson(data);
+                        try{
+                            M newData = dataRepository.createObject(Data);
+                            Log.i(TAG, "NEW DATA ADDED" + data.toString());
+                            onDataReceived.onData(newData);
+                        }catch (Exception e){
+                            Log.e("SnaphySocket", e.toString());
+                        }
+
                     }
                 });
             }
@@ -119,7 +125,7 @@ public class SnaphySocket {
      * @param onDataReceived
      * @return {SnaphyRealTime} Return self to maintain chaining.
      */
-    public SnaphySocket onDataUpdated(final OnData<Chat> onDataReceived){
+    public SnaphySocket onDataUpdated(final OnData<M> onDataReceived){
         Emitter.Listener onDataUpdated = new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
@@ -127,15 +133,20 @@ public class SnaphySocket {
                     @Override
                     public void run() {
                         JSONObject data = (JSONObject) args[0];
-                        Map<String, Object> ChatData = Util.fromJson(data);
-                        Chat chat = chatRepository.createObject(ChatData);
-                        Log.i(TAG, "DATA UPDATED" + data.toString());
-                        onDataReceived.onData(chat);
+                        Map<String, Object> Data = Util.fromJson(data);
+                        try{
+                            M updatedData = dataRepository.createObject(Data);
+                            Log.i(TAG, "DATA UPDATED" + data.toString());
+                            onDataReceived.onData(updatedData);
+                        }
+                        catch (Exception e){
+                            Log.e("SnaphySocket", e.toString());
+                        }
+
                     }
                 });
             }
         };
-
 
         //On Data added
         socket.on("PUT", onDataUpdated);
@@ -149,7 +160,7 @@ public class SnaphySocket {
      * @param onDataReceived
      * @return {SnaphyRealTime} Return self to maintain chaining.
      */
-    public SnaphySocket onDataDeleted(final OnData<Chat> onDataReceived){
+    public SnaphySocket onDataDeleted(final OnData<M> onDataReceived){
         Emitter.Listener onDataDeleted = new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
@@ -157,10 +168,15 @@ public class SnaphySocket {
                     @Override
                     public void run() {
                         JSONObject data = (JSONObject) args[0];
-                        Map<String, Object> ChatData = Util.fromJson(data);
-                        Chat chat = chatRepository.createObject(ChatData);
-                        Log.i(TAG, "DATA Deleted" + data.toString());
-                        onDataReceived.onData(chat);
+                        Map<String, Object> Data = Util.fromJson(data);
+                        try{
+                            M deletedData = (M)dataRepository.createObject(Data);
+                            Log.i(TAG, "DATA Deleted" + data.toString());
+                            onDataReceived.onData(deletedData);
+                        }
+                        catch(Exception e){
+                            Log.e("SnaphySocket", e.toString());
+                        }
                     }
                 });
             }
@@ -171,11 +187,12 @@ public class SnaphySocket {
         return this;
     }
 
+
     /**
      * Listen for real time data change for onNewData added, deleted and updated..
      * @param onDataReceived
      */
-    public void subscribe(final Subscribe<Chat> onDataReceived) {
+    public void subscribe(final Subscribe<M> onDataReceived) {
         Emitter.Listener onDataAdded = new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
@@ -183,10 +200,16 @@ public class SnaphySocket {
                     @Override
                     public void run() {
                         JSONObject data = (JSONObject) args[0];
-                        Map<String, Object> ChatData = Util.fromJson(data);
-                        Chat chat = chatRepository.createObject(ChatData);
-                        Log.i(TAG, "NEW DATA ADDED" + data.toString());
-                        onDataReceived.onDataAdded(chat);
+                        Map<String, Object> Data = Util.fromJson(data);
+                        try{
+                            M newData = (M)dataRepository.createObject(Data);
+                            Log.i(TAG, "NEW DATA ADDED" + data.toString());
+                            onDataReceived.onDataAdded(newData);
+                        }
+                        catch(Exception e){
+                            Log.e("SnaphySocket", e.toString());
+                        }
+
                     }
                 });
             }
@@ -203,10 +226,16 @@ public class SnaphySocket {
                     @Override
                     public void run() {
                         JSONObject data = (JSONObject) args[0];
-                        Map<String, Object> ChatData = Util.fromJson(data);
-                        Chat chat = chatRepository.createObject(ChatData);
-                        Log.i(TAG, "DATA UPDATED" + data.toString());
-                        onDataReceived.onDataUpdated(chat);
+                        Map<String, Object> Data = Util.fromJson(data);
+                        try{
+                            M updatedData = (M)dataRepository.createObject(Data);
+                            Log.i(TAG, "DATA UPDATED" + data.toString());
+                            onDataReceived.onDataUpdated(updatedData);
+                        }
+                        catch(Exception e){
+                            Log.e("SnaphySocket", e.toString());
+                        }
+
                     }
                 });
             }
@@ -223,10 +252,15 @@ public class SnaphySocket {
                     @Override
                     public void run() {
                         JSONObject data = (JSONObject) args[0];
-                        Map<String, Object> ChatData = Util.fromJson(data);
-                        Chat chat = chatRepository.createObject(ChatData);
-                        Log.i(TAG, "DATA DELETED" + data.toString());
-                        onDataReceived.onDataDeleted(chat);
+                        Map<String, Object> deletedDataObj = Util.fromJson(data);
+                        try{
+                            M deletedData = (M)dataRepository.createObject(deletedDataObj);
+                            Log.i(TAG, "DATA DELETED" + data.toString());
+                            onDataReceived.onDataDeleted(deletedData);
+                        }
+                        catch (Exception e){
+                            Log.e("SnaphySocket", e.toString());
+                        }
                     }
                 });
             }

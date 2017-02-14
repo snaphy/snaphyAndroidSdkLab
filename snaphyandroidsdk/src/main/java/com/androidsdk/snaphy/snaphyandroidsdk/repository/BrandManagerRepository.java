@@ -23,7 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-
+import java.lang.reflect.Method;
+import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
 
 
 //Replaced by Custom  Repo methods
@@ -31,7 +36,6 @@ import java.util.HashMap;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
 import android.content.SharedPreferences;
-import android.util.Log;
 import org.json.JSONException;
 import android.content.Context;
 
@@ -43,9 +47,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.BrandManager;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.BrandManagerDb;
 
 //Now import model of related models..
@@ -67,8 +69,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.BrandManagerDb;
 public class BrandManagerRepository extends UserRepository<BrandManager> {
 
 
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
+
     public BrandManagerRepository(){
         super("BrandManager", null, BrandManager.class);
+
     }
 
 
@@ -77,6 +84,7 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
     		public BrandManager cachedCurrentUser;
             private Object currentUserId;
             private boolean isCurrentUserIdLoaded;
+
     		public BrandManager getCachedCurrentUser(){
     			return cachedCurrentUser;
     		}
@@ -99,7 +107,6 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                 }
 
                 HashMap<String, Object> hashMap = new HashMap<>();
-
                 this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<BrandManager>() {
                     @Override
                     public void onSuccess(BrandManager user){
@@ -116,7 +123,6 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                         callback.onFinally();
                     }
                 });
-
             }
 
             public Object getCurrentUserId(){
@@ -173,7 +179,7 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
 
 
 
-    
+
 
 
 
@@ -211,11 +217,19 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
 
 
 
-private void addStorage(Context context){
-    setBrandManagerDb(new BrandManagerDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setBrandManagerDb(new BrandManagerDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
+    }
 
 
     public RestContract createContract() {
@@ -569,13 +583,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          accessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = accessToken.getClass().getMethod("save__db");
+                                                    method.invoke(accessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(accessToken);
@@ -686,13 +718,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          accessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = accessToken.getClass().getMethod("save__db");
+                                                    method.invoke(accessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(accessToken);
@@ -753,13 +803,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brand);
@@ -822,15 +890,30 @@ private void addStorage(Context context){
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
+
                                         AccessToken accessToken = accessTokenRepo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 accessToken.save__db();
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = accessToken.getClass().getMethod("save__db");
+                                                      method.invoke(accessToken);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         accessTokenList.add(accessToken);
                                     }
@@ -890,13 +973,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          accessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = accessToken.getClass().getMethod("save__db");
+                                                    method.invoke(accessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(accessToken);
@@ -1054,13 +1155,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandManagerRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandManager.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandManager);
@@ -1120,13 +1239,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandManagerRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandManager.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandManager);
@@ -1238,13 +1375,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandManagerRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandManager.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandManager);
@@ -1305,15 +1460,30 @@ private void addStorage(Context context){
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<BrandManager> brandManagerList = new DataList<BrandManager>();
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
+
                                         BrandManager brandManager = brandManagerRepo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 brandManager.save__db();
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = brandManager.getClass().getMethod("save__db");
+                                                      method.invoke(brandManager);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         brandManagerList.add(brandManager);
                                     }
@@ -1371,13 +1541,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandManagerRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandManager.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandManager);
@@ -1593,13 +1781,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandManagerRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandManager.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandManager);

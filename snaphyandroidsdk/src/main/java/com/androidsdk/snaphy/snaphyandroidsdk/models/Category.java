@@ -84,11 +84,6 @@ public class Category extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -110,11 +105,6 @@ public class Category extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -136,11 +126,6 @@ public class Category extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -148,18 +133,13 @@ public class Category extends Model {
 
             
             
-            
-            
-
-            
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -225,13 +205,13 @@ public class Category extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   CategoryRepository categoryRepository = (CategoryRepository) getRepository();
-                                 
+                                   HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
+
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
                                  // Getting single cont
-                                 hotDeals = categoryRepository.getCategoryDb().getAll__db("categoryId", that.getId().toString());
-                              
+                                 hotDeals = hotDealRepository.getHotDealDb().getAll__db("categoryId", that.getId().toString());
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return hotDeals;
@@ -254,7 +234,11 @@ public class Category extends Model {
                             this.hotDeals = hotDeals;
                             //TODO: Warning move this to new thread
                             for(HotDeal data: hotDeals){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -303,8 +287,13 @@ public class Category extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(HotDeal hotDeals) {
                         try{
-                            //Save to database..
-                            hotDeals.save__db();
+                            try{
+
+                                  //Save to database..
+                                  hotDeals.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getHotDeals().add(hotDeals);
                         }catch(Exception e){
                             DataList< HotDeal> hotDeals1 = new DataList();

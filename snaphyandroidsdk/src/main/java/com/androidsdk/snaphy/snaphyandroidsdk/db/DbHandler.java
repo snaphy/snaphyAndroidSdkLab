@@ -1,9 +1,12 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+import java.util.ArrayList;
+import java.util.List;
 import android.content.ContentValues;
+import android.content.pm.PackageManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -33,7 +36,7 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
     private String KEY_ID = "ID";
     private String KEY_OBJECT = "OBJECT";
 
-    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+
 
     // Database Name
     private static String DATABASE_NAME;
@@ -44,17 +47,12 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
 
 
 
-    public DbHandler(Context context, String tableName, RestAdapter restAdapter) {
+    public DbHandler(Context context, String tableName, String DATABASE_NAME, RestAdapter restAdapter) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.restAdapter = restAdapter;
+        this.DATABASE_NAME = DATABASE_NAME;
         TABLE = tableName;
-        try{
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
-        }
-        catch (Exception e){
-            Log.e(TAG, e.toString());
-        }
+
     }
 
 
@@ -74,14 +72,14 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+            //db.execSQL("DROP TABLE IF EXISTS " + TABLE);
             // Create tables again
             onCreate(db);
 
     }
 
 
-   
+
 
     public String toJsonString(HashMap<String, Object> data ){
         if(data != null){
@@ -107,9 +105,10 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
         String countQuery = "SELECT  * FROM " + TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
         cursor.close();
         // return count
-        return cursor.getCount();
+        return count;
     }
 
 
@@ -119,12 +118,13 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
      * @return
      */
     public int count__db(String id){
-        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID=" + id;
+        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
         cursor.close();
         // return count
-        return cursor.getCount();
+        return count;
     }
 
 

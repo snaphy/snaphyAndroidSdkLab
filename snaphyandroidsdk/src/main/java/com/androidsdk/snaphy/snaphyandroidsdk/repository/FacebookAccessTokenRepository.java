@@ -23,7 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-
+import java.lang.reflect.Method;
+import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
 
 
 //Replaced by Custom ModelRepository method
@@ -37,9 +42,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.FacebookAccessTokenDb;
 
 //Now import model of related models..
@@ -58,8 +61,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.FacebookAccessTokenDb;
 public class FacebookAccessTokenRepository extends ModelRepository<FacebookAccessToken> {
 
 
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
+
     public FacebookAccessTokenRepository(){
         super("FacebookAccessToken", null, FacebookAccessToken.class);
+
     }
 
 
@@ -67,7 +75,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
 
 
-    
+
 
 
 
@@ -105,11 +113,19 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
 
 
-private void addStorage(Context context){
-    setFacebookAccessTokenDb(new FacebookAccessTokenDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setFacebookAccessTokenDb(new FacebookAccessTokenDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
+    }
 
 
     public RestContract createContract() {
@@ -349,13 +365,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(appUserRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //appUserRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -414,13 +448,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(facebookAccessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //facebookAccessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -480,13 +532,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(facebookAccessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //facebookAccessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -598,13 +668,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(facebookAccessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //facebookAccessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -665,15 +753,30 @@ private void addStorage(Context context){
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<FacebookAccessToken> facebookAccessTokenList = new DataList<FacebookAccessToken>();
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(facebookAccessTokenRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
+
                                         FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 facebookAccessToken.save__db();
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = facebookAccessToken.getClass().getMethod("save__db");
+                                                      method.invoke(facebookAccessToken);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         facebookAccessTokenList.add(facebookAccessToken);
                                     }
@@ -731,13 +834,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(facebookAccessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //facebookAccessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -953,13 +1074,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(facebookAccessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //facebookAccessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);

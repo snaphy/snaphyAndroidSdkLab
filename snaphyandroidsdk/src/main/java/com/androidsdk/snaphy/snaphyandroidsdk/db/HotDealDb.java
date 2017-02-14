@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
-  public HotDealDb(Context context, RestAdapter restAdapter){
-    super(context, "HotDeal", restAdapter);
+  public HotDealDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "HotDeal", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                            
-    String CREATE_HotDeal_TABLE = "CREATE TABLE  HotDeal IF NOT EXISTS (  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT)";
+                                                                                                                                                                                                                                                                                                                                        
+    
+    String CREATE_HotDeal_TABLE = "CREATE TABLE IF NOT EXISTS HotDeal (  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_HotDeal_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS HotDeal");
+            //db.execSQL("DROP TABLE IF EXISTS HotDeal");
             // Create tables again
             onCreate(db);
     }
@@ -82,10 +85,8 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 values.put("url", urlData);
                                 
-                                                            double priceData = 0;
-                        if(modelData.getPrice() != null){
-                          priceData = (double)modelData.getPrice();
-                        }
+                                                            double priceData;
+                        priceData = (double)modelData.getPrice();
                                                 values.put("price", priceData);
                                 
                                                             String statusData = "";
@@ -112,30 +113,57 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 values.put("updated", updatedData);
                                 
-                                                            String idData = "";
-                        if(modelData.getId() != null){
-                          idData =modelData.getId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getId");
+                              if(method.invoke(modelData) != null){
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("id", idData);
                                 
-                                                            String categoryIdData = "";
-                        if(modelData.getCategoryId() != null){
-                          categoryIdData =modelData.getCategoryId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String categoryIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getCategoryId");
+                              if(method.invoke(modelData) != null){
+                                //categoryIdData = modelData.getCategoryId().toString();
+                                categoryIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("categoryId", categoryIdData);
                                 
-                                                            String brandIdData = "";
-                        if(modelData.getBrandId() != null){
-                          brandIdData =modelData.getBrandId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String brandIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getBrandId");
+                              if(method.invoke(modelData) != null){
+                                //brandIdData = modelData.getBrandId().toString();
+                                brandIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("brandId", brandIdData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   HotDeal get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -146,7 +174,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
                     return (HotDeal)repo.createObject(hashMap);
@@ -239,12 +267,12 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            double priceData = double(0);  
+                                                            double priceData = (double)0;
                           priceData = cursor.getInt(4);
                           priceData = (double)priceData;
                           hashMap.put("price", priceData);
-                      
-                      
+
+
                                                 
                                 
                                                             String statusData = "";
@@ -316,7 +344,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -344,7 +372,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
@@ -356,14 +384,14 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         db.close();
         // return contact list
         return (DataList<HotDeal>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<HotDeal>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<HotDeal> modelList = new DataList<HotDeal>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM HotDeal WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM HotDeal WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -371,7 +399,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
@@ -393,6 +421,24 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         // updating row
         return db.update("HotDeal", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("HotDeal", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("HotDeal", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

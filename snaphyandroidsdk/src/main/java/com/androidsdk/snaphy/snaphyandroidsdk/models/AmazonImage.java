@@ -77,11 +77,6 @@ public class AmazonImage extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -103,11 +98,6 @@ public class AmazonImage extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -129,18 +119,11 @@ public class AmazonImage extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
             
 
-            
-            
             
                 private Map<String, Object> url;
                 /* Adding Getter and Setter methods */
@@ -157,9 +140,6 @@ public class AmazonImage extends Model {
 
             
             
-
-            
-
         
     
         
@@ -167,18 +147,13 @@ public class AmazonImage extends Model {
 
             
             
-            
-            
-
-            
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

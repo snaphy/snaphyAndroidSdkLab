@@ -1,7 +1,7 @@
--injars /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/transforms/jarMerging/debug/jars/1/1f/combined.jar
--outjars /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/multi-dex/debug/componentClasses.jar
+-injars /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/transforms/jarMerging/debug/jars/1/1f/combined.jar
+-outjars /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/multi-dex/debug/componentClasses.jar
 
--libraryjars /home/snaphy/Android/Sdk/build-tools/23.0.0/lib/shrinkedAndroid.jar
+-libraryjars /home/robins/Android/Sdk/build-tools/23.0.0/lib/shrinkedAndroid.jar
 
 -forceprocessing
 -dontoptimize
@@ -10,7 +10,7 @@
 -dontpreverify
 -dontnote **
 -dontwarn **
--printconfiguration /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/multi-dex/debug/components.flags
+-printconfiguration /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/multi-dex/debug/components.flags
 
 
 -keep class com.androidsdk.snaphy.snaphysdk.MainActivity {

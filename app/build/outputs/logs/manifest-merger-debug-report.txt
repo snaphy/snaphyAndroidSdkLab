@@ -1,110 +1,110 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:2:1-32:12
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:2:1-32:12
 	package
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:3:5-46
-		INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
-		INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:3:5-46
+		INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
+		INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
-		INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
+		INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
+		INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:2:11-69
 	android:versionCode
-		INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
-		INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
+		INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
+		INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.INTERNET
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:4:5-67
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:4:5-67
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:4:22-64
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:4:22-64
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:5:5-81
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:5:5-81
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:5:22-78
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:5:22-78
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:6:5-76
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:6:5-76
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:6:22-73
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:6:22-73
 uses-permission#android.permission.CHANGE_WIFI_STATE
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:7:5-76
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:7:5-76
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:7:22-73
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:7:22-73
 uses-permission#android.permission.CHANGE_NETWORK_STATE
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:8:5-79
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:8:5-79
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:8:22-76
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:8:22-76
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:9:5-79
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:9:5-79
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:9:22-76
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:9:22-76
 application
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:11:5-30:19
-MERGED from [SnaphySdk:snaphyandroidsdk:unspecified] /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/SnaphySdk/snaphyandroidsdk/unspecified/AndroidManifest.xml:11:5-14:19
-MERGED from [com.android.support:appcompat-v7:23.1.1] /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.1] /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:11:5-30:19
+MERGED from [SnaphySdk:snaphyandroidsdk:unspecified] /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/SnaphySdk/snaphyandroidsdk/unspecified/AndroidManifest.xml:11:5-14:19
+MERGED from [com.android.support:appcompat-v7:23.1.1] /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.1] /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
 	android:label
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:14:9-41
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:14:9-41
 	android:allowBackup
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:12:9-35
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:12:9-35
 	android:icon
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:13:9-43
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:13:9-43
 	android:theme
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:15:9-40
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:15:9-40
 meta-data#DATABASE
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:16:9-72
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:16:9-72
 	android:value
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:16:44-69
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:16:44-69
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:16:20-43
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:16:20-43
 meta-data#VERSION
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:17:9-63
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:17:9-63
 	android:value
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:17:43-60
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:17:43-60
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:17:20-42
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:17:20-42
 meta-data#QUERY_LOG
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:18:9-68
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:18:9-68
 	android:value
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:18:45-65
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:18:45-65
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:18:20-44
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:18:20-44
 meta-data#DOMAIN_PACKAGE_NAME
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:19:9-85
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:19:9-85
 	android:value
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:19:55-82
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:19:55-82
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:19:20-54
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:19:20-54
 meta-data#snaphy.database.name
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:20:9-94
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:20:9-94
 	android:value
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:20:20-45
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:20:20-45
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:20:46-81
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:20:46-81
 activity#com.androidsdk.snaphy.snaphysdk.MainActivity
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:21:9-29:20
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:21:9-29:20
 	android:label
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:23:13-45
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:23:13-45
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:22:13-41
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:22:13-41
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:24:13-28:29
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:24:13-28:29
 action#android.intent.action.MAIN
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:25:17-69
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:25:17-69
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:25:25-66
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:25:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:27:17-77
+ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:27:17-77
 	android:name
-		ADDED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:27:27-74
+		ADDED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml:27:27-74
 uses-sdk
-INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support:multidex:1.0.1] /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/AndroidManifest.xml:18:5-42
-MERGED from [SnaphySdk:snaphyandroidsdk:unspecified] /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/SnaphySdk/snaphyandroidsdk/unspecified/AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:23.1.1] /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.1] /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
+INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:multidex:1.0.1] /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/AndroidManifest.xml:18:5-42
+MERGED from [SnaphySdk:snaphyandroidsdk:unspecified] /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/SnaphySdk/snaphyandroidsdk/unspecified/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:23.1.1] /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.1] /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
-		INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
-		INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
+		INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
+		INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
-		INJECTED from /home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
+		INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml
+		INJECTED from /media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/src/main/AndroidManifest.xml

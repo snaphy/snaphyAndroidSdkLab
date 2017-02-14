@@ -23,7 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-
+import java.lang.reflect.Method;
+import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
 
 
 //Replaced by Custom ModelRepository method
@@ -37,9 +42,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.HotDealDb;
 
 //Now import model of related models..
@@ -65,8 +68,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.HotDealDb;
 public class HotDealRepository extends ModelRepository<HotDeal> {
 
 
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
+
     public HotDealRepository(){
         super("HotDeal", null, HotDeal.class);
+
     }
 
 
@@ -74,7 +82,7 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
 
 
 
-    
+
 
 
 
@@ -112,11 +120,19 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
 
 
 
-private void addStorage(Context context){
-    setHotDealDb(new HotDealDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setHotDealDb(new HotDealDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
+    }
 
 
     public RestContract createContract() {
@@ -389,13 +405,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(categoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //categoryRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     Category category = categoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          category.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = category.getClass().getMethod("save__db");
+                                                    method.invoke(category);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(category);
@@ -456,13 +490,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brand);
@@ -521,13 +573,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //hotDealRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          hotDeal.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(hotDeal);
@@ -587,13 +657,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //hotDealRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          hotDeal.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(hotDeal);
@@ -705,13 +793,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //hotDealRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          hotDeal.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(hotDeal);
@@ -772,15 +878,30 @@ private void addStorage(Context context){
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<HotDeal> hotDealList = new DataList<HotDeal>();
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
+
                                         HotDeal hotDeal = hotDealRepo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 hotDeal.save__db();
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = hotDeal.getClass().getMethod("save__db");
+                                                      method.invoke(hotDeal);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         hotDealList.add(hotDeal);
                                     }
@@ -838,13 +959,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //hotDealRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          hotDeal.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(hotDeal);
@@ -1060,13 +1199,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //hotDealRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          hotDeal.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(hotDeal);

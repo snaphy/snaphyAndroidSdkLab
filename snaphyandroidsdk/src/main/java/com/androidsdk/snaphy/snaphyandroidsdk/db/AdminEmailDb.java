@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
-  public AdminEmailDb(Context context, RestAdapter restAdapter){
-    super(context, "AdminEmail", restAdapter);
+  public AdminEmailDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "AdminEmail", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                          
-    String CREATE_AdminEmail_TABLE = "CREATE TABLE  AdminEmail IF NOT EXISTS (  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY)";
+                                                                                                                                                                      
+    
+    String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail (  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_AdminEmail_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS AdminEmail");
+            //db.execSQL("DROP TABLE IF EXISTS AdminEmail");
             // Create tables again
             onCreate(db);
     }
@@ -58,48 +61,99 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
     public ContentValues getContentValues(AdminEmail modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String toData = "";
-                        if(modelData.getTo() != null){
-                          toData =modelData.getTo().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String toData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getTo");
+                              if(method.invoke(modelData) != null){
+                                //toData = modelData.getTo().toString();
+                                toData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("to", toData);
                                 
-                                                            String fromData = "";
-                        if(modelData.getFrom() != null){
-                          fromData =modelData.getFrom().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String fromData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getFrom");
+                              if(method.invoke(modelData) != null){
+                                //fromData = modelData.getFrom().toString();
+                                fromData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("from", fromData);
                                 
-                                                            String subjectData = "";
-                        if(modelData.getSubject() != null){
-                          subjectData =modelData.getSubject().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String subjectData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getSubject");
+                              if(method.invoke(modelData) != null){
+                                //subjectData = modelData.getSubject().toString();
+                                subjectData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("subject", subjectData);
                                 
-                                                            String textData = "";
-                        if(modelData.getText() != null){
-                          textData =modelData.getText().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String textData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getText");
+                              if(method.invoke(modelData) != null){
+                                //textData = modelData.getText().toString();
+                                textData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("text", textData);
                                 
-                                                            String htmlData = "";
-                        if(modelData.getHtml() != null){
-                          htmlData =modelData.getHtml().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String htmlData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getHtml");
+                              if(method.invoke(modelData) != null){
+                                //htmlData = modelData.getHtml().toString();
+                                htmlData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("html", htmlData);
                                 
-                                                            String idData = "";
-                        if(modelData.getId() != null){
-                          idData =modelData.getId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getId");
+                              if(method.invoke(modelData) != null){
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("id", idData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   AdminEmail get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -110,7 +164,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
                     return (AdminEmail)repo.createObject(hashMap);
@@ -222,7 +276,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -250,7 +304,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
@@ -262,14 +316,14 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         db.close();
         // return contact list
         return (DataList<AdminEmail>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<AdminEmail>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<AdminEmail> modelList = new DataList<AdminEmail>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM AdminEmail WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM AdminEmail WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -277,7 +331,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
@@ -299,6 +353,24 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         // updating row
         return db.update("AdminEmail", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("AdminEmail", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("AdminEmail", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

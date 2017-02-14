@@ -23,7 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-
+import java.lang.reflect.Method;
+import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
 
 
 //Replaced by Custom  Repo methods
@@ -31,7 +36,6 @@ import java.util.HashMap;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
 import android.content.SharedPreferences;
-import android.util.Log;
 import org.json.JSONException;
 import android.content.Context;
 
@@ -43,9 +47,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.AppUserDb;
 
 //Now import model of related models..
@@ -61,15 +63,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.AppUserDb;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
             
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.FollowBrand;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.FollowBrandRepository;
             
         
     
@@ -81,8 +83,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.AppUserDb;
 public class AppUserRepository extends UserRepository<AppUser> {
 
 
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
+
     public AppUserRepository(){
         super("AppUser", null, AppUser.class);
+
     }
 
 
@@ -91,6 +98,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
     		public AppUser cachedCurrentUser;
             private Object currentUserId;
             private boolean isCurrentUserIdLoaded;
+
     		public AppUser getCachedCurrentUser(){
     			return cachedCurrentUser;
     		}
@@ -113,7 +121,6 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 }
 
                 HashMap<String, Object> hashMap = new HashMap<>();
-
                 this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<AppUser>() {
                     @Override
                     public void onSuccess(AppUser user){
@@ -130,7 +137,6 @@ public class AppUserRepository extends UserRepository<AppUser> {
                         callback.onFinally();
                     }
                 });
-
             }
 
             public Object getCurrentUserId(){
@@ -187,7 +193,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
 
 
-    
+
 
 
 
@@ -225,11 +231,19 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
 
 
-private void addStorage(Context context){
-    setAppUserDb(new AppUserDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setAppUserDb(new AppUserDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
+    }
 
 
     public RestContract createContract() {
@@ -320,7 +334,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "GET"), "AppUser.prototype.__findById__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands/:fk", "GET"), "AppUser.prototype.__findById__followBrands");
     
 
     
@@ -329,7 +343,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "DELETE"), "AppUser.prototype.__destroyById__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands/:fk", "DELETE"), "AppUser.prototype.__destroyById__followBrands");
     
 
     
@@ -338,34 +352,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "PUT"), "AppUser.prototype.__updateById__brands");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "PUT"), "AppUser.prototype.__link__brands");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "DELETE"), "AppUser.prototype.__unlink__brands");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "HEAD"), "AppUser.prototype.__exists__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands/:fk", "PUT"), "AppUser.prototype.__updateById__followBrands");
     
 
     
@@ -482,7 +469,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "GET"), "AppUser.prototype.__get__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands", "GET"), "AppUser.prototype.__get__followBrands");
     
 
     
@@ -491,7 +478,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "POST"), "AppUser.prototype.__create__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands", "POST"), "AppUser.prototype.__create__followBrands");
     
 
     
@@ -500,7 +487,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "DELETE"), "AppUser.prototype.__delete__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands", "DELETE"), "AppUser.prototype.__delete__followBrands");
     
 
     
@@ -509,7 +496,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/count", "GET"), "AppUser.prototype.__count__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands/count", "GET"), "AppUser.prototype.__count__followBrands");
     
 
     
@@ -665,24 +652,6 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__connect__brands", "POST"), "AppUser.__connect__brands");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__disconnect__brands", "POST"), "AppUser.__disconnect__brands");
-    
-
-    
-    
-
-    
-
-    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchRecentAppUser", "POST"), "AppUser.fetchRecentAppUser");
     
 
@@ -738,36 +707,6 @@ private void addStorage(Context context){
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "AppUser.subscribe");
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
     
 
     
@@ -841,13 +780,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          accessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = accessToken.getClass().getMethod("save__db");
+                                                    method.invoke(accessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(accessToken);
@@ -958,13 +915,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          accessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = accessToken.getClass().getMethod("save__db");
+                                                    method.invoke(accessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(accessToken);
@@ -1025,13 +1000,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(facebookAccessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //facebookAccessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -1142,13 +1135,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(facebookAccessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //facebookAccessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -1209,13 +1220,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = chat.getClass().getMethod("save__db");
+                                                    method.invoke(chat);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(chat);
@@ -1326,13 +1355,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = chat.getClass().getMethod("save__db");
+                                                    method.invoke(chat);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(chat);
@@ -1355,8 +1402,8 @@ private void addStorage(Context context){
         
     
         
-            //Method findById__brands definition
-            public void findById__brands(  String appUserId,  String fk, final ObjectCallback<Brand> callback){
+            //Method findById__followBrands definition
+            public void findById__followBrands(  String appUserId,  String fk, final ObjectCallback<FollowBrand> callback){
 
                 /**
                 Call the onBefore event
@@ -1379,7 +1426,7 @@ private void addStorage(Context context){
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__followBrands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1392,17 +1439,35 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(followBrandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //followBrandRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    FollowBrand followBrand = followBrandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = followBrand.getClass().getMethod("save__db");
+                                                    method.invoke(followBrand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
-                                    callback.onSuccess(brand);
+                                    callback.onSuccess(followBrand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1415,15 +1480,15 @@ private void addStorage(Context context){
 
                 
 
-            }//Method findById__brands definition ends here..
+            }//Method findById__followBrands definition ends here..
 
             
 
         
     
         
-            //Method destroyById__brands definition
-            public void destroyById__brands(  String appUserId,  String fk, final VoidCallback callback){
+            //Method destroyById__followBrands definition
+            public void destroyById__followBrands(  String appUserId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -1441,7 +1506,7 @@ private void addStorage(Context context){
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__brands", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__followBrands", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -1463,15 +1528,15 @@ private void addStorage(Context context){
 
                 
 
-            }//Method destroyById__brands definition ends here..
+            }//Method destroyById__followBrands definition ends here..
 
             
 
         
     
         
-            //Method updateById__brands definition
-            public void updateById__brands(  String appUserId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Brand> callback){
+            //Method updateById__followBrands definition
+            public void updateById__followBrands(  String appUserId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<FollowBrand> callback){
 
                 /**
                 Call the onBefore event
@@ -1496,7 +1561,7 @@ private void addStorage(Context context){
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__followBrands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1509,17 +1574,35 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(followBrandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //followBrandRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    FollowBrand followBrand = followBrandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = followBrand.getClass().getMethod("save__db");
+                                                    method.invoke(followBrand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
-                                    callback.onSuccess(brand);
+                                    callback.onSuccess(followBrand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1532,175 +1615,7 @@ private void addStorage(Context context){
 
                 
 
-            }//Method updateById__brands definition ends here..
-
-            
-
-        
-    
-        
-            //Method link__brands definition
-            public void link__brands(  String appUserId,  String fk, final ObjectCallback<Brand> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("appUserId", appUserId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__link__brands", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
-                                      }
-
-                                    callback.onSuccess(brand);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method link__brands definition ends here..
-
-            
-
-        
-    
-        
-            //Method unlink__brands definition
-            public void unlink__brands(  String appUserId,  String fk, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("appUserId", appUserId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__unlink__brands", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method unlink__brands definition ends here..
-
-            
-
-        
-    
-        
-            //Method exists__brands definition
-            public void exists__brands(  String appUserId,  String fk, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("appUserId", appUserId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__exists__brands", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method exists__brands definition ends here..
+            }//Method updateById__followBrands definition ends here..
 
             
 
@@ -1747,15 +1662,30 @@ private void addStorage(Context context){
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
+
                                         AccessToken accessToken = accessTokenRepo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 accessToken.save__db();
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = accessToken.getClass().getMethod("save__db");
+                                                      method.invoke(accessToken);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         accessTokenList.add(accessToken);
                                     }
@@ -1815,13 +1745,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          accessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = accessToken.getClass().getMethod("save__db");
+                                                    method.invoke(accessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(accessToken);
@@ -1983,15 +1931,30 @@ private void addStorage(Context context){
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<FacebookAccessToken> facebookAccessTokenList = new DataList<FacebookAccessToken>();
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(facebookAccessTokenRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
+
                                         FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 facebookAccessToken.save__db();
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = facebookAccessToken.getClass().getMethod("save__db");
+                                                      method.invoke(facebookAccessToken);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         facebookAccessTokenList.add(facebookAccessToken);
                                     }
@@ -2051,13 +2014,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = facebookAccessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(facebookAccessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //facebookAccessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -2219,15 +2200,30 @@ private void addStorage(Context context){
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Chat> chatList = new DataList<Chat>();
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
+
                                         Chat chat = chatRepo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 chat.save__db();
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = chat.getClass().getMethod("save__db");
+                                                      method.invoke(chat);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         chatList.add(chat);
                                     }
@@ -2287,13 +2283,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = chat.getClass().getMethod("save__db");
+                                                    method.invoke(chat);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(chat);
@@ -2415,8 +2429,8 @@ private void addStorage(Context context){
         
     
         
-            //Method get__brands definition
-            public void get__brands(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<Brand> callback){
+            //Method get__followBrands definition
+            public void get__followBrands(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<FollowBrand> callback){
 
                 /**
                 Call the onBefore event
@@ -2439,7 +2453,7 @@ private void addStorage(Context context){
                 
 
                 
-                    invokeStaticMethod("prototype.__get__brands", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__followBrands", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2453,21 +2467,36 @@ private void addStorage(Context context){
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Brand> brandList = new DataList<Brand>();
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    DataList<FollowBrand> followBrandList = new DataList<FollowBrand>();
+                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(followBrandRepo, context);
 
-                                    for (Map<String, Object> obj : result) {
-                                        Brand brand = brandRepo.createObject(obj);
-
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 brand.save__db();
-                                            }
-
-                                        brandList.add(brand);
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
                                     }
-                                    callback.onSuccess(brandList);
+                                    for (Map<String, Object> obj : result) {
+
+                                        FollowBrand followBrand = followBrandRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = followBrand.getClass().getMethod("save__db");
+                                                      method.invoke(followBrand);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        followBrandList.add(followBrand);
+                                    }
+                                    callback.onSuccess(followBrandList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2478,15 +2507,15 @@ private void addStorage(Context context){
                     });
                 
 
-            }//Method get__brands definition ends here..
+            }//Method get__followBrands definition ends here..
 
             
 
         
     
         
-            //Method create__brands definition
-            public void create__brands(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<Brand> callback){
+            //Method create__followBrands definition
+            public void create__followBrands(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<FollowBrand> callback){
 
                 /**
                 Call the onBefore event
@@ -2509,7 +2538,7 @@ private void addStorage(Context context){
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__followBrands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2522,17 +2551,35 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(followBrandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //followBrandRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    FollowBrand followBrand = followBrandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = followBrand.getClass().getMethod("save__db");
+                                                    method.invoke(followBrand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
-                                    callback.onSuccess(brand);
+                                    callback.onSuccess(followBrand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2545,15 +2592,15 @@ private void addStorage(Context context){
 
                 
 
-            }//Method create__brands definition ends here..
+            }//Method create__followBrands definition ends here..
 
             
 
         
     
         
-            //Method delete__brands definition
-            public void delete__brands(  String appUserId, final VoidCallback callback){
+            //Method delete__followBrands definition
+            public void delete__followBrands(  String appUserId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -2569,7 +2616,7 @@ private void addStorage(Context context){
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__brands", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__followBrands", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -2591,15 +2638,15 @@ private void addStorage(Context context){
 
                 
 
-            }//Method delete__brands definition ends here..
+            }//Method delete__followBrands definition ends here..
 
             
 
         
     
         
-            //Method count__brands definition
-            public void count__brands(  String appUserId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            //Method count__followBrands definition
+            public void count__followBrands(  String appUserId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -2621,7 +2668,7 @@ private void addStorage(Context context){
 
                 
                     
-                    invokeStaticMethod("prototype.__count__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__followBrands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2644,7 +2691,7 @@ private void addStorage(Context context){
 
                 
 
-            }//Method count__brands definition ends here..
+            }//Method count__followBrands definition ends here..
 
             
 
@@ -2687,13 +2734,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(appUserRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //appUserRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -2753,13 +2818,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(appUserRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //appUserRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -2871,13 +2954,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(appUserRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //appUserRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -2938,15 +3039,30 @@ private void addStorage(Context context){
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AppUser> appUserList = new DataList<AppUser>();
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(appUserRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
+
                                         AppUser appUser = appUserRepo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 appUser.save__db();
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = appUser.getClass().getMethod("save__db");
+                                                      method.invoke(appUser);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         appUserList.add(appUser);
                                     }
@@ -3004,13 +3120,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(appUserRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //appUserRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -3226,13 +3360,31 @@ private void addStorage(Context context){
                             
                                 if(response != null){
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(appUserRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //appUserRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -3457,112 +3609,6 @@ private void addStorage(Context context){
         
     
         
-            //Method __connect__brands definition
-            public void __connect__brands(  String id,  DataList<String> fk, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("id", id);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("__connect__brands", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method __connect__brands definition ends here..
-
-            
-
-        
-    
-        
-            //Method __disconnect__brands definition
-            public void __disconnect__brands(  String id,  DataList<String> fk, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("id", id);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("__disconnect__brands", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method __disconnect__brands definition ends here..
-
-            
-
-        
-    
-        
             //Method fetchRecentAppUser definition
             public void fetchRecentAppUser(  String brandId,  double limit,  String query, final DataListCallback<AppUser> callback){
 
@@ -3605,15 +3651,30 @@ private void addStorage(Context context){
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AppUser> appUserList = new DataList<AppUser>();
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(appUserRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
+
                                         AppUser appUser = appUserRepo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 appUser.save__db();
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = appUser.getClass().getMethod("save__db");
+                                                      method.invoke(appUser);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         appUserList.add(appUser);
                                     }
@@ -3934,26 +3995,6 @@ private void addStorage(Context context){
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

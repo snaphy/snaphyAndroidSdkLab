@@ -1,10 +1,12 @@
 package com.androidsdk.snaphy.snaphysdk;
 
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
+
 /**
  * Created by snaphy on 30/1/17.
  */
 
-public abstract class Subscribe<T> implements SnaphySocket.Listeners<T>{
+public abstract class Subscribe<T extends Model> implements SnaphySocket.Listeners<T>{
     //On Initialization of the Constructors..
     public void onDataAdded(T data){}
     // When any Change appears in the list..

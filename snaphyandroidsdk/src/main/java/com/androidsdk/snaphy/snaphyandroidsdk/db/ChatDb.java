@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class ChatDb extends DbHandler<Chat, ChatRepository> {
-  public ChatDb(Context context, RestAdapter restAdapter){
-    super(context, "Chat", restAdapter);
+  public ChatDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "Chat", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                 
-    String CREATE_Chat_TABLE = "CREATE TABLE  Chat IF NOT EXISTS (  added TEXT, updated TEXT, message TEXT, type TEXT, image TEXT, from TEXT, guid TEXT, status TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT)";
+                                                                                                                                                                                                                                                                                                             
+    
+    String CREATE_Chat_TABLE = "CREATE TABLE IF NOT EXISTS Chat (  added TEXT, updated TEXT, message TEXT, type TEXT, image TEXT, from TEXT, guid TEXT, status TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Chat_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Chat");
+            //db.execSQL("DROP TABLE IF EXISTS Chat");
             // Create tables again
             onCreate(db);
     }
@@ -106,30 +109,57 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                         }
                                                 values.put("status", statusData);
                                 
-                                                            String idData = "";
-                        if(modelData.getId() != null){
-                          idData =modelData.getId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getId");
+                              if(method.invoke(modelData) != null){
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("id", idData);
                                 
-                                                            String appUserIdData = "";
-                        if(modelData.getAppUserId() != null){
-                          appUserIdData =modelData.getAppUserId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String appUserIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getAppUserId");
+                              if(method.invoke(modelData) != null){
+                                //appUserIdData = modelData.getAppUserId().toString();
+                                appUserIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("appUserId", appUserIdData);
                                 
-                                                            String brandIdData = "";
-                        if(modelData.getBrandId() != null){
-                          brandIdData =modelData.getBrandId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String brandIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getBrandId");
+                              if(method.invoke(modelData) != null){
+                                //brandIdData = modelData.getBrandId().toString();
+                                brandIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("brandId", brandIdData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Chat get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -140,7 +170,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
                     return (Chat)repo.createObject(hashMap);
@@ -302,7 +332,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -330,7 +360,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
@@ -342,14 +372,14 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         db.close();
         // return contact list
         return (DataList<Chat>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<Chat>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Chat> modelList = new DataList<Chat>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Chat WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Chat WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -357,7 +387,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
@@ -379,6 +409,24 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         // updating row
         return db.update("Chat", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("Chat", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("Chat", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

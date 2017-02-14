@@ -70,11 +70,6 @@ public class Role extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -96,11 +91,6 @@ public class Role extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -108,11 +98,6 @@ public class Role extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -120,11 +105,6 @@ public class Role extends Model {
 
             
             
-            
-            
-
-            
-
         
     
         
@@ -132,18 +112,13 @@ public class Role extends Model {
 
             
             
-            
-            
-
-            
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -209,13 +184,13 @@ public class Role extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   RoleRepository roleRepository = (RoleRepository) getRepository();
-                                 
+                                   RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
+
                                  //Fetch locally from db
                                  //principals = getPrincipals__db(restAdapter);
                                  // Getting single cont
-                                 principals = roleRepository.getRoleDb().getAll__db("roleId", that.getId().toString());
-                              
+                                 principals = roleMappingRepository.getRoleMappingDb().getAll__db("roleId", that.getId().toString());
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return principals;
@@ -238,7 +213,11 @@ public class Role extends Model {
                             this.principals = principals;
                             //TODO: Warning move this to new thread
                             for(RoleMapping data: principals){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -287,8 +266,13 @@ public class Role extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(RoleMapping principals) {
                         try{
-                            //Save to database..
-                            principals.save__db();
+                            try{
+
+                                  //Save to database..
+                                  principals.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getPrincipals().add(principals);
                         }catch(Exception e){
                             DataList< RoleMapping> principals1 = new DataList();

@@ -1,6 +1,10 @@
 [
     {
-        "merged": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/res/merged/debug/drawable-v23/abc_control_background_material.xml",
-        "source": "/home/snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-v23/abc_control_background_material.xml"
+        "merged": "/media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/res/merged/debug/drawable-v23/abc_control_background_material.xml",
+        "source": "/media/robins/Snaphy/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-v23/abc_control_background_material.xml"
+    },
+    {
+        "merged": "/media/robins/Snaphy/Robins Backup/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/res/merged/debug/drawable-v23/abc_control_background_material.xml",
+        "source": "/media/robins/Snaphy/Robins Backup/snaphy/Snaphy_sdk_lab/SnaphySdk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-v23/abc_control_background_material.xml"
     }
 ]

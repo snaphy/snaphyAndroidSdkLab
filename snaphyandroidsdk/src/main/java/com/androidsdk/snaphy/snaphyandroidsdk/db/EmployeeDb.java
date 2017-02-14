@@ -10,6 +10,8 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -23,15 +25,16 @@ import com.strongloop.android.loopback.RestAdapter;
 */
 
 public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
-  public EmployeeDb(Context context, RestAdapter restAdapter){
-    super(context, "Employee", restAdapter);
+  public EmployeeDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+    super(context, "Employee", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-    String CREATE_Employee_TABLE = "CREATE TABLE  Employee IF NOT EXISTS (  username TEXT, firstName TEXT, lastName TEXT, added TEXT, updated TEXT, email TEXT, password TEXT, realm TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY)";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    
+    String CREATE_Employee_TABLE = "CREATE TABLE IF NOT EXISTS Employee (  username TEXT, firstName TEXT, lastName TEXT, added TEXT, updated TEXT, email TEXT, password TEXT, realm TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Employee_TABLE);
   }
 
@@ -39,7 +42,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Employee");
+            //db.execSQL("DROP TABLE IF EXISTS Employee");
             // Create tables again
             onCreate(db);
     }
@@ -100,66 +103,141 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                         }
                                                 values.put("password", passwordData);
                                 
-                                                            String realmData = "";
-                        if(modelData.getRealm() != null){
-                          realmData =modelData.getRealm().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String realmData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getRealm");
+                              if(method.invoke(modelData) != null){
+                                //realmData = modelData.getRealm().toString();
+                                realmData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("realm", realmData);
                                 
-                                                            String credentialsData = "";
-                        if(modelData.getCredentials() != null){
-                          credentialsData =modelData.getCredentials().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String credentialsData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getCredentials");
+                              if(method.invoke(modelData) != null){
+                                //credentialsData = modelData.getCredentials().toString();
+                                credentialsData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("credentials", credentialsData);
                                 
-                                                            String challengesData = "";
-                        if(modelData.getChallenges() != null){
-                          challengesData =modelData.getChallenges().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String challengesData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getChallenges");
+                              if(method.invoke(modelData) != null){
+                                //challengesData = modelData.getChallenges().toString();
+                                challengesData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("challenges", challengesData);
                                 
-                                                            String emailVerifiedData = "";
-                        if(modelData.getEmailVerified() != null){
-                          emailVerifiedData =modelData.getEmailVerified().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String emailVerifiedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getEmailVerified");
+                              if(method.invoke(modelData) != null){
+                                //emailVerifiedData = modelData.getEmailVerified().toString();
+                                emailVerifiedData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("emailVerified", emailVerifiedData);
                                 
-                                                            String verificationTokenData = "";
-                        if(modelData.getVerificationToken() != null){
-                          verificationTokenData =modelData.getVerificationToken().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String verificationTokenData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getVerificationToken");
+                              if(method.invoke(modelData) != null){
+                                //verificationTokenData = modelData.getVerificationToken().toString();
+                                verificationTokenData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("verificationToken", verificationTokenData);
                                 
-                                                            String statusData = "";
-                        if(modelData.getStatus() != null){
-                          statusData =modelData.getStatus().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String statusData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getStatus");
+                              if(method.invoke(modelData) != null){
+                                //statusData = modelData.getStatus().toString();
+                                statusData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("status", statusData);
                                 
-                                                            String createdData = "";
-                        if(modelData.getCreated() != null){
-                          createdData =modelData.getCreated().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String createdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getCreated");
+                              if(method.invoke(modelData) != null){
+                                //createdData = modelData.getCreated().toString();
+                                createdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("created", createdData);
                                 
-                                                            String lastUpdatedData = "";
-                        if(modelData.getLastUpdated() != null){
-                          lastUpdatedData =modelData.getLastUpdated().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String lastUpdatedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getLastUpdated");
+                              if(method.invoke(modelData) != null){
+                                //lastUpdatedData = modelData.getLastUpdated().toString();
+                                lastUpdatedData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("lastUpdated", lastUpdatedData);
                                 
-                                                            String idData = "";
-                        if(modelData.getId() != null){
-                          idData =modelData.getId().toString();
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getId");
+                              if(method.invoke(modelData) != null){
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                                 values.put("id", idData);
                   
+
+        //Add the updated data property value to be 1
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Employee get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -170,7 +248,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
                     return (Employee)repo.createObject(hashMap);
@@ -382,7 +460,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -410,7 +488,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
@@ -422,14 +500,14 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         db.close();
         // return contact list
         return (DataList<Employee>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
     public DataList<Employee>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Employee> modelList = new DataList<Employee>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Employee WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Employee WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -437,7 +515,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
@@ -459,6 +537,24 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         // updating row
         return db.update("Employee", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("Employee", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("Employee", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }
