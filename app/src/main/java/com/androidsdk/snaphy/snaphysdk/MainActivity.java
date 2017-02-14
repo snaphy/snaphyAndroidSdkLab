@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         snaphyHelper = new SnaphyHelper(this);
         restAdapter = snaphyHelper.getLoopBackAdapter();
-        readChatData();
+        //readChatData();
         subscribe();
     }
 
