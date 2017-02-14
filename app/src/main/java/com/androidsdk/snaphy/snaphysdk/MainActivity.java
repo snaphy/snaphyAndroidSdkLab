@@ -9,28 +9,15 @@ import android.view.MenuItem;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
-import com.androidsdk.snaphy.snaphyandroidsdk.list.Listen;
-import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
-import com.androidsdk.snaphy.snaphyandroidsdk.presenter.Presenter;
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.Manager;
 import com.google.gson.Gson;
 import com.strongloop.android.loopback.RestAdapter;
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
 
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,16 +26,16 @@ public class MainActivity extends AppCompatActivity {
     SnaphyHelper snaphyHelper;
     MainActivity mainActivity;
     String TAG = "SNAPHY_SDK_MAINACTIVITY";
-    final ChatPresenter chatPresenter = new ChatPresenter();;
+    final ChatPresenter chatPresenter = new ChatPresenter();
 
-    private Manager manager;
+ /*   private Manager manager;
     {
         try {
             this.manager = new Manager(new URI(Constants.baseUrl));
         } catch (URISyntaxException e) {
             Log.e(TAG, e.toString());
         }
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,41 +48,47 @@ public class MainActivity extends AppCompatActivity {
         subscribe();
     }
 
+   /* *//**
+     * Will create namespace if not present on the server..
+     * @param where
+     * @param jsonObjectObjectCallback
+     *//*
+    private void createNameServerIfNotExists(HashMap<String, String> where, final ObjectCallback<JSONObject> jsonObjectObjectCallback){
+        try {
+            //Calling through reflection..
+            Method method = dataRepository.getClass().getMethod("subscribe", Map.class, ObjectCallback.class);
+            method.invoke(dataRepository, where, jsonObjectObjectCallback);
+        } catch (Exception e) {
+            Log.e("SocketError", e.toString());
+        }
+    }
 
+*/
 
     private void subscribe(){
-        ChatRepository chatRepository = restAdapter.createRepository(ChatRepository.class);
-        HashMap<String, String> hashMap = new HashMap<>();
-
+        final ChatRepository chatRepository = restAdapter.createRepository(ChatRepository.class);
+        final HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("from", "brand");
-        SnaphySocket<Chat, ChatRepository> snaphySocket = new SnaphySocket<>(mainActivity, chatRepository, hashMap);
-        snaphySocket.onDataAdded(new OnData<Chat>() {
-            @Override
-            public void onData(Chat data) {
-                Log.e(TAG, data+"");
-                Log.e(TAG, "New Data has been added in route");
-            }
-        });
-
-        snaphySocket.subscribe(new Subscribe<Chat>() {
+        SnaphySocket<Chat, ChatRepository> chatChatRepositorySnaphySocket = new SnaphySocket<>(mainActivity, chatRepository, hashMap);
+        chatChatRepositorySnaphySocket.subscribe(new Subscribe<Chat>() {
             @Override
             public void onDataAdded(Chat data) {
-                Log.e(TAG, data+"");
-                Log.e(TAG, "New Data has been added in route");
+                super.onDataAdded(data);
             }
 
             @Override
             public void onDataUpdated(Chat data) {
-                Log.e(TAG, data+"");
-                Log.e(TAG, "New Data has been updated in route");
+                super.onDataUpdated(data);
             }
 
             @Override
             public void onDataDeleted(Chat data) {
-                Log.e(TAG, data+"");
-                Log.e(TAG, "Data has been deleted in route");
+                super.onDataDeleted(data);
             }
         });
+
+        //chatRepository.subscribe(hashMap);
+
     }
 
 

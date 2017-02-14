@@ -1,13 +1,10 @@
 package com.androidsdk.snaphy.snaphysdk;
 
 import android.util.Log;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.ModelRepository;
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.Manager;
-import com.github.nkzawa.socketio.client.Socket;
+
 
 import org.json.JSONObject;
 
@@ -15,6 +12,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 /**
  * Created by snaphy on 30/1/17.
@@ -26,29 +27,27 @@ public class SnaphySocket<M extends Model, R extends ModelRepository<M>> {
     private Socket socket;
     private String room = "";
     private String namespace = "";
-    private String TAG = "Snaphy";
+    private String TAG = "SnaphySocket";
     private MainActivity mainActivity;
-    private Manager manager;
-    {
-        try {
-            this.manager = new Manager(new URI(Constants.baseUrl));
-        } catch (URISyntaxException e) {
-            Log.e("Snaphy", e.toString());
-        }
-    }
 
 
     public SnaphySocket(MainActivity mainActivity, R dataRepository, HashMap<String, String> where){
         this.mainActivity = mainActivity;
         this.dataRepository = dataRepository;
-
-        this.where = where;
-        //Get the room and namespace.
-        getDetails();
-        socket = manager.socket(namespace);
-        socket.connect();
-        joinRoom(socket, room);
+        final Socket mainSocket;
+        try {
+            mainSocket = IO.socket(new URI(Constants.baseUrl));
+            getDetails();
+            socket = mainSocket.io().socket(namespace);
+            //socket = manager.socket(namespace);
+            socket.connect();
+            joinRoom(socket, room);
+        } catch (URISyntaxException e) {
+            Log.e("SnaphySocket Error", e.toString());
+        }
     }
+
+
 
     private void joinRoom(Socket socket, String room){
         socket.emit("create", room);
@@ -100,7 +99,6 @@ public class SnaphySocket<M extends Model, R extends ModelRepository<M>> {
                         }catch (Exception e){
                             Log.e("SnaphySocket", e.toString());
                         }
-
                     }
                 });
             }
